@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IT Audit, Governance &amp; Compliance — Interactive Practice Exam (120 MCQs)</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #131a2a;
+    --surface-2: #1a2338;
+    --border: #26324d;
+    --text: #e6ecf8;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --accent-soft: rgba(56, 189, 248, 0.12);
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.14);
+    --danger: #ef4444;
+    --danger-soft: rgba(239, 68, 68, 0.14);
+    --warning: #f59e0b;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 1.75rem 1.25rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .header-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .title-block h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #f8fafc;
+  }
+
+  .title-block p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .global-stats {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .stat-pill span.val {
+    color: var(--accent);
+  }
+
+  .stat-pill.score span.val {
+    color: var(--success);
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+  }
+
+  .tab-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    text-align: left;
+  }
+
+  .tab-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .tab-btn.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .tab-meta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .tab-btn.active .tab-meta {
+    color: var(--accent);
+  }
+
+  main {
+    padding: 1.5rem 1.25rem 4rem;
+  }
+
+  .toolbar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-wrap {
+    flex: 1 1 280px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #22c55e);
+    transition: width 0.3s ease;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #06101d;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    color: #06101d;
+  }
+
+  .btn-danger:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .filter-active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.35rem 1.4rem;
+    margin-bottom: 1.15rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .question-card.answered-correct {
+    border-color: rgba(34, 197, 94, 0.45);
+  }
+
+  .question-card.answered-wrong {
+    border-color: rgba(239, 68, 68, 0.45);
+  }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .q-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  .q-status {
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .q-status.correct {
+    color: var(--success);
+  }
+
+  .q-status.wrong {
+    color: var(--danger);
+  }
+
+  .q-text {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 1rem;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: all 0.15s ease;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  .option-btn:disabled {
+    cursor: default;
+  }
+
+  .opt-letter {
+    font-weight: 700;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 0.08rem;
+  }
+
+  .option-btn.correct-choice {
+    background: var(--success-soft);
+    border-color: var(--success);
+    color: #dcfce7;
+  }
+
+  .option-btn.correct-choice .opt-letter {
+    background: var(--success);
+    color: #052e16;
+  }
+
+  .option-btn.wrong-choice {
+    background: var(--danger-soft);
+    border-color: var(--danger);
+    color: #fee2e2;
+  }
+
+  .option-btn.wrong-choice .opt-letter {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  .explanation-box {
+    margin-top: 0.95rem;
+    padding: 0.85rem 1rem;
+    background: rgba(15, 23, 42, 0.85);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    display: none;
+  }
+
+  .explanation-box.visible {
+    display: block;
+  }
+
+  .explanation-box strong {
+    color: var(--accent);
+  }
+
+  .summary-banner {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(34, 197, 94, 0.12));
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .summary-banner.visible {
+    display: flex;
+  }
+
+  @media (max-width: 700px) {
+    .tabs {
+      grid-template-columns: 1fr;
+    }
+    header {
+      position: static;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-top">
+      <div class="title-block">
+        <h1>IT Audit, Governance &amp; Compliance — Practice Exam</h1>
+        <p>120 Exam-Standard MCQs • ISO 27001 • ISO 38500 • COBIT 2019 • ITIL</p>
+      </div>
+      <div class="global-stats">
+        <div class="stat-pill">Total Progress: <span class="val" id="global-progress">0 / 120</span></div>
+        <div class="stat-pill score">Total Score: <span class="val" id="global-score">0 / 120 (0%)</span></div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-part="part1" onclick="switchPart('part1')">
+        <span>Part 1: IT Auditing</span>
+        <span class="tab-meta" id="meta-part1">0 / 40 Answered • Score: 0</span>
+      </button>
+      <button class="tab-btn" data-part="part2" onclick="switchPart('part2')">
+        <span>Part 2: IT Controls</span>
+        <span class="tab-meta" id="meta-part2">0 / 40 Answered • Score: 0</span>
+      </button>
+      <button class="tab-btn" data-part="part3" onclick="switchPart('part3')">
+        <span>Part 3: IT Governance</span>
+        <span class="tab-meta" id="meta-part3">0 / 40 Answered • Score: 0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="summary-banner" id="part-summary">
+    <div>
+      <h3 id="summary-title" style="font-size:1.05rem; margin-bottom:0.2rem;">Section Completed!</h3>
+      <p id="summary-text" style="font-size:0.88rem; color:#cbd5e1;"></p>
+    </div>
+    <button class="btn btn-primary" onclick="resetCurrentPart()">Retake This Section</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="part-title-label">Part 1: IT Auditing (40 Questions)</span>
+        <span id="part-progress-text">0 / 40 (0%)</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="part-progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="toolbar-actions">
+      <button class="btn" id="btn-filter-missed" onclick="toggleMissedFilter()">Show Missed Only</button>
+      <button class="btn" onclick="revealAllAnswers()">Reveal All Answers</button>
+      <button class="btn btn-danger" onclick="resetCurrentPart()">Reset Section</button>
+    </div>
+  </div>
+
+  <div id="questions-container"></div>
+</main>
+
+<script>
+const QUIZ_DATA = {"part1": [{"q": "How does IT auditing primarily differ from financial auditing in terms of subject matter?", "options": ["IT auditing examines financial statements for accounting compliance, while financial auditing evaluates server uptime.", "IT auditing examines controls, infrastructure, systems, and data, whereas financial auditing examines financial records and statements.", "IT auditing only evaluates manufacturing workflows, while financial auditing evaluates ISO 9001 conformance.", "IT auditing is exclusively performed by external regulators, while financial auditing is strictly internal."], "answer": 1, "explanation": "Financial auditing examines financial records and statements to verify a true and fair view under accounting standards, whereas IT auditing examines controls, infrastructure, systems, and data for integrity, security, availability, and compliance."}, {"q": "Which auditing discipline specifically evaluates the efficiency and effectiveness of business operations and processes?", "options": ["Financial auditing", "Quality auditing", "Operational auditing", "Statutory tax auditing"], "answer": 2, "explanation": "Operational auditing focuses on evaluating the efficiency and effectiveness of an organization's business operations and processes."}, {"q": "Quality auditing primarily assesses an organization's conformance to which type of standards?", "options": ["GAAP and IFRS accounting standards", "ISO 9001 and internal quality procedures", "PCI-DSS cryptographic key lengths", "BGP routing protocols"], "answer": 1, "explanation": "Quality auditing assesses conformance to quality standards such as ISO 9001 and internal quality procedures."}, {"q": "Despite differences in scope and subject matter, what common foundation do IT, financial, operational, and quality auditing share?", "options": ["They all exclusively examine source code repositories.", "They all rely on auditor independence, evidence-based conclusions, and a systematic methodology.", "They all require mandatory external certification every 30 days.", "They all focus solely on physical perimeter security."], "answer": 1, "explanation": "Every auditing discipline shares a common foundation built on independence of the auditor, evidence-based conclusions, and a systematic, structured methodology."}, {"q": "Which of the following is NOT one of the core properties of an organization's IT environment verified during an IT audit?", "options": ["Integrity", "Security", "Availability", "Marketing profitability"], "answer": 3, "explanation": "IT auditing examines controls, infrastructure, systems, and data to verify integrity, security, availability, and compliance."}, {"q": "Who conducts an Internal IT Audit, and who receives its primary reports?", "options": ["An independent third-party CPA firm; reports go exclusively to external investors.", "The organization's own internal audit department; reports go to management and the board/audit committee.", "Government law enforcement; reports go to public tax registries.", "Third-party software vendors; reports go to end-user customers."], "answer": 1, "explanation": "Internal audits are conducted by an organization's own audit function to improve internal controls, governance, and risk management, with reports delivered to management and the board/audit committee."}, {"q": "What is the primary purpose of an External IT Audit?", "options": ["To perform daily helpdesk ticket resolution for employees", "To provide assurance to outside stakeholders such as regulators, investors, and customers", "To write application code for internal ERP modules", "To replace the board of directors in strategic planning"], "answer": 1, "explanation": "External audits are conducted by independent third-party audit firms to provide assurance to external stakeholders (regulators, investors, customers), such as for compliance or ISO 27001 certification."}, {"q": "Which type of audit would an organization undergo to achieve official ISO 27001 certification?", "options": ["An informal self-assessment by the network administrator", "An external audit conducted by an independent third-party audit firm", "A financial statement review by the payroll clerk", "An internal marketing quality review"], "answer": 1, "explanation": "Certification audits (such as ISO 27001 certification) are examples of external audits performed by independent third-party audit firms."}, {"q": "Which of the following represents the four main organizational purposes of IT auditing?", "options": ["Software coding, hardware manufacturing, sales forecasting, and HR recruitment", "Risk management, compliance assurance, operational efficiency, and governance support", "Physical demolition, tax evasion, marketing design, and vendor lock-in", "Network cabling, biometric enrollment, token issuance, and debt collection"], "answer": 1, "explanation": "The four main purposes of IT auditing are Risk Management, Compliance Assurance, Operational Efficiency, and Governance Support."}, {"q": "How does IT auditing support the 'Risk Management' purpose of an organization?", "options": ["By eliminating all business operations that use computers", "By helping identify and mitigate technological risks before they materialize, including evaluating mechanisms against cyberattacks", "By guaranteeing zero software bugs in production code", "By transferring all legal liability to end users"], "answer": 1, "explanation": "In risk management, IT audits help identify and mitigate technological risks before they materialize by evaluating mechanisms, activities, and processes designed to reduce threats like cyberattacks."}, {"q": "Ensuring adherence to regulations such as HIPAA, GDPR, and PCI-DSS falls under which purpose of IT auditing?", "options": ["Operational Efficiency", "Compliance Assurance", "Financial Statement Consolidation", "Hardware Procurement"], "answer": 1, "explanation": "Compliance assurance ensures the organization meets various standards and regulations such as HIPAA (health data), GDPR, PCI-DSS, and industry standards."}, {"q": "Which regulation specifically referenced in the notes governs health data compliance?", "options": ["ISO 9001", "HIPAA", "ITIL", "OAuth 2.0"], "answer": 1, "explanation": "HIPAA is cited in both the handwritten notes and study guide as a key health data compliance standard."}, {"q": "How does IT auditing contribute to 'Operational Efficiency'?", "options": ["By examining IT systems and processes to identify inefficiencies and opportunities for improvement", "By doubling the headcount of the IT support team", "By disabling audit logging to save disk space", "By outsourcing all executive decision-making"], "answer": 0, "explanation": "By examining IT systems and processes, audits identify inefficiencies and opportunities to improve how technology supports business processes."}, {"q": "What does the 'Governance Support' purpose of IT auditing provide to senior management and the board?", "options": ["Daily source code patches for web servers", "Assurance that IT resources are being managed effectively and aligned with organizational goals", "Physical security guards for data center entrances", "Automated customer billing invoices"], "answer": 1, "explanation": "Governance support provides senior management and the board with assurance that IT resources are managed effectively and aligned with organizational goals."}, {"q": "What are the two dimensions of 'Independence' that an IT auditor must maintain?", "options": ["Financial and geographical independence", "Organizational and mental independence", "Hardware and software independence", "Internal and external independence"], "answer": 1, "explanation": "Auditors must maintain both organizational and mental independence to ensure an objective evaluation."}, {"q": "Why must an IT auditor NOT audit systems that they helped design or operate?", "options": ["Because they lack technical knowledge of the system", "Because doing so compromises auditor independence and objectivity", "Because external regulators prohibit auditors from reading system documentation", "Because internal auditors are not allowed to inspect databases"], "answer": 1, "explanation": "Auditing systems one helped design or operate creates a self-review threat that impairs organizational and mental independence."}, {"q": "According to the general features of auditing, what four qualities must audit evidence possess?", "options": ["Encrypted, compressed, proprietary, and verbal", "Sufficient, reliable, relevant, and useful", "Expensive, external, biometric, and automated", "Anonymous, informal, qualitative, and temporary"], "answer": 1, "explanation": "All audit findings must be supported by evidence that is sufficient, reliable, relevant, and useful."}, {"q": "What is the correct sequence of phases in a Systematic Approach to IT auditing?", "options": ["Reporting \u2192 Planning \u2192 Follow-Up \u2192 Analysis", "Planning \u2192 Analysis \u2192 Reporting \u2192 Follow-Up", "Analysis \u2192 Follow-Up \u2192 Planning \u2192 Reporting", "Follow-Up \u2192 Reporting \u2192 Analysis \u2192 Planning"], "answer": 1, "explanation": "Audits follow a structured methodology with defined phases: Planning \u2192 Analysis \u2192 Reporting \u2192 Follow-Up."}, {"q": "During which phase of the systematic audit methodology does the auditor verify whether management has remediated previously identified findings?", "options": ["Planning", "Analysis", "Reporting", "Follow-Up"], "answer": 3, "explanation": "The Follow-Up phase comes after Planning, Analysis, and Reporting to verify corrective actions taken on audit findings."}, {"q": "What does a 'Risk-Based Focus' mean in IT auditing?", "options": ["Auditors test every single server and laptop with identical time and effort.", "Audit resources are allocated based on a risk assessment, concentrating effort on areas of greatest potential risk.", "Auditors only review systems that have never experienced an incident.", "Auditors ignore high-risk systems because they are too complex."], "answer": 1, "explanation": "Under a risk-based focus, audit resources are allocated based on risk assessment, concentrating effort on areas of greatest potential risk rather than spreading effort evenly."}, {"q": "In the handwritten notes' overview of controls under auditing, what is the primary objective of 'Application Controls'?", "options": ["To regulate physical perimeter lighting around data centers", "To verify that records are accurate and complete, and that their entries are valid", "To establish board-level corporate governance charters", "To negotiate third-party cyber insurance policies"], "answer": 1, "explanation": "Application controls restrict unauthorized applications from putting data/systems at risk and verify that records are accurate, complete, and contain valid entries."}, {"q": "Which of the following are examples of Application Controls cited in the lecture notes?", "options": ["Warning signs and perimeter strobe lights", "Automated checks, validations, and security rules", "Virtual fencing and pressure mats", "Board portfolio committees and CIO strategic meetings"], "answer": 1, "explanation": "Automated checks, validations, and security rules are specific examples of application controls."}, {"q": "Which framework is the international standard specifically for an Information Security Management System (ISMS)?", "options": ["ISO 9001", "ISO/IEC 27001", "ISO 38500", "ITIL"], "answer": 1, "explanation": "ISO/IEC 27001 is the international standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)."}, {"q": "Which standard addresses the corporate governance of information technology?", "options": ["ISO 38500", "ISO 27001", "PCI-DSS", "HIPAA"], "answer": 0, "explanation": "ISO 38500 is the international standard for the corporate governance of information technology."}, {"q": "How many governance and management objectives are noted in the COBIT 2019 diagram reference in the handwritten notes?", "options": ["10 objectives under 2 domains", "40 objectives under 5 domains (EDM, APO, BAI, DSS, MEA)", "100 objectives under 12 domains", "5 objectives under 40 domains"], "answer": 1, "explanation": "The handwritten notes reference the COBIT diagram having 40 objectives grouped under 5 domains (EDM, APO, BAI, DSS, MEA)."}, {"q": "Which framework provides best practices specifically for IT Service Management (ITSM)?", "options": ["ITIL", "HIPAA", "OAuth 2.0", "FICO Falcon"], "answer": 0, "explanation": "ITIL provides best practices for IT service management (service lifecycle / Service Value System)."}, {"q": "An auditor is reviewing whether an organization's database backups can be restored within required recovery times. Which IT audit verification property is being tested?", "options": ["Availability", "Financial profitability", "Marketing reach", "User interface aesthetics"], "answer": 0, "explanation": "Ensuring systems and data remain accessible and recoverable when needed falls under verifying Availability."}, {"q": "If an internal IT auditor reports directly to the Chief Information Officer (CIO) whose department is being audited, which general feature of auditing is threatened?", "options": ["Systematic approach", "Organizational independence", "Risk-based focus", "Tokenization"], "answer": 1, "explanation": "Reporting to the head of the function being audited compromises organizational independence; internal audit should report to the board or audit committee."}, {"q": "During an audit, an auditor relies solely on a system administrator's verbal assurance that firewall rules are reviewed monthly, without checking logs or configurations. Which audit feature is violated?", "options": ["Evidence-Based approach (sufficient, reliable evidence)", "Deterrent control placement", "Value delivery", "Strategic alignment"], "answer": 0, "explanation": "Audits must be evidence-based, requiring sufficient, reliable, relevant, and useful evidence rather than unsupported verbal claims."}, {"q": "In the COBIT 2019 framework, what do the five domains (EDM, APO, BAI, DSS, MEA) represent?", "options": ["Five types of physical perimeter sensors", "The core governance and management domains organizing the 40 objectives of enterprise IT", "Five encryption key lengths for AES", "Five phases of financial statement preparation"], "answer": 1, "explanation": "COBIT 2019 organizes its 40 governance and management objectives across five domains: Evaluate, Direct and Monitor (EDM); Align, Plan and Organize (APO); Build, Acquire and Implement (BAI); Deliver, Service and Support (DSS); and Monitor, Evaluate and Assess (MEA)."}, {"q": "Which audit type would examine whether an organization's accounting ledger accurately reflects revenue and expenses under accounting standards?", "options": ["IT auditing", "Financial auditing", "Quality auditing", "Physical security auditing"], "answer": 1, "explanation": "Financial auditing examines financial records and statements to opine on whether they present a true and fair view under accounting standards."}, {"q": "What distinguishes 'mental independence' from 'organizational independence' for an IT auditor?", "options": ["Mental independence is the auditor's unbiased state of mind and objectivity, while organizational independence is structural freedom from management interference.", "Mental independence means working from home, while organizational independence means working at a client site.", "Mental independence applies only to external auditors, while organizational independence applies only to internal auditors.", "There is no difference; both terms refer to automated software testing."], "answer": 0, "explanation": "Organizational independence comes from reporting lines free of operational management control, whereas mental independence is the auditor's personal objectivity and lack of bias."}, {"q": "During which audit phase does the auditor define the audit scope, objectives, risk assessment, and testing procedures?", "options": ["Planning", "Reporting", "Follow-Up", "Containment"], "answer": 0, "explanation": "In the systematic audit methodology (Planning \u2192 Analysis \u2192 Reporting \u2192 Follow-Up), scope, risk assessment, and audit programs are established during Planning."}, {"q": "During which audit phase does the auditor gather evidence, test controls, and evaluate findings?", "options": ["Planning", "Analysis", "Reporting", "Follow-Up"], "answer": 1, "explanation": "Evidence collection, control testing, and evaluation occur during the Analysis (fieldwork) phase."}, {"q": "Why do internal audit departments submit their reports to the board or audit committee in addition to senior management?", "options": ["To bypass all regulatory requirements", "To preserve organizational independence and provide governance oversight", "To request software development licenses", "To calculate employee payroll taxes"], "answer": 1, "explanation": "Reporting to the board/audit committee maintains independence from day-to-day operational management and fulfills governance support."}, {"q": "Which regulation in the study guide specifically governs the protection of payment card data?", "options": ["HIPAA", "PCI-DSS", "ISO 9001", "ITIL"], "answer": 1, "explanation": "PCI-DSS (Payment Card Industry Data Security Standard) governs payment card security compliance."}, {"q": "Which regulation in the study guide governs data protection and privacy for individuals in the European Union?", "options": ["GDPR", "HIPAA", "COBIT 2019", "ISO 38500"], "answer": 0, "explanation": "GDPR (General Data Protection Regulation) governs data privacy and protection compliance."}, {"q": "In the handwritten notes, the two broad categories of controls introduced under 'Types' on Page 1 are:", "options": ["Application Controls and General Controls", "Financial Controls and Marketing Controls", "Hardware Controls and Biometric Controls", "Internal Controls and External Audits"], "answer": 0, "explanation": "Page 1 of the handwritten notes categorizes IT controls under 'Types' into Application Controls and General Controls."}, {"q": "How does a risk-based audit approach improve audit effectiveness?", "options": ["It eliminates the need for audit evidence.", "It directs finite audit time and resources toward high-impact, high-likelihood risk areas rather than low-risk routines.", "It guarantees that no cyberattacks will ever occur.", "It allows auditors to skip the reporting phase."], "answer": 1, "explanation": "Risk-based auditing prioritizes high-risk systems and processes so audit resources deliver maximum assurance where vulnerabilities would cause the greatest harm."}, {"q": "Which statement accurately captures the relationship between IT Auditing and IT Controls?", "options": ["IT auditing evaluates the design and operating effectiveness of IT controls to verify security, integrity, availability, and compliance.", "IT auditing replaces the need for any preventive or detective IT controls.", "IT controls are only used when an organization fails an external financial audit.", "IT auditing is a type of physical perimeter sensor."], "answer": 0, "explanation": "IT auditing systematically examines an organization's IT controls, infrastructure, and systems to provide evidence-based assurance on security, integrity, availability, and compliance."}], "part2": [{"q": "How are IT controls formally defined in the lecture notes and study guide?", "options": ["Software applications used solely for accounting ledgers", "The policies, procedures, and mechanisms implemented to ensure the integrity, security, availability, and compliance of IT systems and data", "External regulatory fines imposed after a data breach", "Hardware servers purchased to increase network bandwidth"], "answer": 1, "explanation": "IT controls are the policies, procedures, and mechanisms implemented to ensure the integrity, security, availability, and compliance of IT systems and data within an organization."}, {"q": "Which of the following is NOT listed as a core business process addressed by IT controls?", "options": ["Service delivery and management", "Information system design", "Information security and IT governance", "Retail product packaging and shipping logistics"], "answer": 3, "explanation": "IT controls address service delivery and management, information and operations, information system design, information security, and IT governance."}, {"q": "Which of the following are the five main reasons why IT controls are important (aligned with ISO 27001)?", "options": ["Enhance security, ensure compliance, improve data integrity, reduce IT risks, and optimize IT performance", "Increase hardware costs, eliminate user passwords, bypass audits, delay delivery, and reduce staff", "Replace management, automate sales calls, design logos, manage payroll, and audit taxes", "Monitor employee lunch breaks, block all internet access, delete logs, and avoid governance"], "answer": 0, "explanation": "The five key reasons IT controls are important are: (1) Enhance security, (2) Ensure compliance, (3) Improve data integrity, (4) Reduce IT risks, and (5) Optimize IT performance."}, {"q": "IT controls are primarily classified based on which two criteria?", "options": ["Cost and vendor name", "Purpose (the task it performs) and functionality", "Programming language and operating system", "Internal audit and external audit"], "answer": 1, "explanation": "IT controls are classified based on Purpose (deterrent, preventive, detective, corrective) and Functionality."}, {"q": "What are the four classifications of IT controls based on 'Purpose'?", "options": ["Avoid, Reduce, Transfer, Accept", "Deterrent, Preventive, Detective, Corrective", "Planning, Analysis, Reporting, Follow-Up", "Confidentiality, Integrity, Availability, Non-repudiation"], "answer": 1, "explanation": "Based on purpose/timing, IT controls are classified as Deterrent, Preventive, Detective, and Corrective."}, {"q": "What is the fundamental difference between a Deterrent control and a Preventive control?", "options": ["Deterrent controls repair damage after an attack, while preventive controls log the attack.", "Deterrent controls discourage potential violators from attempting a breach, while preventive controls actively block the violation from succeeding.", "Deterrent controls are purely software-based, while preventive controls are purely human policies.", "There is no difference; both terms mean automated system backup."], "answer": 1, "explanation": "Deterrent controls discourage individuals from attempting a policy violation (e.g., warning signs), whereas preventive controls proactively block unauthorized actions before they succeed (e.g., locks, firewalls, MFA)."}, {"q": "Which control type identifies security breaches, errors, or fraudulent activities while or after they occur?", "options": ["Deterrent controls", "Preventive controls", "Detective controls", "Avoidance controls"], "answer": 2, "explanation": "Detective controls (such as audit trails, logging, and IDS) identify security breaches, errors, or fraudulent activities through monitoring and alerts."}, {"q": "Which control type restores systems and repairs damage after a security incident has occurred?", "options": ["Corrective controls", "Deterrent controls", "Preventive controls", "Tokenization controls"], "answer": 0, "explanation": "Corrective controls (such as backups and recovery, incident response procedures, and patch management) restore systems and repair damage after an incident."}, {"q": "How does Role-Based Access Control (RBAC) function as a preventive control?", "options": ["By encrypting all network traffic with AES-256", "By enforcing least-privilege access so users receive only the permissions required for their job role", "By sounding an audible siren when a server room door opens", "By scanning third-party libraries for CVEs"], "answer": 1, "explanation": "RBAC enforces the principle of least privilege by restricting user access based on job roles and preventing excessive privileges."}, {"q": "What is the purpose of Multi-Factor Authentication (MFA) in login verification?", "options": ["To replace encryption on stored financial records", "To require more than one independent authentication factor (e.g., password + code or biometric) before granting access", "To automatically reconcile financial ledger entries", "To detect humidity changes in a server room"], "answer": 1, "explanation": "MFA strengthens preventive access control by requiring multiple verification factors during login."}, {"q": "In the lecture notes, for what specific scenario is Biometric Authentication highlighted as a preventive control?", "options": ["Public marketing website browsing", "High-risk transactions", "Perimeter fence vibration detection", "Automated software composition analysis"], "answer": 1, "explanation": "Biometric authentication (fingerprints, face, or iris recognition) is specifically noted for verifying high-risk transactions."}, {"q": "How does OAuth 2.0 (Open Authorization) protect user credentials during third-party API integrations (such as Open Banking)?", "options": ["By emailing the user's plaintext password to the third-party vendor", "By granting systems access via short-lived tokens without exposing the user's password or secret code", "By storing passwords in a public spreadsheet", "By disabling all authentication checks for mobile apps"], "answer": 1, "explanation": "OAuth 2.0 allows third-party systems to receive scoped access via short-lived tokens without knowing the user's password or secret code."}, {"q": "How does Risk-Based Access Control determine whether to grant or challenge a user's access attempt?", "options": ["By checking the alphabetical order of the user's last name", "By checking the behavior of the user and contextual risk signals (such as location, device, and behavior)", "By allowing all logins during business hours without passwords", "By requiring physical pressure mats under every desk"], "answer": 1, "explanation": "Risk-based access control evaluates the behavior of the user and contextual risk signals to dynamically allow or challenge access."}, {"q": "What is the difference between Encryption and Tokenization as described in the data security notes?", "options": ["Encryption uses AES-256 to mathematically transform data, whereas tokenization replaces sensitive values (like credit card numbers or PII) with a non-sensitive token.", "Encryption is only for physical paper files, whereas tokenization is for server room doors.", "Encryption deletes data permanently, whereas tokenization prints it on warning signs.", "There is no difference; both terms refer to biometric fingerprint scanning."], "answer": 0, "explanation": "End-to-end encryption protects transaction data and stored financial records (e.g., AES-256), while tokenization replaces sensitive values such as credit card numbers and PII with a non-sensitive placeholder token."}, {"q": "What is the primary function of Data Loss Prevention (DLP) tools such as Email DLP and Cloud DLP?", "options": ["To accelerate database query execution", "To prevent unauthorized data transfers outside the organization", "To trigger strobe lights during a fire", "To negotiate IT outsourcing contracts"], "answer": 1, "explanation": "DLP tools prevent unauthorized data transfers across channels like email and cloud services."}, {"q": "What additional capability distinguishes 'Next-Gen DLP' from traditional DLP according to the handwritten notes?", "options": ["It only checks physical USB ports.", "It inspects both the content of the data and the specific applications being used.", "It replaces all network firewalls and switches.", "It automatically writes financial audit reports."], "answer": 1, "explanation": "The handwritten notes specify that Next-Gen DLP looks at both contents and which applications are being used."}, {"q": "Why are audit logs stored on Write-Once, Read-Many (WORM) memory?", "options": ["To allow administrators to easily edit out mistakes in logs", "To create tamper-proof audit logs so records cannot be altered or deleted once written", "To compress video surveillance footage into audio files", "To speed up RAM allocation for gaming applications"], "answer": 1, "explanation": "WORM (Write-Once, Read-Many) memory ensures audit logs are tamper-proof so neither attackers nor malicious insiders can alter historical records."}, {"q": "Which of the following is an example of a Detective control in system logging and monitoring?", "options": ["Continuous logging of financial transactions and real-time monitoring of privileged user activities using behavioral analytics", "Installing an AES-256 encryption chip", "Posting a 'No Trespassing' sign on a gate", "Enforcing parameterized SQL queries in source code"], "answer": 0, "explanation": "Continuous logging, real-time monitoring of privileged/user activities, behavioral analytics, and threat intelligence are detective controls."}, {"q": "Under the Categorization of Technical Controls, which category includes Firewalls, NGFWs, IDS/IPS, ZTNA, and DDoS protection?", "options": ["Access Control and Identity", "Network Security", "Application and Software Security", "Fraud and Transaction Controls"], "answer": 1, "explanation": "Firewalls, Next-Generation Firewalls (NGFWs), IPS/IDS, Zero Trust Network Access (ZTNA), and DDoS protection fall under Network Security."}, {"q": "What is the purpose of Zero Trust Network Access (ZTNA) in network security?", "options": ["To allow any remote user onto the corporate LAN without verification", "To secure remote access through continuous verification rather than implicit trust", "To disable encryption for internal APIs", "To detect water leaks in server rooms"], "answer": 1, "explanation": "ZTNA provides secure remote access by enforcing continuous authentication and verification of users and devices."}, {"q": "Which technical control under 'Application and Software Security' specifically prevents SQL/code injection attacks?", "options": ["Photocell perimeter lighting", "Input validation and parameterized queries", "Virtual underground fencing", "WORM storage media"], "answer": 1, "explanation": "Input validation and parameterized queries ensure user input is sanitized and separated from executable code, preventing SQL/code injection."}, {"q": "What is the purpose of Software Composition Analysis (SCA) in application security?", "options": ["To monitor employee keystrokes during shifts", "To identify vulnerable third-party libraries and dependencies in software", "To calculate financial return on IT investments", "To trigger sirens during unauthorized physical entry"], "answer": 1, "explanation": "Software Composition Analysis (SCA) scans applications to detect known vulnerabilities in third-party libraries and open-source components."}, {"q": "Which platforms are cited in the notes as examples of real-time AI fraud scoring and blocking in the financial sector?", "options": ["Splunk and ITIL", "FICO Falcon and Feedzai", "ISO 38500 and COBIT 2019", "OAuth 2.0 and WORM"], "answer": 1, "explanation": "FICO Falcon and Feedzai are cited as real-time AI fraud scoring and blocking platforms under Fraud and Transaction Controls."}, {"q": "Which financial control automatically cross-checks transaction records across systems to detect discrepancies?", "options": ["Perimeter strobe lighting", "Automated reconciliation and cross-verification of transactions", "Biometric iris scanning", "Virtual perimeter fencing"], "answer": 1, "explanation": "Automated reconciliation and cross-verification of transactions is a financial/transaction control that detects errors or unauthorized entries."}, {"q": "Regarding the assignment prompt in the notes ('Discuss platforms for automated alerts on policy violations and detecting unusual activity'), which category of tools is primarily designed to aggregate logs and generate real-time security alerts?", "options": ["SIEM (Security Information and Event Management) and UEBA platforms", "Word processors and spreadsheet editors", "Photocell perimeter lights and pressure mats", "Tokenization vaults"], "answer": 0, "explanation": "SIEM platforms (such as Splunk, IBM QRadar, Microsoft Sentinel) combined with UEBA (User and Entity Behavior Analytics) collect logs, detect unusual activity/policy violations, and trigger automated alerts."}, {"q": "What is the overarching purpose of Physical Controls in an organization?", "options": ["To format SQL database tables", "To maintain, keep available, and restrict or monitor access to facilities, storage areas, equipment, and information assets", "To negotiate software licensing fees", "To conduct financial ratio analysis"], "answer": 1, "explanation": "Physical controls comprise provisions an organization puts in place to maintain, keep available, and restrict or monitor access to facilities, storage areas, equipment, and information assets."}, {"q": "Sirens and strobe lights are examples of which type of physical control?", "options": ["Environmental detection sensors", "Alarm output devices", "Virtual fencing", "Warning signs"], "answer": 1, "explanation": "Alarm output devices (such as sirens and strobes) trigger audio and visible alerts when unauthorized access or suspicious activities are detected."}, {"q": "Warning signs alerting individuals to video surveillance function primarily as which type of control?", "options": ["Corrective control", "Deterrent control", "Cryptographic control", "Compensating financial control"], "answer": 1, "explanation": "Warning signs displayed to alert individuals of video surveillance act primarily as a deterrent control to discourage unauthorized behavior."}, {"q": "Which three types of perimeter lighting triggers are mentioned in the handwritten notes to deter nighttime intruders?", "options": ["Biometric, cryptographic, and tokenized", "Motion-triggered, ambient-light-triggered, and photocell-based lights", "Acoustic, thermal, and ultrasonic", "Manual, quarterly, and annual"], "answer": 1, "explanation": "The notes specify motion-triggered, ambient-light-triggered, and photocell-based perimeter lighting, often used in combination to deter nighttime intruders."}, {"q": "How does 'Virtual Fencing' detect an intruder without a visible physical barrier?", "options": ["By requiring visitors to scan an OAuth QR code", "By using underground sensors that detect vibrations or pressure changes when an invisible boundary is crossed", "By monitoring email attachments with DLP", "By checking user login locations via IP address"], "answer": 1, "explanation": "Virtual fencing uses underground sensors that detect vibrations or pressure changes when crossed, triggering an alarm discreetly."}, {"q": "What is the purpose of 'Pressure Mats' as a physical control?", "options": ["To measure server CPU temperature", "To accurately detect unauthorized access to restricted areas when stepped on", "To encrypt credit card numbers at point-of-sale terminals", "To balance electrical voltage in UPS batteries"], "answer": 1, "explanation": "Pressure mats accurately detect unauthorized physical presence or access in restricted areas."}, {"q": "What threats do 'Environmental Detection Sensors' protect IT equipment against?", "options": ["SQL injection and cross-site scripting", "Physical hazards such as smoke, heat, water, and humidity", "Unauthorized OAuth token reuse", "Insider financial embezzlement"], "answer": 1, "explanation": "Environmental detection sensors monitor smoke, heat, water, and humidity to protect physical facilities and IT equipment."}, {"q": "Which four best practices are recommended for implementing IT internal controls in E-Commerce?", "options": ["Adopt Zero Trust, use AI for fraud detection, implement strong encryption (AES-256) & tokenization, and enforce RBAC/least-privilege access", "Disable MFA, store plaintext card numbers, grant admin rights to all staff, and eliminate logging", "Use HTTP instead of HTTPS, rely solely on warning signs, skip software updates, and share passwords", "Outsource all security without audits, ignore anomalies, use single-factor logins, and delete backups"], "answer": 0, "explanation": "The four e-commerce IT internal control best practices are: (1) Adopt a Zero Trust Security Model, (2) Use AI for fraud detection, (3) Implement strong encryption (AES-256) and data masking/tokenization, and (4) Enforce role-based and least-privilege access."}, {"q": "Which symmetric encryption standard is specifically recommended in the e-commerce best practices notes to protect sensitive financial data?", "options": ["DES-56", "AES-256", "ROT13", "MD5"], "answer": 1, "explanation": "AES-256 encryption (alongside tokenization) is specifically recommended to protect sensitive financial data."}, {"q": "In Enterprise Resource Planning (ERP) systems, what is the purpose of 'Segregation of Duties' (SoD)?", "options": ["To ensure one single administrator controls every step of a financial transaction", "To ensure no single person can execute a critical process end-to-end (e.g., separating payment approval from payment recording)", "To separate IT servers from air conditioning units", "To prevent external auditors from viewing ERP logs"], "answer": 1, "explanation": "Segregation of duties prevents fraud and errors by dividing critical tasks among multiple individuals so no one person can initiate, approve, and record a transaction end-to-end."}, {"q": "Which control type combines BOTH preventive and detective capabilities at the network perimeter?", "options": ["Warning signs", "Intrusion Detection and Prevention Systems (IDS/IPS)", "WORM storage media", "Photocell lights"], "answer": 1, "explanation": "IDS detects malicious traffic (detective), while IPS actively blocks malicious traffic in real time (preventive)."}, {"q": "A company blocks employees from uploading customer spreadsheets to personal cloud drives by inspecting file contents and the browser application being used. Which technology is this?", "options": ["Next-Gen Data Loss Prevention (DLP)", "Virtual fencing", "Perimeter strobe lighting", "Software Composition Analysis"], "answer": 0, "explanation": "Next-Gen DLP inspects both the sensitive content and the application being used to prevent unauthorized data transfers."}, {"q": "An online banking app requires a customer to complete a fingerprint scan only when transferring an unusually large amount from a new device. Which two controls are working together here?", "options": ["Risk-Based Access Control and Biometric Authentication", "Virtual Fencing and Pressure Mats", "WORM Memory and Environmental Sensors", "Software Composition Analysis and Perimeter Lighting"], "answer": 0, "explanation": "Evaluating the unusual transaction/device is Risk-Based Access Control, and requiring a fingerprint for the high-risk transaction is Biometric Authentication."}, {"q": "Which of the following is an example of a Corrective control after a ransomware attack encrypts a file server?", "options": ["Restoring clean data from offline backups and patching the exploited vulnerability", "Displaying a cybersecurity awareness poster in the lobby", "Installing motion-activated floodlights outside the building", "Enabling OAuth 2.0 for a new mobile app"], "answer": 0, "explanation": "Backups and recovery along with patch management are classic corrective controls that restore systems and repair damage after an incident."}, {"q": "Why does Zero Trust require continuous authentication and verification of all users and devices?", "options": ["Because it assumes no user or device\u2014inside or outside the network perimeter\u2014should be trusted by default", "Because firewalls are no longer capable of filtering IP packets", "Because internal employees never need access to company data", "Because it eliminates the need for encryption"], "answer": 0, "explanation": "Zero Trust operates on 'never trust, always verify,' continuously authenticating and validating every user, device, and request."}], "part3": [{"q": "How is 'IT Governance' defined in the lecture notes and study guide?", "options": ["The daily troubleshooting of employee laptops and printers", "The structure and processes organizations use to ensure that IT operations support the overall goals and objectives of the organization", "The writing of firewall rules and SQL parameterized queries", "The installation of physical alarm sensors around server rooms"], "answer": 1, "explanation": "IT Governance refers to the structure and processes organizations use to ensure that their IT operations support the overall goals and objectives of the organization."}, {"q": "What are the two primary focal areas of IT Governance noted in the handwritten notes?", "options": ["Hardware cabling and office furniture", "Information and IT assets", "Marketing campaigns and retail pricing", "External tax audits and payroll processing"], "answer": 1, "explanation": "Page 9 of the handwritten notes explicitly highlights that IT Governance focuses on Information and IT Assets."}, {"q": "What is the key distinction between IT Governance and IT Management?", "options": ["IT Governance is executed by top-level managers (direction, accountability, value), whereas IT Management is carried out by operational managers (running systems and executing plans).", "IT Governance is handled by junior helpdesk technicians, whereas IT Management is handled by external regulators.", "IT Governance focuses solely on software coding, whereas IT Management focuses on board elections.", "There is no distinction; both terms describe identical daily tasks."], "answer": 0, "explanation": "IT Governance actions are taken by top-level managers (deciding what should be done and why), while IT Management is carried out by operational managers (deciding how to do it and running systems)."}, {"q": "Which of the following summarizes the governance vs. management distinction?", "options": ["Governance decides how to code; management decides what to audit.", "Governance decides what should be done and why; management decides how to do it.", "Governance manages daily backups; management approves vacation requests.", "Governance handles physical locks; management handles financial taxes."], "answer": 1, "explanation": "Governance sets direction and purpose ('what should be done and why'), while management executes operations ('how to do it')."}, {"q": "Which of the following are the four main reasons 'Why IT Governance' is essential to an enterprise?", "options": ["Aligning IT strategy with enterprise strategy, allocating IT resources efficiently, realizing value from IT investments, and managing IT-related risk", "Eliminating all IT staff, avoiding compliance laws, maximizing server downtime, and hiding IT budgets", "Replacing business units with IT teams, ignoring stakeholder feedback, delaying projects, and increasing operational waste", "Purchasing the most expensive hardware, disabling access controls, skipping risk assessments, and centralizing all tasks in one person"], "answer": 0, "explanation": "The four core drivers of IT Governance are: (1) Aligning IT strategy with enterprise strategy, (2) Allocating IT resources efficiently, (3) Realizing anticipated value from IT investment, and (4) Effectively managing IT-related risk."}, {"q": "How do 'Value Realization' and 'Value Delivery' differ according to the lecture notes?", "options": ["Value realization deals with the financial/business feedback (measurable business benefits), while value delivery deals with the technical/operational execution aspect.", "Value realization refers to hardware shipping times, while value delivery refers to stock market dividends.", "Value realization is only for non-profits, while value delivery is only for banks.", "Value realization is a detective control, while value delivery is a deterrent control."], "answer": 0, "explanation": "As noted on Page 10, Value Realization deals with the financial feedback/business outcomes, whereas Value Delivery deals with the technical execution aspect."}, {"q": "Which of the following are examples of 'Value Realization' listed in the notes?", "options": ["Increasing customer base, controlling congestion, faster transactions, revenue generation, and harnessing tasks", "Installing perimeter strobe lights and virtual fences", "Conducting software composition analysis and input validation", "Writing WORM audit logs and configuring firewalls"], "answer": 0, "explanation": "The handwritten notes list increasing customer base, controlling congestion, faster transactions, revenue generation, and harnessing tasks under Value Realization."}, {"q": "Which two core metrics are highlighted under 'Value Delivery' in the handwritten notes?", "options": ["On-time delivery (avoiding delay) and cost reduction", "Revenue generation and market share expansion", "Biometric enrollment and token expiration", "Auditor independence and evidence reliability"], "answer": 0, "explanation": "Value Delivery focuses on the technical execution aspects: on-time delivery (minimizing/avoiding delay) and cost reduction."}, {"q": "What are the three broad IT Risk Management approaches listed on Page 10 of the handwritten notes?", "options": ["Mitigation, Third-party assistance/assurance, and Containment", "Encryption, Tokenization, and Biometrics", "Planning, Reporting, and Follow-Up", "Deterrence, Prevention, and Detection"], "answer": 0, "explanation": "The notes list three broad IT risk management mechanisms: Mitigation, Third-party assistance/assurance, and Containment."}, {"q": "What is the correct sequence of the seven 'Steps to Manage IT Risk' from the lecture notes?", "options": ["Identify Risk \u2192 Assess Risk \u2192 Prioritize \u2192 Choose a Response \u2192 Put Controls in Place \u2192 Monitor Continuously \u2192 Report and Review", "Put Controls in Place \u2192 Identify Risk \u2192 Report and Review \u2192 Prioritize \u2192 Assess Risk \u2192 Monitor Continuously \u2192 Choose a Response", "Monitor Continuously \u2192 Assess Risk \u2192 Identify Risk \u2192 Choose a Response \u2192 Report and Review \u2192 Prioritize \u2192 Put Controls in Place", "Choose a Response \u2192 Prioritize \u2192 Identify Risk \u2192 Put Controls in Place \u2192 Assess Risk \u2192 Report and Review \u2192 Monitor Continuously"], "answer": 0, "explanation": "The 7-step risk management lifecycle is: (1) Identify Risk, (2) Assess Risk, (3) Prioritize, (4) Choose a Response, (5) Put Controls in Place, (6) Monitor Continuously, and (7) Report and Review."}, {"q": "During the 'Identify Risk' step of IT risk management, which two techniques are explicitly cited in the notes?", "options": ["Brainstorming and reviewing past incidents", "AES-256 encryption and tokenization", "Perimeter lighting and pressure mats", "Portfolio budgeting and CIO interviews"], "answer": 0, "explanation": "The notes specifically cite brainstorming and reviewing past incidents as methods to identify risk."}, {"q": "What takes place during the 'Assess Risk' step?", "options": ["Installing firewalls and passwords", "Rating the likelihood (and potential impact) of identified risks", "Signing third-party insurance contracts", "Publishing the final annual financial report"], "answer": 1, "explanation": "During risk assessment, risks are evaluated by rating their likelihood and impact."}, {"q": "In step 4 ('Choose a Response'), what two types of analysis can be used to evaluate risk responses?", "options": ["Quantitative or qualitative analysis", "Internal or external auditing", "Preventive or deterrent lighting", "Symmetric or asymmetric encryption"], "answer": 0, "explanation": "The notes indicate that choosing a response involves quantitative or qualitative analysis."}, {"q": "What are the 'Four Ways to Respond to Risk' listed in the lecture notes?", "options": ["Avoid, Reduce, Transfer, Accept", "Deter, Prevent, Detect, Correct", "Plan, Analyze, Report, Follow-Up", "Evaluate, Learn, Measure, Evaluate"], "answer": 0, "explanation": "The four standard risk response options are Avoid, Reduce, Transfer, and Accept."}, {"q": "Which risk response involves eliminating the activity or system that generates the risk (e.g., deciding not to launch an insecure system)?", "options": ["Reduce", "Transfer", "Avoid", "Accept"], "answer": 2, "explanation": "Risk Avoidance eliminates the risk entirely by not engaging in or discontinuing the risky activity."}, {"q": "Applying technical and administrative controls such as firewalls, passwords, and staff training to lower risk likelihood or impact is an example of which risk response?", "options": ["Avoid", "Reduce (Mitigate)", "Transfer", "Accept"], "answer": 1, "explanation": "Risk Reduction (mitigation) lowers the likelihood or impact of a risk through security controls."}, {"q": "Purchasing cyber insurance or outsourcing a high-risk operation to a specialized vendor via contract is an example of which risk response?", "options": ["Avoid", "Reduce", "Transfer", "Accept"], "answer": 2, "explanation": "Risk Transfer shifts the financial or operational burden of a risk to a third party through insurance, outsourcing, or contractual agreements."}, {"q": "When does an organization typically choose the 'Accept' risk response?", "options": ["When the cost of implementing controls exceeds the potential loss, resulting in a conscious management decision to tolerate the risk", "When management is completely unaware that the risk exists", "When regulators mandate immediate system shutdown", "When a cyberattack is actively exfiltrating customer databases"], "answer": 0, "explanation": "Risk Acceptance is a conscious management decision to tolerate a risk when the cost of mitigation exceeds the potential loss."}, {"q": "How is 'Strategic Alignment' defined as a domain of IT Governance?", "options": ["The physical alignment of server racks in a data center", "The degree to which an organization's IT strategy, infrastructure, and operations are synchronized with its business strategy", "The formatting of SQL queries in relational databases", "The calibration of perimeter photocell sensors"], "answer": 1, "explanation": "Strategic alignment deals with the degree to which an organization's IT strategy, infrastructure, and operations are synchronized with its business strategy."}, {"q": "Which three primary outcomes of Strategic Alignment are highlighted in the handwritten notes?", "options": ["Competitive advantage, operational efficiency, and value creation", "Deterrence, prevention, and detection", "Smoke detection, water detection, and heat detection", "Authentication, authorization, and accounting"], "answer": 0, "explanation": "Page 11 notes that strategic alignment produces competitive advantage, operational efficiency, and value creation."}, {"q": "Which four 'Benefits of Strategic Alignment' are listed in the lecture notes?", "options": ["Enhancing decision-making, operational efficiency, innovation enablement, and competitive advantage", "Eliminating firewalls, reducing encryption strength, skipping audits, and delaying software releases", "Increasing technical debt, isolating IT from business leaders, hiding costs, and duplicating systems", "Manual bookkeeping, paper filing, single-factor passwords, and unpatched servers"], "answer": 0, "explanation": "The four listed benefits of strategic alignment are: (1) Enhancing decision-making, (2) Operational efficiency, (3) Innovation enablement, and (4) Competitive advantage."}, {"q": "Which of the following is an indicator of 'Good Alignment' between IT and the business?", "options": ["IT is treated strictly as an isolated cost center that never speaks to business units.", "IT leaders (such as the CIO) take part in business planning, and every major IT project can be linked to a business goal.", "Business executives approve IT projects without knowing their purpose.", "IT and business teams use incompatible terminology and meet only once every five years."], "answer": 1, "explanation": "Good alignment is demonstrated when IT leaders (like the CIO) participate in business planning, every major IT project links to a business goal, business and IT meet regularly sharing a common language, and IT is seen as a partner."}, {"q": "In a well-aligned organization, how is the IT department perceived by executive leadership?", "options": ["As a strategic partner rather than merely a cost center", "As an external regulatory adversary", "As an unnecessary administrative overhead", "As a purely physical facilities maintenance crew"], "answer": 0, "explanation": "When good alignment exists, IT is viewed as a strategic partner driving business value rather than just a cost center."}, {"q": "What are the three 'Strategies for Achieving Good Alignment' listed on Page 12 of the handwritten notes?", "options": ["Stakeholder engagement, governance structure, and continuous assessment", "Encryption, tokenization, and data masking", "Alarm sirens, warning signs, and pressure mats", "Risk avoidance, risk transfer, and risk acceptance"], "answer": 0, "explanation": "The three strategies for achieving good alignment are Stakeholder Engagement, Governance Structure, and Continuous Assessment."}, {"q": "What is the cyclical loop for 'Continuous Assessment' shown in the handwritten notes?", "options": ["Plan \u2192 Code \u2192 Test \u2192 Deploy", "Evaluate \u2192 Learn \u2192 Measure \u2192 Evaluate", "Identify \u2192 Encrypt \u2192 Delete \u2192 Audit", "Deter \u2192 Prevent \u2192 Detect \u2192 Correct"], "answer": 1, "explanation": "Page 12 explicitly maps continuous assessment as the cycle: Evaluate \u2192 Learn \u2192 Measure \u2192 Evaluate."}, {"q": "Which three 'Key Principles of IT Governance for Strategic Alignment' are listed in the notes?", "options": ["Clear framework, collaboration between IT and business units, and portfolio management of IT investment", "Single-factor authentication, plaintext storage, and shared admin accounts", "Virtual fencing, environmental sensors, and strobe lights", "Internal audit, external audit, and quality audit"], "answer": 0, "explanation": "The three key principles are: (1) Clear framework, (2) Collaboration between IT and business units, and (3) Portfolio management of IT investment."}, {"q": "What does 'Portfolio Management of IT Investment' entail as an IT governance principle?", "options": ["Approving every IT request on a first-come, first-served basis without financial review", "Prioritizing and managing IT projects as an investment portfolio tied directly to business value and strategic goals", "Investing company cash reserves exclusively in cryptocurrency", "Allowing individual departments to buy duplicate software without oversight"], "answer": 1, "explanation": "Portfolio management treats IT initiatives as investments that must be prioritized, balanced, and evaluated based on expected business value and alignment."}, {"q": "Which governance framework provides principles specifically aimed at boards of directors on the effective, efficient, and acceptable use of IT?", "options": ["ISO 38500", "PCI-DSS", "OAuth 2.0", "HIPAA"], "answer": 0, "explanation": "ISO 38500 is the international standard for corporate governance of IT, guiding boards and top executives."}, {"q": "Which governance framework bridges business goals and IT goals through a comprehensive set of 40 governance and management objectives across 5 domains?", "options": ["COBIT 2019", "ISO 9001", "HIPAA", "AES-256"], "answer": 0, "explanation": "COBIT 2019 is the enterprise IT governance and management framework organizing 40 objectives across 5 domains (EDM, APO, BAI, DSS, MEA)."}, {"q": "In COBIT 2019, which domain specifically represents board-level Governance ('Evaluate, Direct and Monitor')?", "options": ["EDM", "DSS", "BAI", "APO"], "answer": 0, "explanation": "EDM (Evaluate, Direct and Monitor) is the governance domain in COBIT 2019, while APO, BAI, DSS, and MEA are management domains."}, {"q": "Why is 'sharing a common language' between business and IT leaders emphasized in strategic alignment?", "options": ["So business executives can write C++ code", "So both groups can communicate business objectives and technical capabilities clearly without misunderstandings", "So IT staff do not need to document system architectures", "So external auditors cannot understand internal meetings"], "answer": 1, "explanation": "A shared common language eliminates silos and ensures IT investments directly address understood business needs."}, {"q": "A retail bank launches a new mobile payment platform that reduces transaction latency by 60% and brings in 200,000 new active accounts. Which governance concept do these measurable business gains represent?", "options": ["Value Realization", "Deterrent Control", "Risk Avoidance", "Physical Containment"], "answer": 0, "explanation": "Faster transactions, an increased customer base, and revenue generation are concrete outcomes of Value Realization."}, {"q": "An IT project team completes a cloud migration two weeks ahead of schedule and 15% under budget. Which governance concept does this illustrate?", "options": ["Value Delivery", "Risk Acceptance", "Deterrent Control", "Evidence Collection"], "answer": 0, "explanation": "On-time delivery (avoiding delay) and cost reduction are the two core indicators of Value Delivery."}, {"q": "What is 'Containment' in the context of IT Risk Management?", "options": ["Limiting the spread and damage of a risk or security incident once it materializes", "Preventing any employee from ever using email", "Transferring financial losses to an insurance provider", "Ignoring low-probability risks"], "answer": 0, "explanation": "Containment limits the scope, spread, and impact of a risk event or breach after it occurs."}, {"q": "Why must 'Monitor Continuously' and 'Report and Review' follow 'Put Controls in Place' in the IT risk management lifecycle?", "options": ["Because threats, systems, and business environments change constantly, requiring ongoing verification that controls remain effective", "Because controls automatically expire after 24 hours", "Because external auditors forbid permanent security policies", "Because risk assessments are only valid during leap years"], "answer": 0, "explanation": "Continuous monitoring and periodic reporting/review ensure that implemented controls remain effective against evolving threats and changing business conditions."}, {"q": "Which governance principle ensures that decision rights, accountability, and organizational roles for IT are unambiguously defined?", "options": ["Clear framework", "Virtual fencing", "Tokenization", "Software composition analysis"], "answer": 0, "explanation": "Establishing a clear framework defines roles, structures, accountability, and decision rights across the enterprise."}, {"q": "If a company decides NOT to expand into a high-risk jurisdiction because local regulatory penalties outweigh potential revenue, which risk response is it exercising?", "options": ["Avoid", "Reduce", "Transfer", "Accept"], "answer": 0, "explanation": "Choosing not to engage in the activity that generates the risk is Risk Avoidance."}, {"q": "How does IT Governance support effective allocation of IT resources?", "options": ["By prioritizing funding and staffing toward initiatives that align with enterprise strategy and deliver measurable value", "By dividing the IT budget equally among every employee regardless of role", "By freezing all capital expenditures indefinitely", "By eliminating project oversight committees"], "answer": 0, "explanation": "Through portfolio management and strategic alignment, IT governance directs resources toward initiatives that maximize enterprise value."}, {"q": "What is the role of the Chief Information Officer (CIO) in demonstrating good strategic alignment?", "options": ["Participating directly in enterprise business planning so IT strategy is shaped alongside corporate goals", "Working solely in the server room configuring network switches", "Avoiding all meetings with finance and operations executives", "Conducting independent external financial audits"], "answer": 0, "explanation": "Good alignment requires IT leaders like the CIO to take an active part in business planning."}, {"q": "How do IT Governance, IT Controls, and IT Auditing work together as a cohesive system?", "options": ["IT Governance sets strategic direction and risk appetite; IT Controls implement policies and mechanisms to achieve objectives; IT Auditing independently verifies that controls are effective and aligned.", "IT Auditing writes the business strategy; IT Governance installs physical locks; IT Controls approve annual budgets.", "They operate in complete isolation with no interaction.", "IT Controls replace IT Governance once an organization hires an external auditor."], "answer": 0, "explanation": "Governance directs and oversees; Controls execute safeguards across people, processes, and technology; Auditing provides independent, evidence-based assurance that controls and governance work as intended."}]};
+
+const PART_LABELS = {
+  part1: "Part 1: IT Auditing",
+  part2: "Part 2: IT Controls",
+  part3: "Part 3: IT Governance"
+};
+
+let currentPart = "part1";
+let showMissedOnly = false;
+let userAnswers = {
+  part1: {},
+  part2: {},
+  part3: {}
+};
+
+// Load saved progress if available
+try {
+  const saved = localStorage.getItem("it_audit_gov_quiz_v1");
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    if (parsed && parsed.part1 && parsed.part2 && parsed.part3) {
+      userAnswers = parsed;
+    }
+  }
+} catch (e) {}
+
+function saveState() {
+  try {
+    localStorage.setItem("it_audit_gov_quiz_v1", JSON.stringify(userAnswers));
+  } catch (e) {}
+}
+
+function switchPart(partKey) {
+  currentPart = partKey;
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.part === partKey);
+  });
+  renderQuestions();
+  updateStats();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toggleMissedFilter() {
+  showMissedOnly = !showMissedOnly;
+  const btn = document.getElementById("btn-filter-missed");
+  btn.classList.toggle("filter-active", showMissedOnly);
+  btn.textContent = showMissedOnly ? "Showing Missed Only" : "Show Missed Only";
+  renderQuestions();
+}
+
+function selectOption(partKey, qIdx, optIdx) {
+  if (userAnswers[partKey][qIdx] !== undefined) return;
+  userAnswers[partKey][qIdx] = optIdx;
+  saveState();
+  renderQuestions();
+  updateStats();
+}
+
+function revealAllAnswers() {
+  const list = QUIZ_DATA[currentPart];
+  list.forEach((item, idx) => {
+    if (userAnswers[currentPart][idx] === undefined) {
+      userAnswers[currentPart][idx] = item.answer;
+    }
+  });
+  saveState();
+  renderQuestions();
+  updateStats();
+}
+
+function resetCurrentPart() {
+  userAnswers[currentPart] = {};
+  showMissedOnly = false;
+  const btn = document.getElementById("btn-filter-missed");
+  btn.classList.remove("filter-active");
+  btn.textContent = "Show Missed Only";
+  saveState();
+  renderQuestions();
+  updateStats();
+}
+
+function renderQuestions() {
+  const container = document.getElementById("questions-container");
+  const questions = QUIZ_DATA[currentPart];
+  const answers = userAnswers[currentPart];
+  const letters = ["A", "B", "C", "D"];
+
+  let html = "";
+  let renderedCount = 0;
+
+  questions.forEach((item, idx) => {
+    const chosen = answers[idx];
+    const isAnswered = chosen !== undefined;
+    const isCorrect = isAnswered && chosen === item.answer;
+
+    if (showMissedOnly && (!isAnswered || isCorrect)) {
+      return;
+    }
+
+    renderedCount++;
+    let cardClass = "question-card";
+    let statusHtml = "";
+
+    if (isAnswered) {
+      if (isCorrect) {
+        cardClass += " answered-correct";
+        statusHtml = `<span class="q-status correct">✓ Correct</span>`;
+      } else {
+        cardClass += " answered-wrong";
+        statusHtml = `<span class="q-status wrong">✗ Incorrect (Correct: ${letters[item.answer]})</span>`;
+      }
+    }
+
+    let optionsHtml = "";
+    item.options.forEach((optText, oIdx) => {
+      let optClass = "option-btn";
+      if (isAnswered) {
+        if (oIdx === item.answer) {
+          optClass += " correct-choice";
+        } else if (oIdx === chosen && chosen !== item.answer) {
+          optClass += " wrong-choice";
+        }
+      }
+
+      optionsHtml += `
+        <button class="${optClass}" ${isAnswered ? "disabled" : ""} onclick="selectOption('${currentPart}', ${idx}, ${oIdx})">
+          <span class="opt-letter">${letters[oIdx]}</span>
+          <span>${optText}</span>
+        </button>
+      `;
+    });
+
+    html += `
+      <div class="${cardClass}">
+        <div class="q-header">
+          <span class="q-num">${PART_LABELS[currentPart]} • Q${idx + 1} of ${questions.length}</span>
+          ${statusHtml}
+        </div>
+        <div class="q-text">${item.q}</div>
+        <div class="options-list">${optionsHtml}</div>
+        <div class="explanation-box ${isAnswered ? "visible" : ""}">
+          <strong>Explanation:</strong> ${item.explanation}
+        </div>
+      </div>
+    `;
+  });
+
+  if (renderedCount === 0 && showMissedOnly) {
+    html = `
+      <div class="question-card" style="text-align:center; padding:2.5rem;">
+        <p style="font-size:1rem; font-weight:600; color:var(--success); margin-bottom:0.4rem;">No missed questions in this section!</p>
+        <p style="font-size:0.88rem; color:var(--muted);">Toggle "Showing Missed Only" off to view all 40 questions.</p>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function updateStats() {
+  let totalAnswered = 0;
+  let totalCorrect = 0;
+
+  ["part1", "part2", "part3"].forEach(pKey => {
+    const qList = QUIZ_DATA[pKey];
+    const ansMap = userAnswers[pKey];
+    let pAnswered = 0;
+    let pCorrect = 0;
+
+    qList.forEach((item, idx) => {
+      if (ansMap[idx] !== undefined) {
+        pAnswered++;
+        if (ansMap[idx] === item.answer) pCorrect++;
+      }
+    });
+
+    totalAnswered += pAnswered;
+    totalCorrect += pCorrect;
+
+    document.getElementById(`meta-${pKey}`).textContent = `${pAnswered} / ${qList.length} Answered • Score: ${pCorrect}`;
+
+    if (pKey === currentPart) {
+      const pct = Math.round((pAnswered / qList.length) * 100);
+      document.getElementById("part-title-label").textContent = `${PART_LABELS[pKey]} (${qList.length} Questions)`;
+      document.getElementById("part-progress-text").textContent = `${pAnswered} / ${qList.length} (${pct}%) • Score: ${pCorrect}`;
+      document.getElementById("part-progress-fill").style.width = `${pct}%`;
+
+      const summaryBanner = document.getElementById("part-summary");
+      if (pAnswered === qList.length) {
+        const scorePct = Math.round((pCorrect / qList.length) * 100);
+        document.getElementById("summary-title").textContent = `${PART_LABELS[pKey]} Complete — ${pCorrect} / ${qList.length} (${scorePct}%)`;
+        document.getElementById("summary-text").textContent = scorePct >= 80
+          ? "Strong mastery of the lecture notes and frameworks."
+          : "Use 'Show Missed Only' to review explanations for any incorrect answers.";
+        summaryBanner.classList.add("visible");
+      } else {
+        summaryBanner.classList.remove("visible");
+      }
+    }
+  });
+
+  const globalPct = Math.round((totalCorrect / 120) * 100);
+  document.getElementById("global-progress").textContent = `${totalAnswered} / 120`;
+  document.getElementById("global-score").textContent = `${totalCorrect} / 120 (${globalPct}%)`;
+}
+
+// Initial render
+renderQuestions();
+updateStats();
+</script>
+</body>
+</html>

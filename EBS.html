@@ -1,0 +1,2374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Electronic Business Security MCQ Question Bank</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #62708a;
+      --line: #dbe3ef;
+      --primary: #2457d6;
+      --primary-dark: #173fa5;
+      --primary-soft: #e9efff;
+      --good: #16794c;
+      --good-bg: #e8f7ef;
+      --bad: #b42318;
+      --bad-bg: #fff0ed;
+      --shadow: 0 14px 35px rgba(24, 39, 75, 0.10);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(36, 87, 214, 0.12), transparent 32rem),
+        radial-gradient(circle at top right, rgba(22, 121, 76, 0.08), transparent 28rem),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #182747 0%, #2457d6 58%, #2c8fdd 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.09);
+      right: -90px;
+      top: -90px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      max-width: 760px;
+      margin: 0;
+      color: rgba(255,255,255,0.86);
+      font-size: 1rem;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      font-weight: 700;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 22px 0;
+      padding: 14px;
+      background: rgba(244, 247, 251, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 8px 26px rgba(24, 39, 75, 0.08);
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .tab {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 12px 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+      text-align: left;
+      min-height: 58px;
+    }
+    .tab small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.76rem;
+    }
+    .tab:hover { transform: translateY(-1px); border-color: #b8c7ef; }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .tab.active small { color: rgba(255,255,255,0.82); }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+    }
+    .search:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(36,87,214,.12); }
+    .stat, .btn {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 13px;
+      padding: 11px 14px;
+      font-weight: 850;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .btn { cursor: pointer; }
+    .btn:hover { border-color: #b8c7ef; background: #fbfcff; }
+    .btn.primary { background: var(--primary); border-color: var(--primary); color: white; }
+    .btn.primary:hover { background: var(--primary-dark); }
+
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0 14px;
+    }
+    .summary h2 {
+      margin: 0;
+      font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+      letter-spacing: -0.02em;
+    }
+    .progress-wrap {
+      min-width: min(360px, 100%);
+      flex: 1;
+      margin-left: 12px;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.84rem;
+      margin-bottom: 7px;
+    }
+    .progress {
+      height: 10px;
+      background: #e7edf6;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #28a46a);
+      border-radius: inherit;
+      transition: width .25s ease;
+    }
+
+    .questions {
+      display: grid;
+      gap: 16px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 26px rgba(24, 39, 75, 0.06);
+      padding: 22px;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: #cbd7ec;
+    }
+    .q-head {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .q-num {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 950;
+    }
+    .q-text { margin: 0; font-size: 1.04rem; font-weight: 820; padding-top: 7px; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .option {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fbfcff;
+      color: var(--text);
+      padding: 13px 14px;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      text-align: left;
+      font: inherit;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+    }
+    .option:hover { background: #f4f7ff; border-color: #b8c7ef; transform: translateY(-1px); }
+    .letter {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #e9eef8;
+      color: #41506a;
+      font-weight: 950;
+      font-size: .88rem;
+      margin-top: 1px;
+    }
+    .card.answered .option { cursor: default; }
+    .card.answered .option:hover { transform: none; }
+    .option.correct {
+      background: var(--good-bg);
+      border-color: rgba(22, 121, 76, 0.42);
+      color: var(--good);
+    }
+    .option.correct .letter { background: var(--good); color: white; }
+    .option.incorrect {
+      background: var(--bad-bg);
+      border-color: rgba(180, 35, 24, 0.35);
+      color: var(--bad);
+    }
+    .option.incorrect .letter { background: var(--bad); color: white; }
+    .option.dim { opacity: .64; }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      border-radius: 13px;
+      padding: 14px 15px;
+      border: 1px solid;
+    }
+    .feedback.show { display: block; }
+    .feedback.good { background: var(--good-bg); border-color: rgba(22, 121, 76, 0.32); color: #0e5737; }
+    .feedback.bad { background: var(--bad-bg); border-color: rgba(180, 35, 24, 0.28); color: #842018; }
+    .feedback strong { display: block; margin-bottom: 4px; }
+    .feedback .explanation { margin: 0; }
+    .card-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
+    .show-answer {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 900;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .show-answer:hover { color: var(--primary-dark); text-decoration: underline; }
+
+    .empty {
+      padding: 44px 18px;
+      text-align: center;
+      background: var(--panel);
+      border: 1px dashed #bfcbe0;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: .92rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 880px) {
+      .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { grid-template-columns: 1fr; }
+      .stat { text-align: center; }
+      .progress-wrap { margin-left: 0; min-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .page { width: min(100% - 20px, 1180px); padding-top: 14px; }
+      .hero { padding: 24px 20px; border-radius: 19px; }
+      .tabs { grid-template-columns: 1fr; }
+      .options { grid-template-columns: 1fr; }
+      .card { padding: 17px; }
+      .summary { align-items: stretch; flex-direction: column; }
+    }
+
+    @media print {
+      body { background: white; }
+      .toolbar, .card-actions, .footer .no-print { display: none !important; }
+      .page { width: 100%; padding: 0; }
+      .hero { color: black; background: white; border: 1px solid #ddd; box-shadow: none; }
+      .hero p, .badge { color: #333; }
+      .card { break-inside: avoid; box-shadow: none; }
+      .feedback { display: block !important; color: black; background: white; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Electronic Business Security MCQ Bank</h1>
+      <p>Select a module, choose an answer, and immediately see whether it is correct with an explanation. All 160 questions are contained in this single offline HTML file.</p>
+      <div class="badges">
+        <span class="badge">4 Modules</span>
+        <span class="badge">160 Questions</span>
+        <span class="badge">Answers + Explanations</span>
+        <span class="badge">Ready to Host</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Quiz controls">
+      <div class="tabs" id="tabs"></div>
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="Search questions, options, or explanations in the current module…" aria-label="Search current module" />
+        <div class="stat" id="score" aria-live="polite">Score: 0/40</div>
+        <button class="btn primary" id="reset" type="button">Reset module</button>
+      </div>
+    </section>
+
+    <section class="summary">
+      <h2 id="moduleTitle"></h2>
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="answeredLabel">0 answered</span><span id="percentLabel">0%</span></div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      </div>
+    </section>
+
+    <section class="questions" id="questions" aria-live="polite"></section>
+
+    <footer class="footer">
+      <span>Generated from the uploaded course slides.</span>
+      <button class="btn no-print" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
+    </footer>
+  </main>
+
+  <script id="quiz-data" type="application/json">{
+  "Module 1 — Security in E-Commerce (UNIT 2)": [
+    {
+      "question": "What is the primary focus of security as defined in the e-commerce module?",
+      "options": [
+        "Increasing system speed",
+        "Measures and controls for confidentiality, integrity, and availability",
+        "Marketing products online",
+        "Replacing hardware annually"
+      ],
+      "answer": 1,
+      "explanation": "Security is defined as the measures and controls that protect the confidentiality, integrity, and availability of information-system assets."
+    },
+    {
+      "question": "Which security goal ensures that private information is not disclosed to unauthorized persons?",
+      "options": [
+        "Integrity",
+        "Availability",
+        "Confidentiality",
+        "Authenticity"
+      ],
+      "answer": 2,
+      "explanation": "Confidentiality prevents unauthorized disclosure and also supports individuals’ control over information collected and stored about them."
+    },
+    {
+      "question": "How does confidentiality support individual privacy?",
+      "options": [
+        "By forcing all information to be public",
+        "By allowing people to control what information is collected and who may access it",
+        "By removing all stored records",
+        "By encrypting every public webpage"
+      ],
+      "answer": 1,
+      "explanation": "The module links confidentiality with privacy: individuals should have authority over information about them, including what is collected, stored, and accessed."
+    },
+    {
+      "question": "Integrity in information security includes which two forms?",
+      "options": [
+        "Network and application integrity",
+        "Data integrity and system integrity",
+        "Hardware and firmware integrity",
+        "User and administrator integrity"
+      ],
+      "answer": 1,
+      "explanation": "Integrity covers both data integrity and system integrity."
+    },
+    {
+      "question": "Data integrity requires that information and programs be changed:",
+      "options": [
+        "Only by attackers",
+        "Only in a manner specified by the authority concerned",
+        "Automatically whenever requested",
+        "By any user with network access"
+      ],
+      "answer": 1,
+      "explanation": "Data integrity means information and programs are modified only as authorized and specified."
+    },
+    {
+      "question": "System integrity means that a system should:",
+      "options": [
+        "Perform its intended function without unauthorized manipulation",
+        "Run without any software updates",
+        "Hide all logs from administrators",
+        "Allow unrestricted access for testing"
+      ],
+      "answer": 0,
+      "explanation": "System integrity ensures the system performs its intended function in an unimpaired manner and is free from unauthorized manipulation."
+    },
+    {
+      "question": "Availability means that computing systems should:",
+      "options": [
+        "Serve only administrators",
+        "Provide prompt and efficient service to authorized users when needed",
+        "Disable access during busy periods",
+        "Store unlimited data without controls"
+      ],
+      "answer": 1,
+      "explanation": "Availability ensures authorized users receive prompt, efficient service and are not denied access when they need it."
+    },
+    {
+      "question": "Authenticity is the ability to ascertain that users or communicating partners:",
+      "options": [
+        "Have expensive devices",
+        "Are who they say they are",
+        "Belong to the same organization",
+        "Use the newest software"
+      ],
+      "answer": 1,
+      "explanation": "Authenticity concerns genuineness, verifiability, and trust that a user or partner is genuinely who they claim to be."
+    },
+    {
+      "question": "Which set of terms best describes authenticity as presented in the module?",
+      "options": [
+        "Speed, cost, and convenience",
+        "Genuineness, verifiability, and trust",
+        "Encryption, compression, and storage",
+        "Hardware, software, and firmware"
+      ],
+      "answer": 1,
+      "explanation": "Authenticity involves genuineness, verifiability, and trust between communicating partners or users."
+    },
+    {
+      "question": "Accountability is best described as the ability to:",
+      "options": [
+        "Trace a user’s actions uniquely to that user",
+        "Make a system faster",
+        "Prevent all attacks automatically",
+        "Remove forensic evidence"
+      ],
+      "answer": 0,
+      "explanation": "Accountability ensures actions can be traced uniquely to a user, supported by a reliable trail of evidence."
+    },
+    {
+      "question": "Why does accountability deter intruders?",
+      "options": [
+        "It guarantees that attacks never occur",
+        "Users cannot credibly deny actions when forensic evidence exists",
+        "It hides malicious activity",
+        "It disables all auditing tools"
+      ],
+      "answer": 1,
+      "explanation": "Accountability creates evidence trails, making it difficult for users to repudiate actions and helping security experts isolate attacks."
+    },
+    {
+      "question": "Which category of computing asset includes all physical devices associated with the computing platform?",
+      "options": [
+        "Software",
+        "Data",
+        "Hardware",
+        "Communication facilities"
+      ],
+      "answer": 2,
+      "explanation": "Hardware consists of physical computing devices, such as computers and related equipment."
+    },
+    {
+      "question": "Which attacks are specifically listed against hardware assets?",
+      "options": [
+        "SQL injection and XSS",
+        "Side-channel attack and glitching",
+        "Phishing and credential stuffing",
+        "Spam and directory traversal"
+      ],
+      "answer": 1,
+      "explanation": "The module gives side-channel attacks and glitching as examples of hardware attacks."
+    },
+    {
+      "question": "Software assets include which items?",
+      "options": [
+        "Only application programs",
+        "Operating systems, utilities, and application software",
+        "Only databases",
+        "Only physical peripherals"
+      ],
+      "answer": 1,
+      "explanation": "Software includes system software such as operating systems and utilities, as well as applications."
+    },
+    {
+      "question": "Which set contains software threats named in the module?",
+      "options": [
+        "SQL injection, cross-site scripting, malware, DDoS",
+        "Glitching, power analysis, jamming, cloning",
+        "Backups, archiving, indexing, caching",
+        "Encryption, hashing, compression, encoding"
+      ],
+      "answer": 0,
+      "explanation": "SQL injection, cross-site scripting, malware such as Zeus and Conficker, and DDoS are listed as software threats."
+    },
+    {
+      "question": "Which asset category includes files, databases, and password files?",
+      "options": [
+        "Hardware",
+        "Software",
+        "Data",
+        "Networks"
+      ],
+      "answer": 2,
+      "explanation": "Data assets include files, databases, and security-related data such as password files."
+    },
+    {
+      "question": "Which set lists attacks associated with data assets in the module?",
+      "options": [
+        "Side-channel and glitching",
+        "Phishing, ransomware, man-in-the-middle, credential stuffing",
+        "GET, POST, and HEAD",
+        "Brute force and rail fence"
+      ],
+      "answer": 1,
+      "explanation": "The module names phishing, ransomware such as WannaCry, man-in-the-middle attacks, and credential stuffing as threats to data."
+    },
+    {
+      "question": "Communication facilities and networks include:",
+      "options": [
+        "Only user keyboards",
+        "LAN/WAN links, bridges, and routers",
+        "Only operating systems",
+        "Only password files"
+      ],
+      "answer": 1,
+      "explanation": "This asset category covers local and wide-area communication links and network devices such as bridges and routers."
+    },
+    {
+      "question": "A threat is best defined as:",
+      "options": [
+        "A security control that succeeded",
+        "Potential security harm to a computer asset",
+        "A completed backup operation",
+        "A user training program"
+      ],
+      "answer": 1,
+      "explanation": "A threat is the potential for security harm to an asset; it becomes an attack when carried out."
+    },
+    {
+      "question": "An attack is:",
+      "options": [
+        "Any unused vulnerability",
+        "A threat that is carried out",
+        "A software patch",
+        "A hardware upgrade"
+      ],
+      "answer": 1,
+      "explanation": "An attack is a threat action. If successful, it produces consequences detrimental to operational security."
+    },
+    {
+      "question": "The entity carrying out an attack is called the:",
+      "options": [
+        "Asset owner",
+        "Attacker or threat agent",
+        "Recovery point",
+        "Countermeasure"
+      ],
+      "answer": 1,
+      "explanation": "The actor who carries out an attack is referred to as an attacker or threat agent."
+    },
+    {
+      "question": "An active attack is one that:",
+      "options": [
+        "Only observes information without affecting operations",
+        "Attempts to modify system resources and affect their operation",
+        "Improves confidentiality by default",
+        "Is always launched from outside the organization"
+      ],
+      "answer": 1,
+      "explanation": "Active attacks try to alter resources or disrupt normal system operation."
+    },
+    {
+      "question": "Which is an example of an active attack?",
+      "options": [
+        "Eavesdropping",
+        "Traffic analysis",
+        "Man-in-the-middle attack",
+        "Reading a public webpage"
+      ],
+      "answer": 2,
+      "explanation": "The module lists man-in-the-middle attacks, denial-of-service attacks, and ransomware as active attacks."
+    },
+    {
+      "question": "A passive attack is one that:",
+      "options": [
+        "Destroys all databases",
+        "Studies or uses information without affecting system operation",
+        "Always modifies files",
+        "Requires administrator privileges"
+      ],
+      "answer": 1,
+      "explanation": "Passive attacks focus on obtaining or studying information while leaving system operations unaffected."
+    },
+    {
+      "question": "Which would most likely be classified as a passive attack?",
+      "options": [
+        "Modifying a database",
+        "Interrupting a network service",
+        "Intercepting and reading confidential traffic",
+        "Deleting system logs"
+      ],
+      "answer": 2,
+      "explanation": "Intercepting and reading traffic seeks information without necessarily changing or disrupting the system."
+    },
+    {
+      "question": "An insider attack is initiated by:",
+      "options": [
+        "An outside criminal with no authorized access",
+        "An entity inside the organization that owns the computing assets",
+        "A customer using a public website",
+        "A software vendor releasing updates"
+      ],
+      "answer": 1,
+      "explanation": "Insider attacks originate within the organization that owns the computing resources."
+    },
+    {
+      "question": "What distinguishes an insider attacker?",
+      "options": [
+        "The attacker has no relationship with the organization",
+        "The attacker is authorized to access resources but uses them maliciously",
+        "The attacker only attacks hardware",
+        "The attacker cannot be identified"
+      ],
+      "answer": 1,
+      "explanation": "Insiders are authorized to access system resources but misuse that access for personal motives or disruption."
+    },
+    {
+      "question": "An outsider attack is initiated by:",
+      "options": [
+        "An authorized employee",
+        "An entity outside the organization who is not authorized to access its assets",
+        "An internal auditor",
+        "A backup service"
+      ],
+      "answer": 1,
+      "explanation": "Outsider attacks come from outside the asset-owning organization and involve unauthorized access."
+    },
+    {
+      "question": "Which examples of outsider attackers are given in the module?",
+      "options": [
+        "Accountants and auditors",
+        "Terrorists and criminal hackers",
+        "Database administrators",
+        "Hardware technicians"
+      ],
+      "answer": 1,
+      "explanation": "The module identifies terrorists and criminal hackers as examples of outsider attackers."
+    },
+    {
+      "question": "A countermeasure is:",
+      "options": [
+        "A type of threat agent",
+        "A means taken to deal with a security attack",
+        "A vulnerability scanner report only",
+        "A password stored in plaintext"
+      ],
+      "answer": 1,
+      "explanation": "Countermeasures are controls or actions used to prevent, detect, or recover from security attacks."
+    },
+    {
+      "question": "Ideally, a countermeasure should first attempt to:",
+      "options": [
+        "Document the attack after damage occurs",
+        "Prevent the attack from succeeding",
+        "Hide the attacker’s identity",
+        "Increase the attack surface"
+      ],
+      "answer": 1,
+      "explanation": "The ideal countermeasure prevents a particular type of attack from succeeding."
+    },
+    {
+      "question": "When prevention is impossible or fails, what are the next goals of a countermeasure?",
+      "options": [
+        "Ignore the event and continue",
+        "Detect the attack and recover from its effects",
+        "Publish the vulnerability",
+        "Disable all logging"
+      ],
+      "answer": 1,
+      "explanation": "If prevention fails, organizations should detect the attack and then recover from its effects."
+    },
+    {
+      "question": "Which security goal primarily prevents unauthorized disclosure?",
+      "options": [
+        "Availability",
+        "Confidentiality",
+        "Integrity",
+        "Authenticity"
+      ],
+      "answer": 1,
+      "explanation": "Confidentiality protects information from being exposed to unauthorized persons."
+    },
+    {
+      "question": "Which security goal primarily prevents unauthorized or unintended modification?",
+      "options": [
+        "Confidentiality",
+        "Availability",
+        "Integrity",
+        "Accountability"
+      ],
+      "answer": 2,
+      "explanation": "Integrity ensures information, programs, and systems are changed only in authorized ways."
+    },
+    {
+      "question": "Which security goal addresses denial of service to authorized users?",
+      "options": [
+        "Availability",
+        "Authenticity",
+        "Confidentiality",
+        "Integrity"
+      ],
+      "answer": 0,
+      "explanation": "Availability ensures prompt and efficient service is provided to authorized users when needed."
+    },
+    {
+      "question": "Which two objectives are identified as additions to the main computer-security objectives by security experts?",
+      "options": [
+        "Speed and scalability",
+        "Authenticity and accountability",
+        "Compression and encryption",
+        "Hardware and firmware"
+      ],
+      "answer": 1,
+      "explanation": "Security experts add authenticity and accountability to confidentiality, integrity, and availability."
+    },
+    {
+      "question": "A password file would most directly be classified as which computing asset?",
+      "options": [
+        "Data",
+        "Hardware",
+        "Communication facilities",
+        "System utilities"
+      ],
+      "answer": 0,
+      "explanation": "Password files are security-related data and therefore belong to the data asset category."
+    },
+    {
+      "question": "Which scenario best represents a passive attack?",
+      "options": [
+        "An attacker silently captures network traffic for analysis",
+        "An attacker deletes database records",
+        "An attacker floods a server to disrupt service",
+        "An attacker changes system configuration"
+      ],
+      "answer": 0,
+      "explanation": "Capturing traffic for study uses information without directly modifying or disrupting the system."
+    },
+    {
+      "question": "Which scenario best represents an insider attack?",
+      "options": [
+        "A criminal hacker with no access breaches the network",
+        "An authorized employee misuses system access to disrupt the organization",
+        "A spammer sends email from many domains",
+        "A visitor views a public webpage"
+      ],
+      "answer": 1,
+      "explanation": "An authorized internal user maliciously misusing access fits the definition of an insider attack."
+    },
+    {
+      "question": "What is the ideal order of defense emphasized for countermeasures?",
+      "options": [
+        "Recover, detect, then prevent",
+        "Prevent, detect, then recover",
+        "Detect, ignore, then repeat",
+        "Recover, conceal, then prevent"
+      ],
+      "answer": 1,
+      "explanation": "Countermeasures ideally prevent attacks; when prevention fails, they detect attacks and support recovery."
+    }
+  ],
+  "Module 2 — Program Security (UNIT 3)": [
+    {
+      "question": "Defensive programming primarily involves:",
+      "options": [
+        "Writing software that continues to function even when under attack",
+        "Assuming all inputs are safe",
+        "Removing error handling to improve speed",
+        "Using only one programming language"
+      ],
+      "answer": 0,
+      "explanation": "Defensive programming designs and implements software that can continue operating safely or fail gracefully under attack."
+    },
+    {
+      "question": "Software built with defensive programming should be able to:",
+      "options": [
+        "Ignore all errors",
+        "Detect erroneous conditions and continue safely or fail gracefully",
+        "Trust every network packet",
+        "Execute attacker code without checks"
+      ],
+      "answer": 1,
+      "explanation": "Defensive software detects error conditions resulting from attacks and responds safely or gracefully."
+    },
+    {
+      "question": "What is the key rule of defensive programming?",
+      "options": [
+        "Assume everything is safe",
+        "Never assume anything; check all assumptions and handle possible error states",
+        "Maximize privileges",
+        "Avoid validating inputs"
+      ],
+      "answer": 1,
+      "explanation": "The module’s key rule is to check assumptions and handle all possible error states."
+    },
+    {
+      "question": "Which four aspects must receive attention when writing secure software?",
+      "options": [
+        "Marketing, pricing, branding, and sales",
+        "Safe input handling, algorithm implementation, interaction with components, and output",
+        "Only user-interface design",
+        "Only network cabling and printers"
+      ],
+      "answer": 1,
+      "explanation": "Secure programming requires attention to inputs, algorithms, interaction with other components, and outputs."
+    },
+    {
+      "question": "Which is listed as a possible source of program input?",
+      "options": [
+        "User keyboard entry",
+        "Moonlight",
+        "Printer ink level",
+        "Screen brightness"
+      ],
+      "answer": 0,
+      "explanation": "Programs may receive input from keyboards, mice, files, networks, configurations, execution environments, and operating systems."
+    },
+    {
+      "question": "Why must a program identify assumptions about input?",
+      "options": [
+        "Because inputs are always valid",
+        "Because input values and their size/type may not be known when code is written",
+        "Because assumptions make code run faster",
+        "Because the compiler automatically blocks bad input"
+      ],
+      "answer": 1,
+      "explanation": "Programmers may not know input values in advance, so assumptions about size and type must be identified and checked."
+    },
+    {
+      "question": "After identifying input assumptions, what should the program do?",
+      "options": [
+        "Use the input without checking it",
+        "Explicitly verify them in code and use values consistently with them",
+        "Store them in plaintext",
+        "Send them to another user"
+      ],
+      "answer": 1,
+      "explanation": "Assumptions about input must be explicitly verified and enforced by the program."
+    },
+    {
+      "question": "The two key input-related areas where security flaws may arise are:",
+      "options": [
+        "Color and font",
+        "Size of the input and its meaning/interpretation",
+        "CPU brand and disk speed",
+        "Programming language and editor"
+      ],
+      "answer": 1,
+      "explanation": "Security flaws can arise from input size, such as buffer overflow, and from incorrect meaning or interpretation."
+    },
+    {
+      "question": "A buffer overflow occurs when:",
+      "options": [
+        "A buffer receives less input than expected",
+        "An allocated input buffer receives more input than its allocated size",
+        "A program has too little source code",
+        "A network connection is idle"
+      ],
+      "answer": 1,
+      "explanation": "Buffer overflow happens when input exceeds the allocated buffer size."
+    },
+    {
+      "question": "According to the module, buffer overflow can lead to:",
+      "options": [
+        "System unavailability",
+        "Improved confidentiality",
+        "Automatic encryption",
+        "Reduced memory use"
+      ],
+      "answer": 0,
+      "explanation": "Overflowing a buffer may crash or compromise a program and can cause system unavailability."
+    },
+    {
+      "question": "What mindset is recommended when writing code that handles input safely?",
+      "options": [
+        "Treat all input as dangerous",
+        "Trust input from administrators",
+        "Trust input because it came from a file",
+        "Validate only network input"
+      ],
+      "answer": 0,
+      "explanation": "Safe code treats any input as potentially dangerous and processes it carefully."
+    },
+    {
+      "question": "Which technique can prevent insufficient buffer space for input?",
+      "options": [
+        "Using a dynamically sized buffer",
+        "Removing all validation",
+        "Increasing user privileges",
+        "Using plaintext passwords"
+      ],
+      "answer": 0,
+      "explanation": "A dynamically sized buffer can grow to accommodate input, provided memory limits are also checked."
+    },
+    {
+      "question": "Another way to handle input safely is to:",
+      "options": [
+        "Process it in buffer-sized blocks",
+        "Ignore unusually large input",
+        "Store it permanently without checking",
+        "Assume it will always fit"
+      ],
+      "answer": 0,
+      "explanation": "When input may be too large, processing in fixed-size blocks can prevent overflow."
+    },
+    {
+      "question": "What must be checked even when dynamically allocated buffers are used?",
+      "options": [
+        "Whether the requested space exceeds available memory",
+        "Whether users like the interface",
+        "Whether the source code is colorful",
+        "Whether the monitor is high resolution"
+      ],
+      "answer": 0,
+      "explanation": "Dynamic allocation can still fail if memory is exhausted, so requested space must be checked against available memory."
+    },
+    {
+      "question": "Which response is appropriate when requested input space exceeds available memory?",
+      "options": [
+        "Process the input in blocks",
+        "Discard excess input",
+        "Terminate the program gracefully",
+        "Any reasonable action that handles the abnormal situation safely"
+      ],
+      "answer": 3,
+      "explanation": "The module lists block processing, discarding excess input, graceful termination, or another reasonable safe response."
+    },
+    {
+      "question": "Input validation checks must apply to:",
+      "options": [
+        "Only keyboard input",
+        "Only network input",
+        "All potential sources of input and data with unknown values",
+        "Only administrator input"
+      ],
+      "answer": 2,
+      "explanation": "Checks apply wherever unknown data enters or is manipulated by the program, regardless of source."
+    },
+    {
+      "question": "Ensuring correct program code includes all of the following except:",
+      "options": [
+        "Correct algorithm implementation",
+        "Correct interpretation of data values",
+        "Avoiding memory leakage",
+        "Ignoring machine-language behavior"
+      ],
+      "answer": 3,
+      "explanation": "Secure code must ensure the algorithm is correct, data is interpreted correctly, memory is managed, and machine code matches the intended algorithm."
+    },
+    {
+      "question": "An incorrect algorithm implementation may produce:",
+      "options": [
+        "A guaranteed secure result",
+        "Correct input leading to unwanted behavior, called a logical or semantic error",
+        "Automatic vulnerability removal",
+        "A faster and safer program"
+      ],
+      "answer": 1,
+      "explanation": "Logical or semantic errors make the program behave incorrectly even when input is valid."
+    },
+    {
+      "question": "Which expression shows the importance of operator precedence?",
+      "options": [
+        "a+b/2 versus (a+b)/2",
+        "x=x+1 versus x=x",
+        "print() versus input()",
+        "1+1 versus 2"
+      ],
+      "answer": 0,
+      "explanation": "The examples show that omitting parentheses changes the order of operations and can create a logic error."
+    },
+    {
+      "question": "An off-by-one error can result from:",
+      "options": [
+        "Using < instead of <=",
+        "Adding two positive numbers",
+        "Encrypting data",
+        "Using a strongly typed language"
+      ],
+      "answer": 0,
+      "explanation": "Using the wrong comparison operator, such as < instead of <=, is a common off-by-one error."
+    },
+    {
+      "question": "Why can Boolean operations be a source of algorithm errors?",
+      "options": [
+        "AND, OR, and related operators can be misused or ordered incorrectly",
+        "Booleans cannot be stored",
+        "Boolean variables are always dangerous",
+        "Boolean operations are unrelated to program logic"
+      ],
+      "answer": 0,
+      "explanation": "Incorrect use or ordering of Boolean operators can change program decisions and create vulnerabilities."
+    },
+    {
+      "question": "At the lowest level, data values are represented as:",
+      "options": [
+        "Binary values stored in memory byte lengths",
+        "English sentences",
+        "Colors",
+        "Printed reports"
+      ],
+      "answer": 0,
+      "explanation": "The module states that low-level data is represented in binary and stored in memory byte lengths."
+    },
+    {
+      "question": "Who or what must interpret raw bits appropriately?",
+      "options": [
+        "The printer",
+        "The program",
+        "The end user",
+        "The network cable"
+      ],
+      "answer": 1,
+      "explanation": "Programs must interpret raw binary data correctly according to the intended data type and meaning."
+    },
+    {
+      "question": "Why do language restrictions and validation capabilities matter?",
+      "options": [
+        "They increase the chance of wrong manipulation",
+        "They reduce the likelihood that inappropriate variable use introduces flaws",
+        "They make memory leaks unavoidable",
+        "They remove the need for testing"
+      ],
+      "answer": 1,
+      "explanation": "Languages that restrict and validate data interpretations reduce the risk of misuse and flaws."
+    },
+    {
+      "question": "The best defense against wrong manipulation of values is to use:",
+      "options": [
+        "A strongly typed programming language",
+        "A plaintext password file",
+        "A larger monitor",
+        "An untyped macro language"
+      ],
+      "answer": 0,
+      "explanation": "Strong typing enforces data-type constraints and helps prevent invalid manipulation of values."
+    },
+    {
+      "question": "A memory leak occurs when dynamically allocated memory is:",
+      "options": [
+        "Released too early",
+        "Allocated when needed but not released when done",
+        "Encrypted",
+        "Stored in a register"
+      ],
+      "answer": 1,
+      "explanation": "A memory leak results from failing to release dynamically allocated memory after it is no longer needed."
+    },
+    {
+      "question": "A memory leak steadily reduces memory available on:",
+      "options": [
+        "The stack",
+        "The heap",
+        "The keyboard buffer",
+        "The screen"
+      ],
+      "answer": 1,
+      "explanation": "Dynamic memory allocation uses the heap; failing to release it exhausts heap memory."
+    },
+    {
+      "question": "Why can a memory leak enable denial of service?",
+      "options": [
+        "It increases confidentiality",
+        "The program may crash when heap memory is exhausted",
+        "It automatically repairs vulnerabilities",
+        "It improves authentication"
+      ],
+      "answer": 1,
+      "explanation": "Attackers can trigger repeated memory leaks until the program crashes, denying service to legitimate users."
+    },
+    {
+      "question": "An environment variable is:",
+      "options": [
+        "A variable set outside the program, often by the operating system or microservice",
+        "A variable that never changes",
+        "A virus",
+        "A type of network cable"
+      ],
+      "answer": 0,
+      "explanation": "Environment variables are external values that can influence program behavior."
+    },
+    {
+      "question": "Which is an example of information commonly stored in environment variables?",
+      "options": [
+        "Executable paths",
+        "Application settings or API keys",
+        "Temporary-file locations",
+        "All of the above"
+      ],
+      "answer": 3,
+      "explanation": "The module identifies paths, configuration data such as API keys, and temporary-file locations as environment-variable uses."
+    },
+    {
+      "question": "Which Windows environment variable returns the processor chip type?",
+      "options": [
+        "winver",
+        "%processor_architecture%",
+        "%computername%",
+        "%temp%"
+      ],
+      "answer": 1,
+      "explanation": "%processor_architecture% returns the processor architecture or chip type; winver gives the Windows version."
+    },
+    {
+      "question": "The principle of least privilege means granting:",
+      "options": [
+        "The maximum permissions available",
+        "Only the minimum permissions needed to perform intended functions",
+        "Administrator rights to every service",
+        "Unrestricted network access"
+      ],
+      "answer": 1,
+      "explanation": "Least privilege limits users, applications, and services to the minimum necessary permissions."
+    },
+    {
+      "question": "Which example best follows least privilege?",
+      "options": [
+        "A database retrieval account has administrator rights",
+        "A code-updating account has access to all financial data",
+        "A database record-retrieval account has only retrieval permissions",
+        "Every service uses the same superuser account"
+      ],
+      "answer": 2,
+      "explanation": "A retrieval-only account should not have administrative rights or access beyond what its function requires."
+    },
+    {
+      "question": "Role-based access control (RBAC) improves security by:",
+      "options": [
+        "Giving each user unlimited privileges",
+        "Assigning permissions to roles and then assigning users to roles",
+        "Removing accountability",
+        "Storing all passwords in source code"
+      ],
+      "answer": 1,
+      "explanation": "RBAC centralizes permissions in roles, reducing over-privileged individual accounts."
+    },
+    {
+      "question": "Just-in-time (JIT) access means:",
+      "options": [
+        "Keeping elevated privileges forever",
+        "Granting elevated privileges only when necessary and revoking them afterward",
+        "Disabling authentication",
+        "Giving access before it is requested"
+      ],
+      "answer": 1,
+      "explanation": "JIT access temporarily grants elevated privileges for sensitive tasks and then automatically revokes them."
+    },
+    {
+      "question": "Why should credentials not be hardcoded in applications?",
+      "options": [
+        "Hardcoding improves accountability",
+        "Hardcoding can expose secrets, makes rotation difficult, and weakens accountability",
+        "Hardcoding is required by all compilers",
+        "Hardcoding prevents source-code access"
+      ],
+      "answer": 1,
+      "explanation": "Hardcoded credentials may be exposed through source code, are brittle and difficult to rotate, and provide poor accountability."
+    },
+    {
+      "question": "Which practices help prevent hardcoded-secret risks?",
+      "options": [
+        "Environment variables, secret managers, and automated secret scanning",
+        "Publishing credentials in documentation",
+        "Using one password everywhere",
+        "Disabling logging"
+      ],
+      "answer": 0,
+      "explanation": "Secure credential handling uses environment variables or secret managers, and scanning helps detect exposed secrets."
+    },
+    {
+      "question": "A system call is:",
+      "options": [
+        "A request by a program for a service from the operating-system kernel",
+        "A user clicking a mouse",
+        "A compiler warning only",
+        "A replacement for an algorithm"
+      ],
+      "answer": 0,
+      "explanation": "System calls are programmatic requests through which user programs obtain operating-system services."
+    },
+    {
+      "question": "Which services are provided through system calls?",
+      "options": [
+        "Process and memory management",
+        "File and device management",
+        "Information maintenance, communication, and protection",
+        "All of the above"
+      ],
+      "answer": 3,
+      "explanation": "The module lists process creation, memory, files, devices, information maintenance, communication, and protection as system-call services."
+    },
+    {
+      "question": "Why must program output be sanitized?",
+      "options": [
+        "Because output may become input to another program, as in XSS",
+        "Because output is always private",
+        "Because sanitization makes output longer",
+        "Because browsers do not process responses"
+      ],
+      "answer": 0,
+      "explanation": "A web server’s unsafe output can become input to a browser, enabling attacks such as XSS; output should therefore be properly sanitized."
+    }
+  ],
+  "Module 3 — Web Security (UNIT 4)": [
+    {
+      "question": "The web is best described as:",
+      "options": [
+        "A single centralized computer",
+        "A distributed application that runs on the Internet",
+        "A type of database",
+        "A physical network cable"
+      ],
+      "answer": 1,
+      "explanation": "The module defines the web as a distributed application running on the Internet."
+    },
+    {
+      "question": "HTTP is implemented in which two programs?",
+      "options": [
+        "Router and switch",
+        "Client browser and web server",
+        "Compiler and editor",
+        "Firewall and printer"
+      ],
+      "answer": 1,
+      "explanation": "HTTP is implemented by the client, usually a browser, and the web server."
+    },
+    {
+      "question": "A typical web page consists of a base HTML file and may include referenced objects such as:",
+      "options": [
+        "JPEG images, Java applets, and audio files",
+        "Only text files",
+        "Only executable programs",
+        "Only spreadsheets"
+      ],
+      "answer": 0,
+      "explanation": "A web page may include multiple referenced objects, including images, applets, and audio files."
+    },
+    {
+      "question": "A URL has which two main parts?",
+      "options": [
+        "Username and password",
+        "Hostname and object pathname",
+        "IP address and MAC address",
+        "Header and body"
+      ],
+      "answer": 1,
+      "explanation": "Each URL contains the hostname of the server and the pathname of the object."
+    },
+    {
+      "question": "Which transport-layer protocol is used by HTTP?",
+      "options": [
+        "UDP",
+        "TCP",
+        "ICMP",
+        "FTP"
+      ],
+      "answer": 1,
+      "explanation": "HTTP uses TCP for communication between browser and server."
+    },
+    {
+      "question": "A web server usually listens on which reserved port number?",
+      "options": [
+        "21",
+        "25",
+        "80",
+        "443"
+      ],
+      "answer": 2,
+      "explanation": "The module states that a web server usually runs on reserved port 80."
+    },
+    {
+      "question": "A non-persistent HTTP connection is one in which:",
+      "options": [
+        "Many objects are fetched through a single connection",
+        "Each referenced object requires a separate TCP connection/request cycle",
+        "No TCP is used",
+        "Only HTTPS may be used"
+      ],
+      "answer": 1,
+      "explanation": "With non-persistent connections, each object gets its own connection setup, exchange, and closing process."
+    },
+    {
+      "question": "A persistent HTTP connection is one in which:",
+      "options": [
+        "No objects are transferred",
+        "Many objects are fetched through a single connection",
+        "The connection is never opened",
+        "Only response headers are sent"
+      ],
+      "answer": 1,
+      "explanation": "Persistent connections reuse a single TCP connection to fetch multiple objects."
+    },
+    {
+      "question": "What are the two types of HTTP messages?",
+      "options": [
+        "GET and POST",
+        "Request and response",
+        "Header and footer",
+        "Encrypt and decrypt"
+      ],
+      "answer": 1,
+      "explanation": "HTTP communication consists of request messages sent by the client and response messages returned by the server."
+    },
+    {
+      "question": "The first line of an HTTP request is called the:",
+      "options": [
+        "Status line",
+        "Request line",
+        "Entity body",
+        "Cookie line"
+      ],
+      "answer": 1,
+      "explanation": "The request line is the first line in an HTTP request message."
+    },
+    {
+      "question": "The request line contains which three fields?",
+      "options": [
+        "Method, URL, and HTTP version",
+        "Host, date, and server",
+        "Username, password, and cookie",
+        "IP address, port, and protocol"
+      ],
+      "answer": 0,
+      "explanation": "The three request-line fields are the method, URL, and HTTP version."
+    },
+    {
+      "question": "A GET request primarily:",
+      "options": [
+        "Sends confidential data in the request body",
+        "Retrieves data from the server",
+        "Deletes the server database",
+        "Modifies HTTP headers only"
+      ],
+      "answer": 1,
+      "explanation": "GET retrieves data from the server, with parameters visible in the URL."
+    },
+    {
+      "question": "A POST request primarily:",
+      "options": [
+        "Retrieves headers only",
+        "Sends data to the server, such as a login form",
+        "Creates a TCP connection",
+        "Deletes browser history"
+      ],
+      "answer": 1,
+      "explanation": "POST sends data to the server, for example login or feedback form data."
+    },
+    {
+      "question": "A HEAD request retrieves:",
+      "options": [
+        "Only headers, not the body",
+        "Only images",
+        "Only encrypted content",
+        "The entire database"
+      ],
+      "answer": 0,
+      "explanation": "HEAD returns metadata or headers and is useful for checking whether a resource exists."
+    },
+    {
+      "question": "Why do plaintext web messages create risk?",
+      "options": [
+        "They cannot be read by any party",
+        "Attackers may read sensitive information exchanged between client and server",
+        "They automatically encrypt credentials",
+        "They eliminate GET requests"
+      ],
+      "answer": 1,
+      "explanation": "Plaintext messages expose information to attackers who can observe or intercept them."
+    },
+    {
+      "question": "Why is unrestricted GET access dangerous?",
+      "options": [
+        "GET requests cannot retrieve objects",
+        "Files accessible under a web directory may be downloaded and sensitive information leaked",
+        "GET requests encrypt all data",
+        "GET is only used for images"
+      ],
+      "answer": 1,
+      "explanation": "Because GET can download accessible web objects, exposed files may leak sensitive information."
+    },
+    {
+      "question": "HTTPS improves security by:",
+      "options": [
+        "Removing the need for servers",
+        "Encrypting data sent between client and server",
+        "Making all GET requests harmless",
+        "Disabling cookies"
+      ],
+      "answer": 1,
+      "explanation": "HTTPS encrypts client-server traffic so intercepted data is not easily readable."
+    },
+    {
+      "question": "Which items does HTTPS help protect from attackers?",
+      "options": [
+        "Login credentials and cookies",
+        "POST request data",
+        "Header information",
+        "All of the above"
+      ],
+      "answer": 3,
+      "explanation": "HTTPS protects credentials, cookies, POST data, and headers by encrypting communication."
+    },
+    {
+      "question": "Cross-site scripting (XSS) involves:",
+      "options": [
+        "Injecting client-side scripts into a website so other users execute them",
+        "Physically cutting network cables",
+        "Increasing screen resolution",
+        "Replacing TCP with UDP"
+      ],
+      "answer": 0,
+      "explanation": "XSS inserts malicious client-side scripts that execute in the browsers of users visiting a vulnerable site."
+    },
+    {
+      "question": "In XSS, whom does the attacker directly exploit?",
+      "options": [
+        "The victim’s browser only",
+        "Loopholes in the vulnerable website visited by the victim",
+        "The hardware manufacturer",
+        "The search engine"
+      ],
+      "answer": 1,
+      "explanation": "The attacker uses weaknesses in the website to make it serve malicious scripts to victims."
+    },
+    {
+      "question": "What website weakness commonly enables XSS?",
+      "options": [
+        "Using HTTPS",
+        "Failing to sanitize attacker-supplied input",
+        "Having too many patches",
+        "Using persistent connections"
+      ],
+      "answer": 1,
+      "explanation": "If malicious code entered as text is not sanitized, the website may store or reflect it to users."
+    },
+    {
+      "question": "Persistent XSS occurs when malicious code:",
+      "options": [
+        "Exists only in the attacker’s browser",
+        "Is stored in the website’s database and executed by visiting browsers",
+        "Is never transmitted",
+        "Can only affect the server administrator"
+      ],
+      "answer": 1,
+      "explanation": "Stored or persistent XSS places malicious code in the site’s database, affecting users who visit."
+    },
+    {
+      "question": "Reflected XSS occurs when malicious code:",
+      "options": [
+        "Is stored permanently in the database",
+        "Originates from the victim’s request and is reflected by the site",
+        "Runs only on the web server",
+        "Requires physical access"
+      ],
+      "answer": 1,
+      "explanation": "Reflected XSS comes from a request made by the victim, often after clicking a malicious link."
+    },
+    {
+      "question": "How might an attacker target a specific individual with reflected XSS?",
+      "options": [
+        "By sending the malicious URL through email or instant messaging",
+        "By updating the victim’s operating system",
+        "By encrypting the victim’s disk",
+        "By deleting the website’s database"
+      ],
+      "answer": 0,
+      "explanation": "A targeted attacker can send a crafted URL and trick the specific victim into visiting it."
+    },
+    {
+      "question": "How might an attacker target a large group with reflected XSS?",
+      "options": [
+        "By publishing a link to the malicious URL and waiting for visitors",
+        "By asking each victim for an administrator password",
+        "By making the site use HTTPS",
+        "By disabling all scripts"
+      ],
+      "answer": 0,
+      "explanation": "For broad attacks, the malicious link may be posted on a website or social network."
+    },
+    {
+      "question": "What is the best solution to XSS according to the module?",
+      "options": [
+        "Detect it after users are infected",
+        "Prevent it from happening",
+        "Reuse the same secret key",
+        "Store scripts in the database"
+      ],
+      "answer": 1,
+      "explanation": "The module emphasizes prevention as the best defense against XSS."
+    },
+    {
+      "question": "Content Security Policy (CSP) is used to:",
+      "options": [
+        "Allow resources from any source",
+        "Constrain a browser to use resources from trusted sources",
+        "Replace all SQL queries",
+        "Slow down web traffic"
+      ],
+      "answer": 1,
+      "explanation": "CSP limits scripts, styles, images, and other resources to trusted sources."
+    },
+    {
+      "question": "Which rules can CSP enforce?",
+      "options": [
+        "Load external resources only from defined trusted sources",
+        "Do not evaluate inline JavaScript or CSS",
+        "Require all traffic to be plaintext",
+        "A and B only"
+      ],
+      "answer": 3,
+      "explanation": "CSP can prohibit untrusted sources and prevent evaluation of inline JavaScript and CSS."
+    },
+    {
+      "question": "Cross-Origin-Resource-Policy (CORP) tells the browser:",
+      "options": [
+        "Which websites are authorized to load a resource",
+        "Which user has the longest password",
+        "Which SQL queries to execute",
+        "Which TCP port to close"
+      ],
+      "answer": 0,
+      "explanation": "CORP declares which origins may embed or load a given resource."
+    },
+    {
+      "question": "What types of CORP policy are listed?",
+      "options": [
+        "same-origin, same-site, and cross-origin",
+        "GET, POST, and HEAD",
+        "Private, shared, and encrypted",
+        "Header, body, and cookie"
+      ],
+      "answer": 0,
+      "explanation": "The module lists Cross-Origin-Resource-Policy values: same-origin, same-site, and cross-origin."
+    },
+    {
+      "question": "SQL injection allows an attacker to:",
+      "options": [
+        "Execute arbitrary SQL code on a database",
+        "Increase monitor brightness",
+        "Change only browser fonts",
+        "Guarantee stronger encryption"
+      ],
+      "answer": 0,
+      "explanation": "SQL injection lets malicious users execute arbitrary SQL and access, modify, or delete data despite permissions."
+    },
+    {
+      "question": "The listed countermeasure for SQL injection is to:",
+      "options": [
+        "Escape special SQL characters in user input",
+        "Store plaintext passwords",
+        "Allow unlimited file uploads",
+        "Disable HTTP responses"
+      ],
+      "answer": 0,
+      "explanation": "Escaping user-input characters that have special meaning in SQL helps prevent SQL injection."
+    },
+    {
+      "question": "A denial-of-service (DoS) attack usually works by:",
+      "options": [
+        "Flooding a target site with fake requests to disrupt legitimate access",
+        "Encrypting all backups",
+        "Improving network bandwidth",
+        "Assigning stronger passwords"
+      ],
+      "answer": 0,
+      "explanation": "DoS floods a site or consumes resources so legitimate users cannot access the service."
+    },
+    {
+      "question": "Where are DoS defenses typically located?",
+      "options": [
+        "Only inside a user’s keyboard",
+        "Before or in the web server",
+        "Only in the database",
+        "Only in the browser cache"
+      ],
+      "answer": 1,
+      "explanation": "DoS defenses identify and block bad traffic before or within the web server and are not merely part of the web application."
+    },
+    {
+      "question": "Directory traversal is an attempt to:",
+      "options": [
+        "Access parts of the web-server file system that should not be accessible",
+        "Increase page-loading speed",
+        "Rewrite HTML tags",
+        "Create a new database table"
+      ],
+      "answer": 0,
+      "explanation": "Directory traversal uses file-system navigation characters to reach restricted files or directories."
+    },
+    {
+      "question": "What might attackers obtain through directory traversal?",
+      "options": [
+        "Database passwords and private documents",
+        "Student or customer information",
+        "Website settings and source code",
+        "All of the above"
+      ],
+      "answer": 3,
+      "explanation": "The module lists all of these as possible disclosures from directory traversal."
+    },
+    {
+      "question": "Which practice helps prevent directory traversal?",
+      "options": [
+        "Keep private files out of public folders",
+        "Give the server excessive permissions",
+        "Stop applying software updates",
+        "Publish all file paths"
+      ],
+      "answer": 0,
+      "explanation": "Prevention includes limiting permissions, updating software, and keeping private files out of public folders."
+    },
+    {
+      "question": "Snowshoe spam is characterized by:",
+      "options": [
+        "Sending junk email from one address thousands of times",
+        "Spreading spam across many IP addresses and domains with small amounts from each",
+        "Encrypting email attachments",
+        "Deleting messages before delivery"
+      ],
+      "answer": 1,
+      "explanation": "Snowshoe spam distributes messages widely to stay below spam-filter thresholds."
+    },
+    {
+      "question": "What is the goal of snowshoe spamming?",
+      "options": [
+        "To make messages easier to filter",
+        "To stay under the radar of spam filters",
+        "To improve email authentication",
+        "To reduce the number of domains used"
+      ],
+      "answer": 1,
+      "explanation": "By sending small amounts from many addresses and domains, spammers try to avoid detection."
+    },
+    {
+      "question": "Which web attack is correctly matched with its description?",
+      "options": [
+        "XSS — executes arbitrary SQL on a database",
+        "SQL injection — injects client-side scripts into webpages",
+        "DoS — floods a site with fake requests to disrupt service",
+        "Directory traversal — stores secret keys in a one-time pad"
+      ],
+      "answer": 2,
+      "explanation": "DoS is the flooding/disruption attack; XSS concerns scripts and SQL injection concerns database code."
+    }
+  ],
+  "Module 4 — Simple Symmetric Encryption and Steganography (UNIT 5)": [
+    {
+      "question": "A substitution cipher encrypts text by:",
+      "options": [
+        "Rearranging letters without changing them",
+        "Substituting each alphabet letter with another letter",
+        "Removing all vowels",
+        "Converting text into URLs"
+      ],
+      "answer": 1,
+      "explanation": "The basic idea of substitution is to replace each letter of the alphabet with another one."
+    },
+    {
+      "question": "Using A→k, B→d, C→w, what is the ciphertext for plaintext ABBA?",
+      "options": [
+        "wddw",
+        "kddk",
+        "ABBA",
+        "kwwk"
+      ],
+      "answer": 1,
+      "explanation": "A becomes k and B becomes d, so ABBA is encrypted as kddk."
+    },
+    {
+      "question": "Cryptanalysis deals with:",
+      "options": [
+        "Designing web pages",
+        "The background and methods of breaking ciphers",
+        "Increasing screen size",
+        "Installing operating systems"
+      ],
+      "answer": 1,
+      "explanation": "Cryptanalysis concerns understanding and breaking ciphers, including recovering plaintext or keys."
+    },
+    {
+      "question": "A cipher should be secure even if the attacker knows:",
+      "options": [
+        "Nothing about computing",
+        "The details of the algorithm",
+        "The plaintext only",
+        "The programmer’s name"
+      ],
+      "answer": 1,
+      "explanation": "Security should not depend on keeping the algorithm secret; it should remain secure even if the attacker knows its details."
+    },
+    {
+      "question": "Classical cryptanalysis is the science of recovering:",
+      "options": [
+        "Only ciphertext from plaintext",
+        "Plaintext x from ciphertext y, or key k from ciphertext",
+        "The computer’s serial number",
+        "Network packets from cables"
+      ],
+      "answer": 1,
+      "explanation": "Classical cryptanalysis aims to recover plaintext or the secret key from ciphertext."
+    },
+    {
+      "question": "An analytical attack breaks a cryptosystem by:",
+      "options": [
+        "Trying every possible key",
+        "Exploiting the internal structure of the encryption method",
+        "Asking users for passwords",
+        "Measuring power consumption"
+      ],
+      "answer": 1,
+      "explanation": "Analytical attacks use the algorithm’s structure and weaknesses rather than testing keys blindly."
+    },
+    {
+      "question": "A brute-force attack is one that:",
+      "options": [
+        "Uses the algorithm’s internal structure",
+        "Treats the encryption algorithm as a black box and tests all possible keys",
+        "Hides data inside an image",
+        "Deletes ciphertext"
+      ],
+      "answer": 1,
+      "explanation": "Brute-force attacks exhaustively try possible keys without relying on internal structure."
+    },
+    {
+      "question": "Which implementation attack uses electrical power consumption to obtain a secret key?",
+      "options": [
+        "Brute-force attack",
+        "Side-channel analysis",
+        "Directory traversal",
+        "Snowshoe spam"
+      ],
+      "answer": 1,
+      "explanation": "Side-channel analysis can infer secret information from physical signals such as power consumption."
+    },
+    {
+      "question": "Social engineering attacks may obtain a secret key through:",
+      "options": [
+        "Bribing, blackmailing, tricking, or spying",
+        "Measuring power consumption",
+        "Trying every key",
+        "Encrypting the key again"
+      ],
+      "answer": 0,
+      "explanation": "Social engineering targets people through manipulation, coercion, deception, or espionage."
+    },
+    {
+      "question": "Malware may reveal secret keys by:",
+      "options": [
+        "Improving encryption strength",
+        "Compromising software systems where keys are stored or used",
+        "Making keys physically longer",
+        "Converting plaintext to ciphertext"
+      ],
+      "answer": 1,
+      "explanation": "Malware can expose secret keys in compromised software systems."
+    },
+    {
+      "question": "The shift or Caesar cipher is:",
+      "options": [
+        "A special case of the substitution cipher",
+        "A form of directory traversal",
+        "A network protocol",
+        "A type of database index"
+      ],
+      "answer": 0,
+      "explanation": "The shift cipher substitutes letters by shifting the alphabet and is therefore a special substitution cipher."
+    },
+    {
+      "question": "A shift cipher encrypts by moving every plaintext letter:",
+      "options": [
+        "A random distance chosen per message",
+        "A fixed number of positions in the alphabet",
+        "Into a database",
+        "Onto another web server"
+      ],
+      "answer": 1,
+      "explanation": "Each plaintext letter is shifted by the same fixed number of positions."
+    },
+    {
+      "question": "With a shift of 3, A and B become:",
+      "options": [
+        "A→c, B→d",
+        "A→d, B→e",
+        "A→b, B→c",
+        "A→x, B→y"
+      ],
+      "answer": 1,
+      "explanation": "A shifts three places to d, and B shifts three places to e."
+    },
+    {
+      "question": "Under a shift of 3, how do X, Y, and Z wrap around?",
+      "options": [
+        "X→a, Y→b, Z→c",
+        "X→d, Y→e, Z→f",
+        "X→x, Y→y, Z→z",
+        "X→y, Y→z, Z→a"
+      ],
+      "answer": 0,
+      "explanation": "The alphabet wraps at the end, so X becomes a, Y becomes b, and Z becomes c."
+    },
+    {
+      "question": "In the Caesar-cipher example, which numeric representation corresponds to plaintext ATTACK?",
+      "options": [
+        "0,19,19,0,2,10",
+        "1,20,20,1,3,11",
+        "17,10,10,17,19,1",
+        "0,1,2,3,4,5"
+      ],
+      "answer": 0,
+      "explanation": "Using A=0, T=19, C=2, and K=10, ATTACK becomes 0,19,19,0,2,10."
+    },
+    {
+      "question": "With key k = 17, what is the ciphertext for ATTACK?",
+      "options": [
+        "attack",
+        "rkkrtb",
+        "xllayk",
+        "qjjqsa"
+      ],
+      "answer": 1,
+      "explanation": "Adding 17 modulo 26 to the numeric values gives 17,10,10,17,19,1, corresponding to rkkrtb."
+    },
+    {
+      "question": "A monoalphabetic cipher increases security over Caesar by allowing:",
+      "options": [
+        "Only one fixed shift",
+        "An arbitrary substitution or permutation",
+        "No key at all",
+        "A key shorter than the message only"
+      ],
+      "answer": 1,
+      "explanation": "Monoalphabetic substitution permits any rearrangement/substitution of the alphabet, greatly increasing the key space."
+    },
+    {
+      "question": "A permutation of a finite set S is:",
+      "options": [
+        "Any random subset",
+        "An ordered sequence containing every element of S exactly once",
+        "A number raised to a power",
+        "A network packet"
+      ],
+      "answer": 1,
+      "explanation": "A permutation lists all elements of the set once each in a particular order."
+    },
+    {
+      "question": "How many permutations exist for the set {a, b, c}?",
+      "options": [
+        "3",
+        "6",
+        "9",
+        "27"
+      ],
+      "answer": 1,
+      "explanation": "The six permutations are abc, acb, bac, bca, cab, and cba."
+    },
+    {
+      "question": "Why are simple monoalphabetic ciphers easy to break?",
+      "options": [
+        "They use keys that are too long",
+        "They preserve the frequency patterns of the original alphabet",
+        "They encrypt numbers rather than letters",
+        "They change the plaintext length"
+      ],
+      "answer": 1,
+      "explanation": "Letter-frequency information from the original language remains visible in ciphertext."
+    },
+    {
+      "question": "What countermeasure helps reduce frequency-analysis attacks on substitution ciphers?",
+      "options": [
+        "Homophones—multiple cipher symbols for one plaintext letter",
+        "Longer plaintext",
+        "Reusing the same key",
+        "Removing spaces only"
+      ],
+      "answer": 0,
+      "explanation": "Homophones assign several substitutes to a letter, flattening simple frequency patterns."
+    },
+    {
+      "question": "A one-time pad represents the message as:",
+      "options": [
+        "A sequence of 0s and 1s",
+        "A list of URLs",
+        "A set of images",
+        "A group of passwords"
+      ],
+      "answer": 0,
+      "explanation": "The message can be represented in binary, for example through binary numbers or ASCII."
+    },
+    {
+      "question": "In a one-time pad, the key must be:",
+      "options": [
+        "A repeated password",
+        "A random sequence of 0s and 1s with the same length as the message",
+        "The plaintext reversed",
+        "A Caesar shift value"
+      ],
+      "answer": 1,
+      "explanation": "The one-time-pad key is random, binary, and exactly as long as the message."
+    },
+    {
+      "question": "What must happen after a one-time-pad key is used?",
+      "options": [
+        "It is stored for reuse",
+        "It is discarded and never used again",
+        "It is shortened",
+        "It is published"
+      ],
+      "answer": 1,
+      "explanation": "One-time-pad security depends on using each random key only once."
+    },
+    {
+      "question": "What advantage does the one-time pad provide?",
+      "options": [
+        "It is unbreakable against a ciphertext-only attack",
+        "It needs no key",
+        "It is easy to transmit",
+        "It can safely reuse keys"
+      ],
+      "answer": 0,
+      "explanation": "With a truly random key used only once, the one-time pad is completely unbreakable for ciphertext-only attacks."
+    },
+    {
+      "question": "What disadvantage does the one-time pad have?",
+      "options": [
+        "It is easy to break with frequency analysis",
+        "It requires a very long key that is expensive to produce and transmit",
+        "It only works on images",
+        "It requires public-key infrastructure"
+      ],
+      "answer": 1,
+      "explanation": "Producing and securely transmitting a key as long as the message is costly and difficult."
+    },
+    {
+      "question": "Why is it dangerous to reuse a one-time-pad key?",
+      "options": [
+        "The second message becomes longer",
+        "Knowledge gained about the first message can reveal information about the second",
+        "The alphabet disappears",
+        "The ciphertext becomes plaintext automatically"
+      ],
+      "answer": 1,
+      "explanation": "Reusing the key creates relationships between messages that can leak information."
+    },
+    {
+      "question": "The word steganography comes from Greek words meaning:",
+      "options": [
+        "Secret key and lock",
+        "Covered and writing",
+        "Substitution and shift",
+        "Network and protocol"
+      ],
+      "answer": 1,
+      "explanation": "Steganos means covered and graphia means writing."
+    },
+    {
+      "question": "Steganography is the technique of:",
+      "options": [
+        "Breaking substitution ciphers",
+        "Hiding secret data within an ordinary, non-secret file or message",
+        "Flooding a server with requests",
+        "Assigning user privileges"
+      ],
+      "answer": 1,
+      "explanation": "Steganography conceals the existence of secret data inside another ordinary object or message."
+    },
+    {
+      "question": "Which is an example of steganography from the module?",
+      "options": [
+        "Playing an audio track backwards to reveal a secret message",
+        "Trying every Caesar key",
+        "Using SQL injection",
+        "Flooding a network"
+      ],
+      "answer": 0,
+      "explanation": "Playing audio backward is listed as one steganographic example; others include RGB channels, metadata, noise, and video frame-rate tricks."
+    },
+    {
+      "question": "What are two drawbacks of steganography?",
+      "options": [
+        "It is always detectable and always fast",
+        "It has high overhead for hiding relatively few bits, and discovery makes it nearly worthless",
+        "It only works once and requires no cover file",
+        "It encrypts every message automatically"
+      ],
+      "answer": 1,
+      "explanation": "Steganography can be inefficient, and once the hiding method is discovered, its concealment value largely disappears."
+    },
+    {
+      "question": "What is a stego object?",
+      "options": [
+        "The original secret message before hiding",
+        "A file that looks very similar to the cover file but contains the embedded secret",
+        "A broken cipher",
+        "A type of SQL query"
+      ],
+      "answer": 1,
+      "explanation": "Encoding produces a stego object that resembles the original cover file, with no obvious visible change."
+    },
+    {
+      "question": "Which five steganography types are listed?",
+      "options": [
+        "Text, image, video, audio, and network steganography",
+        "GET, POST, HEAD, TCP, and HTTP",
+        "Hardware, software, data, firmware, and networks",
+        "Caesar, monoalphabetic, one-time pad, substitution, and transposition"
+      ],
+      "answer": 0,
+      "explanation": "The five cover-object categories are text, image, video, audio, and network/protocol steganography."
+    },
+    {
+      "question": "Which methods are associated with text steganography?",
+      "options": [
+        "Least significant bits and phase coding",
+        "Format-based methods, random/statistical generation, and linguistic methods",
+        "Masking and filtering only",
+        "Embedding in compressed streams only"
+      ],
+      "answer": 1,
+      "explanation": "Text steganography includes format-based techniques, random/statistical generation, and linguistic methods."
+    },
+    {
+      "question": "Which method is listed as an image-steganography approach?",
+      "options": [
+        "Least Significant Bit insertion",
+        "Parity encoding",
+        "Spread spectrum",
+        "Embedding in ICMP headers"
+      ],
+      "answer": 0,
+      "explanation": "LSB insertion is an image method; parity coding and spread spectrum are audio methods, and ICMP fields relate to network steganography."
+    },
+    {
+      "question": "Which set contains audio-steganography methods?",
+      "options": [
+        "LSB encoding, parity encoding, phase coding, and spread spectrum",
+        "Format-based, linguistic, and statistical methods",
+        "Same-origin, same-site, and cross-origin",
+        "GET, POST, and HEAD"
+      ],
+      "answer": 0,
+      "explanation": "The module lists LSB encoding, parity encoding, phase coding, and spread spectrum for audio steganography."
+    },
+    {
+      "question": "What are the two main classes of video steganography?",
+      "options": [
+        "Encrypting before hiding and hiding before encrypting",
+        "Embedding in uncompressed raw video and compressing later, or embedding directly into the compressed stream",
+        "Using one frame or using two frames",
+        "Text-only and audio-only hiding"
+      ],
+      "answer": 1,
+      "explanation": "Video hiding can occur before compression or directly within the compressed video data."
+    },
+    {
+      "question": "Network or protocol steganography hides information in:",
+      "options": [
+        "Only image pixels",
+        "Network control protocols such as TCP, UDP, or ICMP, including optional header fields",
+        "Substitution tables",
+        "Printed documents only"
+      ],
+      "answer": 1,
+      "explanation": "Protocol steganography embeds data in networking protocols, for example optional fields in TCP/IP packet headers."
+    },
+    {
+      "question": "A transposition cipher differs from substitution because it:",
+      "options": [
+        "Replaces each plaintext symbol with a ciphertext symbol",
+        "Permutes or rearranges the plaintext letters",
+        "Uses only one letter",
+        "Hides messages in cover files"
+      ],
+      "answer": 1,
+      "explanation": "Transposition ciphers reorder plaintext letters rather than replacing them."
+    },
+    {
+      "question": "In a rail-fence cipher, plaintext is written as:",
+      "options": [
+        "A sequence of diagonals and then read as rows",
+        "A SQL query",
+        "A random binary key",
+        "A compressed video stream"
+      ],
+      "answer": 0,
+      "explanation": "Rail fence writes the message diagonally and reads it row by row to produce ciphertext."
+    }
+  ]
+}</script>
+  <script>
+    const modules = JSON.parse(document.getElementById('quiz-data').textContent);
+    const moduleNames = Object.keys(modules);
+    const letters = ['A', 'B', 'C', 'D'];
+    let activeModule = 0;
+    let query = '';
+    const answers = {};
+
+    const tabsEl = document.getElementById('tabs');
+    const questionsEl = document.getElementById('questions');
+    const moduleTitleEl = document.getElementById('moduleTitle');
+    const scoreEl = document.getElementById('score');
+    const answeredLabelEl = document.getElementById('answeredLabel');
+    const percentLabelEl = document.getElementById('percentLabel');
+    const progressBarEl = document.getElementById('progressBar');
+    const searchEl = document.getElementById('search');
+    const resetEl = document.getElementById('reset');
+
+    function key(m, i) { return `${m}:${i}`; }
+
+    function renderTabs() {
+      tabsEl.innerHTML = '';
+      moduleNames.forEach((name, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tab' + (idx === activeModule ? ' active' : '');
+        const unit = name.match(/\(UNIT \d+\)/)?.[0] || '';
+        btn.innerHTML = `<span>${name.replace(/ \(UNIT \d+\)/, '')}</span><small>${unit} · 40 questions</small>`;
+        btn.addEventListener('click', () => {
+          activeModule = idx;
+          query = '';
+          searchEl.value = '';
+          render();
+        });
+        tabsEl.appendChild(btn);
+      });
+    }
+
+    function filteredIndexes() {
+      const list = modules[moduleNames[activeModule]];
+      if (!query.trim()) return list.map((_, i) => i);
+      const needle = query.trim().toLowerCase();
+      return list.map((item, i) => {
+        const haystack = [item.question, item.explanation, ...item.options].join(' ').toLowerCase();
+        return haystack.includes(needle) ? i : -1;
+      }).filter(i => i >= 0);
+    }
+
+    function makeOptionButton(questionIndex, optionIndex, optionText, state) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option';
+      btn.innerHTML = `<span class="letter">${letters[optionIndex]}</span><span>${escapeHTML(optionText)}</span>`;
+      if (state) {
+        btn.disabled = true;
+        if (optionIndex === state.selected) {
+          btn.classList.add(state.correct ? 'correct' : 'incorrect');
+        } else if (optionIndex === modules[moduleNames[activeModule]][questionIndex].answer) {
+          btn.classList.add('correct');
+        } else {
+          btn.classList.add('dim');
+        }
+      } else {
+        btn.addEventListener('click', () => selectOption(questionIndex, optionIndex));
+      }
+      return btn;
+    }
+
+    function makeFeedback(item, state, revealed) {
+      const box = document.createElement('div');
+      const show = state || revealed;
+      box.className = 'feedback';
+      if (show) {
+        const correct = state ? state.correct : false;
+        box.classList.add('show', correct ? 'good' : 'bad');
+        const correctText = escapeHTML(item.options[item.answer]);
+        box.innerHTML = `<strong>${correct ? 'Correct!' : 'Correct answer: ' + letters[item.answer] + ' — ' + correctText}</strong><p class="explanation">${escapeHTML(item.explanation)}</p>`;
+      }
+      return box;
+    }
+
+    function makeCard(item, questionIndex) {
+      const state = answers[key(activeModule, questionIndex)];
+      const card = document.createElement('article');
+      card.className = 'card' + (state ? ' answered' : '');
+
+      const head = document.createElement('div');
+      head.className = 'q-head';
+      const num = document.createElement('div');
+      num.className = 'q-num';
+      num.textContent = questionIndex + 1;
+      const text = document.createElement('h3');
+      text.className = 'q-text';
+      text.textContent = item.question;
+      head.append(num, text);
+
+      const options = document.createElement('div');
+      options.className = 'options';
+      item.options.forEach((opt, optionIndex) => options.appendChild(makeOptionButton(questionIndex, optionIndex, opt, state)));
+
+      const feedback = makeFeedback(item, state, false);
+      feedback.dataset.role = 'feedback';
+
+      card.append(head, options, feedback);
+
+      if (!state) {
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        const reveal = document.createElement('button');
+        reveal.type = 'button';
+        reveal.className = 'show-answer';
+        reveal.textContent = 'Show answer without scoring';
+        reveal.addEventListener('click', () => {
+          const fb = card.querySelector('[data-role="feedback"]');
+          fb.replaceWith(makeFeedback(item, null, true));
+          reveal.remove();
+        });
+        actions.appendChild(reveal);
+        card.appendChild(actions);
+      }
+      return card;
+    }
+
+    function renderQuestions() {
+      questionsEl.innerHTML = '';
+      const list = modules[moduleNames[activeModule]];
+      const indexes = filteredIndexes();
+      if (!indexes.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = 'No matching questions found in this module.';
+        questionsEl.appendChild(empty);
+        return;
+      }
+      indexes.forEach(i => questionsEl.appendChild(makeCard(list[i], i)));
+    }
+
+    function updateStats() {
+      const list = modules[moduleNames[activeModule]];
+      let answered = 0;
+      let correct = 0;
+      list.forEach((_, i) => {
+        const state = answers[key(activeModule, i)];
+        if (state) {
+          answered++;
+          if (state.correct) correct++;
+        }
+      });
+      scoreEl.textContent = `Score: ${correct}/${list.length}`;
+      answeredLabelEl.textContent = `${answered} answered`;
+      const pct = list.length ? Math.round((answered / list.length) * 100) : 0;
+      percentLabelEl.textContent = `${pct}%`;
+      progressBarEl.style.width = `${pct}%`;
+    }
+
+    function render() {
+      renderTabs();
+      moduleTitleEl.textContent = moduleNames[activeModule];
+      document.title = `${moduleNames[activeModule]} — Electronic Business Security MCQ Bank`;
+      renderQuestions();
+      updateStats();
+    }
+
+    function selectOption(questionIndex, optionIndex) {
+      const item = modules[moduleNames[activeModule]][questionIndex];
+      const id = key(activeModule, questionIndex);
+      if (answers[id]) return;
+      answers[id] = { selected: optionIndex, correct: optionIndex === item.answer };
+      renderQuestions();
+      updateStats();
+    }
+
+    function escapeHTML(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    searchEl.addEventListener('input', (event) => {
+      query = event.target.value;
+      renderQuestions();
+    });
+
+    resetEl.addEventListener('click', () => {
+      if (!confirm('Reset all answers in this module?')) return;
+      modules[moduleNames[activeModule]].forEach((_, i) => delete answers[key(activeModule, i)]);
+      renderQuestions();
+      updateStats();
+    });
+
+    render();
+  </script>
+</body>
+</html>

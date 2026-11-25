@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 1 Quiz — Foundations of Data Analytics | 40 MCQs</title>
+<style>
+  :root{
+    --teal:#22b8a8; --teal-dark:#178a7e; --teal-ink:#7ce8dc;
+    --orange:#ff7b52; --paper:#0d1110; --card:#151c1a;
+    --ink:#e6ece9; --muted:#8f9e98; --line:#27332f;
+    --ok:#2eb87a; --ok-bg:#122b20; --ok-line:#1f523b;
+    --bad:#f0544f; --bad-bg:#331615; --bad-line:#632624;
+    --amber-bg:#2a2214; --amber-line:#d99b26;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth; color-scheme:dark}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.55;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 clamp(12px,3vw,24px) 60px}
+
+  /* ---------- sticky top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50; background:rgba(19,25,23,.92);
+    border-bottom:1px solid var(--line); backdrop-filter:blur(8px);
+  }
+  .tb-inner{max-width:880px; margin:0 auto; padding:10px clamp(12px,3vw,24px)}
+  .tb-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px}
+  .tb-title{font-size:clamp(15px,2.4vw,19px); font-weight:800; color:var(--teal); letter-spacing:.2px}
+  .tb-sub{font-size:clamp(11px,1.7vw,13px); color:var(--muted)}
+  .tb-stats{display:flex; flex-wrap:wrap; gap:6px 18px; align-items:center; margin-top:6px}
+  .stat{font-size:clamp(12px,1.9vw,14px); color:var(--ink); font-weight:600}
+  .stat b{color:var(--teal)}
+  .tb-reset{
+    margin-left:auto; border:1px solid var(--teal); color:var(--teal);
+    background:transparent; border-radius:8px; padding:4px 12px; font-size:12.5px;
+    font-weight:700; cursor:pointer; transition:.18s;
+  }
+  .tb-reset:hover{background:var(--teal); color:#0b1210}
+  .pbar{height:6px; background:#222c28; border-radius:99px; margin-top:8px; overflow:hidden}
+  .pbar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--teal-dark),var(--teal)); border-radius:99px; transition:width .3s ease}
+  .chips{display:flex; gap:6px; margin-top:8px; flex-wrap:wrap}
+  .chips a{
+    font-size:11.5px; font-weight:700; color:var(--teal-ink); text-decoration:none;
+    border:1px solid var(--line); background:var(--card); padding:3px 9px; border-radius:99px; transition:.18s;
+  }
+  .chips a:hover{border-color:var(--teal); background:var(--teal); color:#0b1210}
+
+  /* ---------- instructions ---------- */
+  .howto{
+    background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange);
+    border-radius:12px; padding:14px 16px; margin:18px 0 6px; font-size:clamp(12.5px,2vw,14.5px);
+  }
+  .howto b{color:var(--teal)}
+  .howto ul{margin:6px 0 0 18px}
+  .howto li{margin:2px 0}
+
+  /* ---------- modules ---------- */
+  .module{margin-top:34px; scroll-margin-top:120px}
+  .mod-head{
+    display:flex; align-items:center; gap:12px; background:linear-gradient(135deg,#135952,#0e423d);
+    border:1px solid #1e736a; color:#fff;
+    border-radius:12px; padding:12px 16px; flex-wrap:wrap;
+  }
+  .mod-num{
+    flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.14);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px;
+  }
+  .mod-title{flex:1 1 240px; font-size:clamp(15px,2.5vw,18px); font-weight:800; letter-spacing:.2px}
+  .mod-sub{flex:1 1 100%; font-size:clamp(11.5px,1.8vw,13px); color:#bde3dc; font-weight:500}
+  .mod-stat{margin-left:auto; font-size:12.5px; font-weight:700; background:rgba(0,0,0,.25); padding:3px 10px; border-radius:99px; white-space:nowrap}
+
+  /* ---------- question cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:16px clamp(14px,2.5vw,22px) 15px; margin:14px 0; box-shadow:0 2px 6px rgba(0,0,0,.28);
+  }
+  .q-meta{display:flex; align-items:center; gap:8px; margin-bottom:7px}
+  .q-no{
+    background:var(--teal-dark); color:#fff; font-weight:800; font-size:12px;
+    border-radius:6px; padding:2px 9px; white-space:nowrap;
+  }
+  .q-mod{font-size:11.5px; color:var(--muted); font-weight:600; letter-spacing:.3px; text-transform:uppercase}
+  .q-text{font-size:clamp(14px,2.2vw,16px); font-weight:600; margin-bottom:12px; color:#f2f6f4}
+  .opts{display:flex; flex-direction:column; gap:8px}
+  .opt{
+    display:flex; align-items:center; gap:11px; width:100%; text-align:left;
+    background:#1b2421; border:1.5px solid #2b3834; border-radius:10px;
+    padding:10px 13px; font-size:clamp(13px,2vw,15px); color:var(--ink);
+    cursor:pointer; transition:border-color .15s, background .15s, transform .05s;
+  }
+  .opt:hover:not(:disabled){border-color:var(--teal); background:#212e2a}
+  .opt:active:not(:disabled){transform:scale(.995)}
+  .opt:disabled{cursor:default}
+  .chip{
+    flex:0 0 26px; width:26px; height:26px; border-radius:8px; background:#26332f;
+    color:#a7bdb6; font-weight:800; font-size:13px;
+    display:flex; align-items:center; justify-content:center; transition:.15s;
+  }
+  .txt{flex:1}
+  .card.answered .opt:not(.correct):not(.wrong){opacity:.5}
+  .opt.correct{border-color:var(--ok); background:var(--ok-bg)}
+  .opt.correct .chip{background:var(--ok); color:#0b1210}
+  .opt.wrong{border-color:var(--bad); background:var(--bad-bg)}
+  .opt.wrong .chip{background:var(--bad); color:#fff}
+  .expl{
+    display:none; margin-top:12px; padding:11px 14px; border-radius:8px;
+    background:var(--amber-bg); border-left:4px solid var(--amber-line);
+    color:#e9dfc9; font-size:clamp(12.5px,1.95vw,14px); animation:fadein .25s ease;
+  }
+  .card.answered .expl{display:block}
+  .verdict{font-weight:800; display:block; margin-bottom:3px}
+  .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+  @keyframes fadein{from{opacity:0; transform:translateY(3px)} to{opacity:1; transform:none}}
+
+  /* ---------- results ---------- */
+  .results{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:20px clamp(14px,3vw,26px); margin-top:38px;
+  }
+  .results h2{color:var(--teal); font-size:clamp(17px,2.8vw,21px); margin-bottom:10px}
+  .score-line{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+  .big{font-size:clamp(30px,6vw,44px); font-weight:800; color:var(--teal); line-height:1}
+  .of{font-size:15px; color:var(--muted); font-weight:600}
+  .pct-chip{margin-left:auto; background:var(--teal-dark); color:#fff; font-weight:800; font-size:14px; padding:4px 12px; border-radius:99px}
+  .r-note{font-size:13px; color:var(--muted); margin-top:4px}
+  .mod-bars{margin:16px 0 6px; display:flex; flex-direction:column; gap:9px}
+  .mb-row{display:flex; align-items:center; gap:10px}
+  .mb-name{flex:0 0 190px; font-size:12.5px; font-weight:600; color:var(--ink)}
+  .mb-track{flex:1; height:9px; background:#232e2a; border-radius:99px; overflow:hidden}
+  .mb-fill{height:100%; width:0%; background:var(--teal); border-radius:99px; transition:width .3s ease}
+  .mb-score{flex:0 0 64px; text-align:right; font-size:12px; font-weight:700; color:var(--teal); white-space:nowrap}
+  .r-msg{
+    margin-top:14px; padding:12px 14px; border-radius:8px; background:#142824;
+    border:1px solid #22473f; font-size:clamp(13px,2vw,14.5px); font-weight:600; color:var(--teal-ink);
+  }
+  .retake-btn{
+    margin-top:16px; background:var(--teal); color:#0b1210; border:none; border-radius:10px;
+    padding:10px 22px; font-size:14.5px; font-weight:800; cursor:pointer; transition:.18s;
+  }
+  .retake-btn:hover{background:var(--teal-ink)}
+
+  footer{
+    text-align:center; color:var(--muted); font-size:12px; margin-top:34px; line-height:1.7;
+  }
+  @media (max-width:640px){
+    .mod-stat{margin-left:0}
+    .mb-name{flex:0 0 118px; font-size:11.5px}
+    .tb-reset{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-inner">
+    <div class="tb-top">
+      <span class="tb-title">CSF 473 · Unit 1 Quiz</span>
+      <span class="tb-sub">Foundations of Data Analytics · 40 multiple-choice questions</span>
+      <button class="tb-reset" id="tbReset" type="button">Retake</button>
+    </div>
+    <div class="tb-stats">
+      <span class="stat">Answered: <b id="stAnswered">0</b>/40</span>
+      <span class="stat">Score: <b id="stScore">0</b>/40</span>
+      <span class="stat">Percent: <b id="stPct">0%</b></span>
+    </div>
+    <div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+    <nav class="chips">
+      <a href="#m1">M1 · Concept &amp; Scope</a>
+      <a href="#m2">M2 · Four Types</a>
+      <a href="#m3">M3 · Analytic Thinking</a>
+      <a href="#m4">M4 · CRISP-DM</a>
+      <a href="#m5">M5 · Questions &amp; KPIs</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="howto">
+    <b>How this quiz works</b>
+    <ul>
+      <li>Five modules, eight questions each (40 total, one mark per question).</li>
+      <li>Click an option — it is <b>marked instantly</b> and the correct answer is explained.</li>
+      <li>Each question locks after your first choice, so answer carefully.</li>
+      <li>Your score updates live above; a results summary appears at the bottom.</li>
+    </ul>
+  </div>
+
+  <main id="app"></main>
+
+  <footer>
+    Based on the CSF 473 · Data Analytics and Visualization · Week 1 lecture slides,
+    "Foundations of Data Analytics". Companion to the Unit 1 study notes.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var MODULES = [
+    {
+      title: "Foundations of Data Analytics: Concept and Scope",
+      sub: "Definition, goal, the data-to-decision chain, neighbouring fields, forms and sources of data.",
+      questions: [
+        {
+          q: "In the unit\u2019s definition, data analytics is the process of collecting, cleaning, analysing and ______ data to support better decisions.",
+          opts: ["storing", "visualising", "interpreting", "archiving"],
+          correct: 2,
+          expl: "The definition names four steps: collecting, cleaning, analysing and interpreting. The endpoint is interpretation that supports a decision — storing or archiving is not part of the process."
+        },
+        {
+          q: "The goal of analytics is to turn data into insight, and insight into:",
+          opts: ["reports", "action", "models", "profit"],
+          correct: 1,
+          expl: "The unit\u2019s goal statement is \u201cturn data into insight, and insight into action\u201d. Reports and models may carry the insight, but the endpoint is a decision someone acts on."
+        },
+        {
+          q: "In the retail shop example, \u201csales dip at month-end\u201d is the:",
+          opts: ["the data stage", "the information stage", "the action stage", "the insight stage"],
+          correct: 3,
+          expl: "The chain runs data \u2192 information \u2192 insight \u2192 action. Raw daily records are data, weekly totals are information, spotting the month-end dip is the insight, and running promotions is the action."
+        },
+        {
+          q: "\u201cWhich customers are likely to leave?\u201d is the typical question of:",
+          opts: ["Business intelligence", "Statistics", "Data science", "Machine learning"],
+          correct: 2,
+          expl: "The unit pairs data science (advanced modelling, algorithms, big data) with the churn question. Machine learning\u2019s paired question is \u201cIs this transaction fraudulent?\u201d"
+        },
+        {
+          q: "Which field-and-focus pairing is correct?",
+          opts: [
+            "Statistics \u2014 inference and uncertainty",
+            "Business intelligence \u2014 algorithms that learn",
+            "Machine learning \u2014 reporting on the past",
+            "Data science \u2014 building dashboards"
+          ],
+          correct: 0,
+          expl: "Statistics focuses on inference and uncertainty. Business intelligence reports the past with dashboards, machine learning builds algorithms that learn patterns, and data science does advanced modelling."
+        },
+        {
+          q: "In Ghanaian agriculture, rainfall, price and yield data are combined mainly to:",
+          opts: ["detect payment fraud", "guide planting and selling decisions", "roster clinic nurses", "plan road maintenance"],
+          correct: 1,
+          expl: "The unit\u2019s agriculture example combines rainfall, price and yield data to guide planting and selling decisions for crops such as cocoa and maize."
+        },
+        {
+          q: "JSON, XML and system logs are best classified as:",
+          opts: ["unstructured data", "structured data", "quantitative data", "semi-structured data"],
+          correct: 3,
+          expl: "Semi-structured data has some organisation without a rigid table layout. Structured data sits in fixed-field tables; unstructured data (text, images, audio, video) has no predefined structure."
+        },
+        {
+          q: "Surveying 500 households to reason about a whole city illustrates:",
+          opts: ["statistical inference", "data leakage", "prescriptive analytics", "business intelligence"],
+          correct: 0,
+          expl: "Statistical inference is using data from a small, manageable subset (a sample) to draw conclusions, make estimates or test assumptions about the larger population."
+        }
+      ]
+    },
+    {
+      title: "The Four Types of Analytics",
+      sub: "Descriptive, diagnostic, predictive and prescriptive — the analytics ladder.",
+      questions: [
+        {
+          q: "\u201cWhy did patient visits fall in March?\u201d belongs to:",
+          opts: ["descriptive analytics", "predictive analytics", "prescriptive analytics", "diagnostic analytics"],
+          correct: 3,
+          expl: "\u201cWhy did it happen?\u201d is the diagnostic question. How many visited is descriptive, how many to expect is predictive, and how many nurses to roster is prescriptive."
+        },
+        {
+          q: "Which technique belongs most to prescriptive analytics?",
+          opts: ["Optimisation", "Drill-down", "Pivot tables", "Correlation"],
+          correct: 0,
+          expl: "Prescriptive analytics uses optimisation, simulation and decision rules. Drill-down and correlation are diagnostic tools; pivot tables summarise what happened."
+        },
+        {
+          q: "A model that uses attendance and quiz scores to estimate which students may fail is:",
+          opts: ["descriptive analytics", "diagnostic analytics", "predictive analytics", "prescriptive analytics"],
+          correct: 2,
+          expl: "Estimating what will happen produces probabilities and risk scores — predictive work. No action is recommended yet; that would be prescriptive."
+        },
+        {
+          q: "Descriptive analytics answers \u201cWhat happened?\u201d mainly using:",
+          opts: ["optimisation models", "totals, averages and trends", "regression coefficients", "simulation outcomes"],
+          correct: 1,
+          expl: "Descriptive work summarises data with totals, averages, percentages and trends, typically shown in dashboards, charts and pivot tables."
+        },
+        {
+          q: "Splitting a total into finer categories while hunting for a cause is:",
+          opts: ["forecasting", "segmentation", "drill-down", "simulation"],
+          correct: 2,
+          expl: "Drill-down breaks a total into finer categories such as student group, week or region. Segmentation groups records that behave alike — a related but different move."
+        },
+        {
+          q: "Which question belongs to prescriptive analytics?",
+          opts: [
+            "\u201cHow many patients visited in March?\u201d",
+            "\u201cHow many visits should we expect in June?\u201d",
+            "\u201cWhy did visits fall in March?\u201d",
+            "\u201cHow many nurses should we roster each day?\u201d"
+          ],
+          correct: 3,
+          expl: "Rostering nurses under limited staff is choosing the best action under constraints — optimisation territory, which is prescriptive."
+        },
+        {
+          q: "Finding that the registration drop is concentrated among part-time students, after the fee deadline moved earlier, is the output of:",
+          opts: ["diagnostic analytics", "descriptive analytics", "predictive analytics", "prescriptive analytics"],
+          correct: 0,
+          expl: "This explains why the drop happened by drilling into who was affected and what changed — diagnostic work. The count of 4,200 registrations, down 6%, alone was descriptive."
+        },
+        {
+          q: "In the mobile money agent scenario, \u201cabout 350 customers next week, and float likely to run out on Thursday\u201d is:",
+          opts: ["a descriptive finding", "a predictive forecast", "a diagnostic finding", "a prescriptive recommendation"],
+          correct: 1,
+          expl: "Projecting what will happen next week is predictive. The prescriptive step comes after it: top up float on Thursday evening and add a second attendant on Friday."
+        }
+      ]
+    },
+    {
+      title: "Data-Analytic Thinking",
+      sub: "Four principles, confounders, and the six common pitfalls.",
+      questions: [
+        {
+          q: "Data-analytic thinking starts by asking:",
+          opts: [
+            "\u201cWhich tool should we buy?\u201d",
+            "\u201cWhat data do we have?\u201d",
+            "\u201cWho will build the model?\u201d",
+            "\u201cWhat decision will this improve?\u201d"
+          ],
+          correct: 3,
+          expl: "The four questions in order are: What decision? What data? What evidence? What action? Starting with the decision keeps the project tied to purpose — \u201clet\u2019s build a dashboard\u201d begins with a tool instead."
+        },
+        {
+          q: "Provost and Fawcett (2013) argue that data-analytic thinking is needed most by:",
+          opts: ["managers and professionals", "statisticians alone", "software engineers only", "database administrators"],
+          correct: 0,
+          expl: "They argue this way of thinking is needed by managers and professionals, not only analysts: whoever frames the problem and owns the decision most needs to understand what evidence can deliver."
+        },
+        {
+          q: "Umbrella sales and malaria cases both rise in the rainy season. The confounder is:",
+          opts: ["umbrella prices", "the season itself", "hospital capacity", "rain"],
+          correct: 3,
+          expl: "Rain is the hidden third factor: it raises umbrella sales and creates mosquito breeding sites, driving malaria up as well. Umbrellas do not cause malaria."
+        },
+        {
+          q: "Which statement is correct?",
+          opts: [
+            "Correlation proves causation",
+            "Causation needs no comparison",
+            "Correlation does not imply causation",
+            "Correlation is tested, causation is observed"
+          ],
+          correct: 2,
+          expl: "Two variables moving together does not mean one causes the other. Causal claims need comparisons, experiments and domain knowledge — never a correlation alone."
+        },
+        {
+          q: "Studying only businesses that succeeded, ignoring those that closed, is:",
+          opts: ["survivorship bias", "sampling bias", "data leakage", "confirmation bias"],
+          correct: 0,
+          expl: "Survivorship bias studies only the cases that passed a filter. Sampling bias is a non-representative sample, data leakage uses unavailable information, confirmation bias seeks only supporting evidence."
+        },
+        {
+          q: "A model that memorises its training data and then fails on new data shows:",
+          opts: ["poor data quality", "sampling bias", "overfitting", "survivorship bias"],
+          correct: 2,
+          expl: "Overfitting is memorising past data and failing on new data. The defence is the principle \u201cexpect uncertainty\u201d: always test models on data they have not seen."
+        },
+        {
+          q: "Using information that would not exist at prediction time is:",
+          opts: ["overfitting", "data leakage", "drill-down", "a vanity metric"],
+          correct: 1,
+          expl: "Data leakage lets a model peek at information unavailable in real use — it looks excellent in testing and fails in production."
+        },
+        {
+          q: "Which habit directly guards against overfitting?",
+          opts: ["Start with the problem", "Test on unseen data", "Think in value and cost", "Collect more variables"],
+          correct: 1,
+          expl: "\u201cExpect uncertainty\u201d means always testing models on data they have not seen. Starting with the problem is vital, but it does not by itself expose a memorising model."
+        }
+      ]
+    },
+    {
+      title: "The CRISP-DM Lifecycle",
+      sub: "Six iterative phases, from Business Understanding to Deployment.",
+      questions: [
+        {
+          q: "CRISP-DM stands for:",
+          opts: [
+            "Cross-Industry Standard Procedure for Data Modelling",
+            "Cross-Industry Standard Process for Data Mining",
+            "Corporate Integrated Standard Process for Data Mining",
+            "Cross-Industry Statistical Process for Data Management"
+          ],
+          correct: 1,
+          expl: "CRISP-DM is the Cross-Industry Standard Process for Data Mining — a six-phase, iterative lifecycle for analytics projects."
+        },
+        {
+          q: "Success criteria and KPIs are defined in which phase?",
+          opts: ["Data Understanding", "Evaluation", "Business Understanding", "Data Preparation"],
+          correct: 2,
+          expl: "Business Understanding frames the project: it clarifies the problem and objectives, defines success criteria and KPIs, and assesses resources, risks and constraints."
+        },
+        {
+          q: "Which phase comes immediately before Modeling?",
+          opts: ["Data Preparation", "Evaluation", "Deployment", "Business Understanding"],
+          correct: 0,
+          expl: "The order is Business Understanding \u2192 Data Understanding \u2192 Data Preparation \u2192 Modeling \u2192 Evaluation \u2192 Deployment."
+        },
+        {
+          q: "Exploring transaction logs and checking them for missing and duplicate values happens in:",
+          opts: ["Deployment", "Modeling", "Business Understanding", "Data Understanding"],
+          correct: 3,
+          expl: "Data Understanding collects initial data, describes and explores it with summaries and charts, and checks its quality for missing, wrong or duplicate values."
+        },
+        {
+          q: "According to the unit, which phase often takes most of the project time?",
+          opts: ["Modeling", "Evaluation", "Deployment", "Data Preparation"],
+          correct: 3,
+          expl: "Selecting, cleaning and shaping data is the bulk of real analytics work — the unit notes that students consistently underestimate it."
+        },
+        {
+          q: "Splitting data into training and test sets happens during:",
+          opts: ["Data Understanding", "Deployment", "Modeling", "Business Understanding"],
+          correct: 2,
+          expl: "In Modeling you choose techniques, split the data into training and test sets, then build, tune and compare models."
+        },
+        {
+          q: "Deciding whether to deploy, improve or restart happens in:",
+          opts: ["Evaluation", "Data Preparation", "Modeling", "Data Understanding"],
+          correct: 0,
+          expl: "Evaluation checks the result against the business goals and then decides: deploy, improve, or go back and restart."
+        },
+        {
+          q: "CRISP-DM is called iterative because:",
+          opts: [
+            "its phases run in parallel at all times",
+            "later findings often send the team back to earlier phases",
+            "each phase is skipped when data is clean",
+            "deployment replaces evaluation"
+          ],
+          correct: 1,
+          expl: "Modelling can expose data-quality problems (back to preparation) and evaluation can reveal the wrong business question (back to business understanding). The lifecycle is a loop, not a straight road."
+        }
+      ]
+    },
+    {
+      title: "From Business Problems to Questions and KPIs",
+      sub: "Framing questions, KPI properties, leading and lagging indicators.",
+      questions: [
+        {
+          q: "In the fraud case study, \u201cfraud rate\u201d and \u201cfalse alarms\u201d are examples of:",
+          opts: ["tools", "datasets", "KPIs", "model features"],
+          correct: 2,
+          expl: "They were chosen in Business Understanding as the project\u2019s success measures — measurable values showing progress toward the goal of cutting fraud losses."
+        },
+        {
+          q: "\u201cYield per hectare\u201d is a KPI from which sector?",
+          opts: ["Utilities", "Health", "Finance", "Agriculture"],
+          correct: 3,
+          expl: "The unit\u2019s sector table pairs agriculture\u2019s objective (raise farm productivity) with yield per hectare, post-harvest loss % and price per bag."
+        },
+        {
+          q: "Which is NOT a rule for framing an analytical question?",
+          opts: [
+            "Prefer the largest available dataset",
+            "Start from the decision, not the data",
+            "Make it specific, measurable and time-bound",
+            "Check that the data exists and is accessible"
+          ],
+          correct: 0,
+          expl: "Size is not a framing rule — relevant, accessible data beats big data. The four rules: start from the decision; be specific, measurable, time-bound and relevant; check the data exists and is accessible; decide which analytics type answers it."
+        },
+        {
+          q: "\u201cWhich first-year courses had a pass rate below 60% in 2025/26, and which student groups were most affected?\u201d is strong because it is:",
+          opts: ["broad and open-ended", "specific, measurable and time-bound", "answerable by one KPI alone", "phrased as a forecast"],
+          correct: 1,
+          expl: "It names the population (first-year courses), the measure (pass rate below 60%) and the time frame (2025/26), unlike the vague \u201cWhy are our students failing?\u201d"
+        },
+        {
+          q: "A KPI is best defined as:",
+          opts: [
+            "a measurable value showing progress toward an objective",
+            "any number that appears in a report",
+            "a technical target for software uptime",
+            "a chart of monthly totals"
+          ],
+          correct: 0,
+          expl: "A KPI is a measurable value showing progress toward an objective. Good ones are clear, measurable, tied to a goal, actionable and time-bound."
+        },
+        {
+          q: "Which is a LEADING indicator of student success?",
+          opts: ["Pass rate", "Number of graduates", "Attendance rate", "Readmission rate"],
+          correct: 2,
+          expl: "Attendance moves before results do, so it predicts outcomes — a leading indicator. Pass rate and graduate counts are lagging: known only after the outcome."
+        },
+        {
+          q: "App download counts, when nobody actually uses the app, illustrate a:",
+          opts: ["leading indicator", "vanity metric", "lagging indicator", "KPI target"],
+          correct: 1,
+          expl: "A vanity metric looks good but drives no decision. The unit\u2019s warning: avoid numbers that flatter rather than inform."
+        },
+        {
+          q: "For the first-year failure problem, the DATA needed includes:",
+          opts: ["month-end promotions", "tutor allocation plans", "waiting-time targets", "registry grades and attendance records"],
+          correct: 3,
+          expl: "The unit\u2019s chain: problem \u2192 question (which courses and groups fall below 60%) \u2192 KPIs (pass rate by course, attendance) \u2192 data (registry grades, attendance records, LMS activity)."
+        }
+      ]
+    }
+  ];
+
+  var LETTERS = ["A","B","C","D"];
+  var app = document.getElementById("app");
+  var state = null;
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  function build(){
+    state = { answered:0, correct:0, mods: MODULES.map(function(){ return {a:0,c:0}; }) };
+    app.innerHTML = "";
+
+    MODULES.forEach(function(m, mi){
+      var sec = el("section","module");
+      sec.id = "m" + (mi+1);
+
+      var head = el("div","mod-head");
+      head.appendChild(el("div","mod-num", String(mi+1)));
+      head.appendChild(el("div","mod-title", m.title));
+      head.appendChild(el("div","mod-sub", m.sub));
+      var stat = el("div","mod-stat", "0/8 answered");
+      head.appendChild(stat);
+      sec.appendChild(head);
+
+      m.questions.forEach(function(item, qi){
+        var card = el("div","card");
+        var qNo = mi*8 + qi + 1;
+
+        var meta = el("div","q-meta");
+        meta.appendChild(el("span","q-no", "Q" + qNo));
+        meta.appendChild(el("span","q-mod", "Module " + (mi+1) + " \u00b7 " + m.title));
+        card.appendChild(meta);
+
+        card.appendChild(el("p","q-text", item.q));
+
+        var optsBox = el("div","opts");
+        var buttons = [];
+        item.opts.forEach(function(t, oi){
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "opt";
+          b.innerHTML = '<span class="chip">' + LETTERS[oi] + '</span><span class="txt">' + t + '</span>';
+          b.addEventListener("click", function(){
+            answer(card, buttons, oi, item, mi, stat);
+          });
+          buttons.push(b);
+          optsBox.appendChild(b);
+        });
+        card.appendChild(optsBox);
+
+        var expl = el("div","expl");
+        expl.appendChild(el("span","verdict bad","\u2716 Not quite \u2014 the correct answer is " + LETTERS[item.correct] + "."));
+        expl.appendChild(document.createTextNode(item.expl));
+        card.appendChild(expl);
+
+        card.dataset.answered = "0";
+        sec.appendChild(card);
+      });
+
+      sec.dataset.statEl = "1";
+      sec._statEl = stat;
+      app.appendChild(sec);
+    });
+
+    buildResults();
+    updateStats();
+  }
+
+  function answer(card, buttons, oi, item, mi, stat){
+    if (card.dataset.answered === "1") return;
+    card.dataset.answered = "1";
+    card.classList.add("answered");
+
+    var hit = (oi === item.correct);
+    buttons[item.correct].classList.add("correct");
+    if (!hit) buttons[oi].classList.add("wrong");
+    buttons.forEach(function(b){ b.disabled = true; });
+
+    var verdict = card.querySelector(".verdict");
+    if (hit){
+      verdict.className = "verdict ok";
+      verdict.textContent = "\u2714 Correct \u2014 " + LETTERS[item.correct] + ".";
+    } else {
+      verdict.className = "verdict bad";
+      verdict.textContent = "\u2716 Not quite \u2014 the correct answer is " + LETTERS[item.correct] + ".";
+    }
+
+    state.answered++;
+    if (hit) state.correct++;
+    state.mods[mi].a++;
+    if (hit) state.mods[mi].c++;
+    stat.textContent = state.mods[mi].a + "/8 answered";
+    updateStats();
+  }
+
+  function buildResults(){
+    var res = el("section","results");
+    res.id = "results";
+    res.innerHTML =
+      '<h2>Results</h2>' +
+      '<div class="score-line">' +
+        '<span class="big" id="rScore">0</span><span class="of">/ 40</span>' +
+        '<span class="pct-chip" id="rPct">0%</span>' +
+      '</div>' +
+      '<p class="r-note">One mark per question \u00b7 five modules \u00b7 eight questions each.</p>' +
+      '<div class="mod-bars" id="modBars"></div>' +
+      '<div class="r-msg" id="rMsg">Select an answer to any question to begin \u2014 your results fill in as you go.</div>' +
+      '<button class="retake-btn" id="retakeBtn" type="button">Retake the quiz</button>';
+    app.appendChild(res);
+
+    document.getElementById("retakeBtn").addEventListener("click", function(){
+      build();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  function updateStats(){
+    var pct = state.answered ? Math.round(state.correct / 40 * 100) : 0;
+    document.getElementById("stAnswered").textContent = state.answered;
+    document.getElementById("stScore").textContent = state.correct;
+    document.getElementById("stPct").textContent = pct + "%";
+    document.getElementById("pbar").style.width = (state.answered / 40 * 100) + "%";
+
+    document.getElementById("rScore").textContent = state.correct;
+    document.getElementById("rPct").textContent = pct + "%";
+
+    var bars = document.getElementById("modBars");
+    bars.innerHTML = "";
+    MODULES.forEach(function(m, mi){
+      var row = el("div","mb-row");
+      var short = m.title.replace("From Business Problems to Questions and KPIs","Questions &amp; KPIs")
+                         .replace("Foundations of Data Analytics: Concept and Scope","Concept &amp; Scope")
+                         .replace("The Four Types of Analytics","Four Types")
+                         .replace("Data-Analytic Thinking","Analytic Thinking")
+                         .replace("The CRISP-DM Lifecycle","CRISP-DM");
+      row.appendChild(el("span","mb-name", "M" + (mi+1) + " \u00b7 " + short));
+      var track = el("div","mb-track");
+      var fill = el("div","mb-fill");
+      fill.style.width = (state.mods[mi].c / 8 * 100) + "%";
+      track.appendChild(fill);
+      row.appendChild(track);
+      row.appendChild(el("span","mb-score", state.mods[mi].c + " / 8"));
+      bars.appendChild(row);
+    });
+
+    var msg = document.getElementById("rMsg");
+    if (state.answered === 0){
+      msg.textContent = "Select an answer to any question to begin \u2014 your results fill in as you go.";
+    } else if (state.answered < 40){
+      msg.textContent = "In progress \u2014 " + (40 - state.answered) + " question(s) left. Current accuracy: " + pct + "%.";
+    } else if (pct >= 85){
+      msg.textContent = "Excellent \u2014 " + pct + "%. You have mastered this unit. Keep the four analytics questions and the six CRISP-DM phases fresh, and you are exam-ready.";
+    } else if (pct >= 70){
+      msg.textContent = "Strong work \u2014 " + pct + "%. Reread the explanations you missed, then retake the quiz to consolidate.";
+    } else if (pct >= 50){
+      msg.textContent = "Good foundation \u2014 " + pct + "%. Revisit the study notes for your weaker modules above, then retake the quiz.";
+    } else {
+      msg.textContent = "Keep going \u2014 " + pct + "% this round. Work through the Unit 1 study notes section by section, then retake the quiz.";
+    }
+  }
+
+  document.getElementById("tbReset").addEventListener("click", function(){
+    build();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>
